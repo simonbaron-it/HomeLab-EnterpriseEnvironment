@@ -2,7 +2,7 @@
 A virtualised enterprise-style infrastructure lab built using VMWare Workstation Pro to showcase practical Systems Administration and Infrastructure Engineering skills.
 
 # Project Overview
-This project is a self-built home lab designed to simulate a small enterprise IT environment. The environment was built using VMWare Workstation Pro and consists of multiple virtual machines representing a small business network. The objective was to display experience with:
+This project is a self-built home lab designed to simulate an enterprise IT environment. The environment was built using VMWare Workstation Pro and consists of multiple virtual machines representing a small business network. The objective was to display experience with:
 - Windows Server administration
 - Active Directory Domain Services
 - DNS
