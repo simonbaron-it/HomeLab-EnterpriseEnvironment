@@ -1,45 +1,49 @@
-# Home Lab - Windows Server Infrastructure
-A virtualised enterprise-style infrastructure lab built using <b>VMWare Workstation Pro</b> to showcase practical Systems Administration and Infrastructure Engineering skills.
+# Home Lab - Enterprise Infrastructure Management
+A virtualised enterprise-style infrastructure lab built using <b>VMWare Workstation Pro</b> to develop practical Infrastructure Engineering skills.
 
 # Project Overview
-This project is a self-built home lab designed to simulate an enterprise IT environment. The environment was built using <b>VMWare Workstation Pro</b> and consists of multiple virtual machines running <b>Windows Server 2022</b> and <b>Windows 11</b> to represent a small business network. The objective was to display experience with:
-- Windows Server administration
-- Active Directory Domain Services
-- DNS
-- DHCP
-- Group Policy
-- Windows client management
-- User and group administration
-- File Server administration
-- File and folder permissions
-- Network configuration
-- Virtualisation
-- Infrastructure Troubleshooting
+This project is a self-built home lab designed to simulate an enterprise IT environment. The environment was built using <b>VMWare Workstation Pro</b> and consists of multiple virtual machines running <b>Windows Server 2022</b> and <b>Windows 11</b> to represent a small business network. All labs are documented with Markdown files and screenshots for clarity and portfolio presentation.
+
+<b>Current Lab Environment:</b>
+- Windows Server 2022 Domain Controller
+  - Active Directory
+  - DNS
+  - DHCP
+  - Group Policy
+- Windows Server 2022 File Server
+  - Network File Share
+  - NTFS Permissions
+- Windows 11 Client Workstation
+  - To verify successful domain join, group policy and NTFS permissions 
+
+<b>To Be Added:</b>
+- Linux Server - to learn Linux administration.
+- Infrastructure Automation - PowerShell, Bash.
+- Azure Migration labs - for learning cloud engineering.
 
 # Lab Documentation
 - ### Network Architecture
   - Network topology/diagram
   - IP configuration
-- ### Domain Controller - DC01
-  - AD DS
+- ### Windows Server 2022 - Domain Controller
+  - Active Directory
   - DNS
   - DHCP
   - Group Policy
-- ### File Server - File01
+- ### Windows Server 2022 - File Server
   - NTFS Permissions
-- ### Windows 11 Workstation - Client01
+- ### Windows 11 - Workstation
   - Domain join verification
   - DHCP verification   
   - Group Policy verification
   - NTFS Permission verification
  
-# Project Objectives
-The main objectives of this project were to:
-1. Build a virtualised Windows Server environment from scratch.
-2. Deploy an Active Directory domain.
-3. Configure DNS and DHCP.
-4. Create organisational units, users and security groups.
-5. Implement Group Policy.
-6. Join Windows client machines to the domain.
-7. Configure file shares and NTFS permissions.
-8. Practice common infrastructure troubleshooting scenarios.
+# Skills Demonstrated
+- Build a virtualised Windows Server environment from scratch.
+- Deploy an Active Directory domain.
+- Configure DNS and DHCP.
+- Create organisational units, users and security groups.
+- Implement Group Policy.
+- Join Windows client machines to the domain.
+- Configure file shares and NTFS permissions.
+
