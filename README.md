@@ -17,9 +17,12 @@ This project is a self-built home lab designed to simulate an enterprise IT envi
   - To verify successful domain join, group policy and NTFS permissions 
 
 <b>To Be Added:</b>
-- Linux Server - to learn Linux administration.
-- Infrastructure Automation - PowerShell, Bash.
-- Azure Migration labs - for learning cloud engineering.
+- VLAN's/Network Segmentation
+- Backup & Disaster Recovery
+- Monitoring & Alerts
+- Linux Server
+- Infrastructure Automation
+- Azure Migration
 
 # Lab Documentation
 - ### Network Architecture
