@@ -10,7 +10,7 @@ This project is a self-built home lab designed to simulate an enterprise IT envi
 - <b>Windows Server 2022 File Server</b>
   - Network File Share, NTFS Permissions
 - <b>Windows 11 Client Workstation</b>
-  - To verify successful domain join, group policy and NTFS permissions. 
+  - To validate successful domain join, group policy and NTFS permissions. 
 
 <b>Next:</b>
 - VLAN's/Network Segmentation
@@ -31,8 +31,8 @@ This project is a self-built home lab designed to simulate an enterprise IT envi
   - [NTFS-Permissions.md](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File-Server/NTFS-Permissions.md) - Shared file structure, NTFS permissions.
 - #### Windows 11 - Workstation
   - [Domain-join.md](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/Domain-Join.md) - Successful domain join, DNS & DHCP contact.    
-  - Group Policy verification
-  - NTFS Permission verification
+  - [GPO-Checks.md](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/GPO-Checks.md) - Group Policy Object validation.
+  - [NTFS-Validation.md](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/NTFS-Validation.md) - Verifying NTFS permissions are configured correctly.
  
 ## Skills Demonstrated
 - Build a virtualised Windows Server environment from scratch.
