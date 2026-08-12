@@ -13,7 +13,7 @@ This project is a self-built home lab designed to simulate an enterprise IT envi
   - To validate successful domain join, group policy and NTFS permissions. 
 
 <b>Next:</b>
-- VLAN's/Network Segmentation
+- VMNet's/Network Segmentation
 - Backup & Disaster Recovery
 - Monitoring & Alerts
 - Linux Server
