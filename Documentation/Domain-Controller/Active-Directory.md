@@ -7,13 +7,13 @@
 ## Overview
 Active Directory Domain Services was installed on my Windows Server Domain Controller to provide centralised:
 
-    - User and computer authentication
-    - User and computer management
-    - Security group management
-    - Organisational Unit management
-    - Group Policy management
-    - DNS & DHCP services
-    - Role-based access to resources
+> - User and computer authentication
+> - User and computer management
+> - Security group management
+> - Organisational Unit management
+> - Group Policy management
+> - DNS & DHCP services
+> - Role-based access to resources
 
 ## Domain Configuration
 I installed the <b>Active Directory Domain Services</b> server role and promoted <b>DC01</b> to a domain controller.
@@ -24,12 +24,12 @@ The domain controller also provides DNS & DHCP services - Detailed in the [DNS/D
 
 |Component|Configuration|
 |---------|-------------|
-|Domain Controller:|`DC01`|
-|Operating System:|`Windows Server 2022`|
-|Domain Controller IP:|`192.168.162.10`|
-|AD Domain Name:|`Baron.local`|
-|DNS Server:|`192.168.162.10`|
-|DHCP Server:|`192.168.162.10`|
+|`Domain Controller`|`DC01`|
+|`Operating System`|`Windows Server 2022`|
+|`Domain Controller IP`|`192.168.162.10`|
+|`AD Domain Name`|`Baron.local`|
+|`DNS Server`|`192.168.162.10`|
+|`DHCP Server`|`192.168.162.10`|
 
 > I deployed a single forest and domain because the lab represents a small organisation and does not require the administrative complexity of multiple domains. DC01 was configured with a static IP address because infrastructure services such as Active Directory and DNS require predictable network addressing. DHCP was configured for Client workstations connecting to the domain.
 
@@ -43,17 +43,17 @@ The domain controller also provides DNS & DHCP services - Detailed in the [DNS/D
 
 ### OU Design Decisions
 The structure separates different Active Directory objects based on their purpose.  
-  - <b>Users</b> are separated by department to allow department-specific policies to be applied where required.  
-  - <b>Computers</b> are separated from user accounts so computer-based Group Policies can be targeted independently.  
-  - <b>Servers</b> are separated from standard workstations because servers generally require different configuration and security policies.  
-  - <b>Groups</b> provide a logical location for security groups used to control access to resources.  
-  - <b>Service Accounts</b> are separated from standard user accounts so they can be managed independently.  
+> - `Users` are separated by department to allow department-specific policies to be applied where required.
+> - `Computers` are separated from user accounts so computer-based Group Policies can be targeted independently.  
+> - `Servers` are separated from standard workstations because servers generally require different configuration and security policies.  
+> - `Groups` provide a logical location for security groups used to control access to resources.  
+> - `Service Accounts` are separated from standard user accounts so they can be managed independently.  
 
 ## User Accounts
 > 20 test user accounts were created to represent employees from different departments within the organisation. These users were placed into their corresponding departmental OUs and assigned appropriate security group memberships.
 
 ### Naming Convention
-User accounts follow a `[first initial][surname]` naming convention.
+User accounts follow a `[first initial]` `[surname]` naming convention.
 
 #### Examples:
 |User|Username|Department|OU|
