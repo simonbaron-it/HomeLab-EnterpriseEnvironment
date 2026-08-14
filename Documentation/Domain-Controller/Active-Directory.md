@@ -18,7 +18,7 @@ Active Directory Domain Services was installed on my Windows Server Domain Contr
 ## Domain Configuration
 I installed the <b>Active Directory Domain Services</b> server role and promoted <b>DC01</b> to a domain controller.
 
-A new Active Directory forest was created using: `Baron.local`
+A new Active Directory Forest was created using: `Baron.local`
 
 The domain controller also provides DNS & DHCP services - Detailed in the [DNS/DHCP setup and configuration](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS-DHCP.md) section.
 
@@ -50,7 +50,7 @@ The structure separates different Active Directory objects based on their purpos
   - <b>Service Accounts</b> are separated from standard user accounts so they can be managed independently.  
 
 ## User Accounts
-> 20 Test user accounts were created to represent employees from different departments within the organisation. These users were placed into their corresponding departmental OUs and assigned appropriate security group memberships.
+> 20 test user accounts were created to represent employees from different departments within the organisation. These users were placed into their corresponding departmental OUs and assigned appropriate security group memberships.
 
 ### Naming Convention
 User accounts follow a `[first initial][surname]` naming convention.
