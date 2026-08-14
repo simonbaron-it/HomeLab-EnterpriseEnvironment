@@ -1,14 +1,14 @@
 ## Network Architecture
-This document describes the network architecture of the Enterprise Environment Home Lab. The environment simulates a small business network using virtual machines hosted on VMWare Workstation Pro. 
+> This document describes the network architecture of the Enterprise Environment Home Lab. The environment simulates a small business network using virtual machines hosted on <b>VMWare Workstation Pro</b>. 
 
-### Virtual Network Configuration
+### Virtual Network IP Configuration
 |Component|Configuration|
 |---------|-------------|
-|Subnet|192.168.162.0/24|
-|Gateway|192.168.162.1|
-|DNS Server|192.168.162.10|
-|DHCP Server|192.168.162.10|
-|DHCP Range|192.168.162.100 - .200|
+|`Subnet`|`192.168.162.0/24`|
+|`Gateway`|`192.168.162.1`|
+|`DNS Server`|`192.168.162.10`|
+|`DHCP Server`|`192.168.162.10`|
+|`DHCP Range`|`192.168.162.100 - .200`|
 
 
 
@@ -18,7 +18,7 @@ This document describes the network architecture of the Enterprise Environment H
 
 |Device|Role|IP Address|Services|
 |-------|----|----------|--------|
-|Physical Host|Virtualisation|NAT|VMWare Workstation Pro|
-|Windows Server 2022 VM|Domain Controller|192.168.162.10|Active Directory, DNS, DHCP|
-|Windows Server 2022 VM|File Server|192.168.162.20|Network File Shares|
-|Windows 11 VM|Domain User Workstation|DHCP|Domain Testing/Validation|
+|`Physical Host`|`Virtualisation`|`NAT`|`VMWare Workstation Pro`|
+|`Windows Server 2022 VM`|`Domain Controller`|`192.168.162.10`|`Active Directory` `DNS` `DHCP`|
+|`Windows Server 2022 VM`|`File Server`|`192.168.162.20`|`File Shares` `NTFS Permissions`|
+|`Windows 11 VM`|`Domain User Workstation`|`DHCP`|`Testing` `Validation`|
