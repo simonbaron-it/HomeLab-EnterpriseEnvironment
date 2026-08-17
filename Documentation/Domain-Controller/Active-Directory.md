@@ -20,7 +20,7 @@ I installed the <b>Active Directory Domain Services</b> server role and promoted
 
 A new Active Directory Forest was created using: `Baron.local`
 
-The domain controller also provides DNS & DHCP services - Detailed in the [DNS/DHCP setup and configuration](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS-DHCP.md) section.
+The domain controller also provides DNS & DHCP services - Detailed in the [DNS & DHCP configuration](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS-DHCP.md) section.
 
 |Component|Configuration|
 |---------|-------------|
