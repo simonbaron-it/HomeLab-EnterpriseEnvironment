@@ -33,13 +33,13 @@ The domain controller also provides DNS & DHCP services - Detailed in the [DNS &
 
 > I deployed a single forest and domain because the lab represents a small organisation and does not require the administrative complexity of multiple domains. DC01 was configured with a static IP address because infrastructure services such as Active Directory and DNS require predictable network addressing. DHCP was configured for Client workstations connecting to the domain.
 
-<i>Screenshot: Add an image showing Server Manager / AD DS running on the domain controller.</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/AD%20DS.JPG" width="700" height="700"/>
 
 ## Organisational Unit Structure
 > Rather than storing users and computers within the default Active Directory containers, I created a custom OU structure to provide clearer organisation and allow Group Policy to be targeted at specific users, computers and departments.
 
 ### OU Structure:
-<i> Insert OU Structure diagram or screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/OU%20Structure.JPG" width="400" height="600"/>
 
 ### OU Design Decisions
 The structure separates different Active Directory objects based on their purpose.  
