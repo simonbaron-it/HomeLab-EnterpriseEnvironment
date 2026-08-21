@@ -45,9 +45,8 @@ The domain controller also provides DNS & DHCP services - Detailed in the [DNS &
 The structure separates different Active Directory objects based on their purpose.  
 > - `Users` are separated by department to allow department-specific policies to be applied where required.
 > - `Computers` are separated from user accounts so computer-based Group Policies can be targeted independently.  
-> - `Servers` are separated from standard workstations because servers generally require different configuration and security policies.  
-> - `Groups` provide a logical location for security groups used to control access to resources.  
-> - `Service Accounts` are separated from standard user accounts so they can be managed independently.  
+> - `Servers` are separated from standard workstations because servers require different configuration and security policies.  
+> - `Security Groups` provide a logical location for groups used to define role configuration and control access to resources.   
 
 ## User Accounts
 > 20 test user accounts were created to represent employees from different departments within the organisation. These users were placed into their corresponding departmental OUs and assigned appropriate security group memberships.
