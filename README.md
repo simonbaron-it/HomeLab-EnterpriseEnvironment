@@ -76,14 +76,26 @@ This project is designed to demonstrate practical experience with:
 #### Identity & Access Management
 `Active Directory users and computers` `Organisational Units` `Security groups` `Group-based access` `Least privilege` `NTFS permissions`
 
-
-> - Build a virtualised Windows Server environment from scratch.
-> - Deploy an Active Directory domain.
-> - Configure DNS and DHCP.
-> - Create organisational units, users and security groups.
-> - Implement Group Policy.
-> - Join Windows client machines to the domain.
-> - Configure file shares and NTFS permissions.
+- Build and configure a multi-server Windows Server 2025 infrastructure environment from scratch.
+- Deploy and manage virtual machines using Hyper-V.
+- Configure Hyper-V virtual switches and isolated virtual networks.
+- Design a multi-VM environment with dedicated networking, domain, file server and client roles.
+- Configure Windows Server RRAS for network routing and NAT.
+- Configure multi-NIC Windows Server networking and connectivity between isolated and external networks.
+- Plan and implement IPv4 addressing for servers and client devices.
+- Deploy and administer Active Directory Domain Services.
+- Design an Active Directory domain, Organisational Unit structure and security group model.
+- Create and manage domain users, computers and security groups.
+- Configure AD-integrated DNS and troubleshoot name resolution.
+- Configure DHCP scopes, options and automatic client IP addressing.
+- Join Windows 11 client machines to an Active Directory domain.
+- Create and apply Group Policy Objects for centralised user, workstation and security configuration.
+- Configure Windows File Services and SMB network shares.
+- Implement group-based NTFS permissions using least-privilege principles.
+- Validate authorised and unauthorised access to network resources.
+- Test and troubleshoot DNS, DHCP, routing, authentication, Group Policy and file permissions from domain-joined clients.
+- Use Windows administrative and diagnostic tools to validate infrastructure configuration and connectivity.
+- Document infrastructure architecture, configuration decisions, testing and troubleshooting.
 
 ### Future Improvements:  
 Planned expansions to the environment include:
