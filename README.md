@@ -65,34 +65,16 @@ All labs are documented with Markdown files and screenshots for clarity and port
   - [NTFS permission validation](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/NTFS-Validation.md)
  
 ## Skills Demonstrated:
-This project is designed to demonstrate practical experience with:  
-#### Virtualisation
-- Hyper-V
-- Virtual machine deployment
-- Virtual networking  
-#### Windows Infrastructure
-- Windows Server 2025
-- Active Directory Domain Services
-- DNS
-- DHCP
-- Group Policy
-- Windows File Services
+This project is designed to demonstrate practical experience with: 
+
+#### Virtualisation  
+`Hyper-V` `Virtual machine deployment` `Virtual networking`  
+#### Windows Infrastructure 
+`Windows Server 2025` `Active Directory Domain Services` `DNS` `DHCP` `Group Policy` `Windows File Services`
 #### Networking
-- IPv4 addressing
-- Subnetting
-- Routing
-- NAT
-- RRAS
-- DNS resolution
-- DHCP
-- Network troubleshooting
+`IPv4 addressing` `Subnetting` `Routing` `NAT` `RRAS` `Network troubleshooting`
 #### Identity & Access Management
-- Active Directory users and computers
-- Organisational Units
-- Security groups
-- Group-based access
-- Least privilege
-- NTFS permissions
+`Active Directory users and computers` `Organisational Units` `Security groups` `Group-based access` `Least privilege` `NTFS permissions`
 
 
 > - Build a virtualised Windows Server environment from scratch.
