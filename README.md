@@ -65,26 +65,11 @@ All labs are documented with Markdown files and screenshots for clarity and port
   - [NTFS permission validation](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/NTFS-Validation.md)
  
 ## Skills Demonstrated:
-This project is designed to demonstrate practical experience with: 
-
-#### Virtualisation  
-`Hyper-V` `Virtual machine deployment` `Virtual networking`  
-#### Windows Infrastructure 
-`Windows Server 2025` `Active Directory Domain Services` `DNS` `DHCP` `Group Policy` `Windows File Services`
-#### Networking
-`IPv4 addressing` `Subnetting` `Routing` `NAT` `RRAS` `Network troubleshooting`
-#### Identity & Access Management
-`Active Directory users and computers` `Organisational Units` `Security groups` `Group-based access` `Least privilege` `NTFS permissions`
-
-- Build and configure a multi-server Windows Server 2025 infrastructure environment from scratch.
-- Deploy and manage virtual machines using Hyper-V.
-- Configure Hyper-V virtual switches and isolated virtual networks.
-- Design a multi-VM environment with dedicated networking, domain, file server and client roles.
-- Configure Windows Server RRAS for network routing and NAT.
-- Configure multi-NIC Windows Server networking and connectivity between isolated and external networks.
+- Build and configure a multi-VM Windows Server 2025 infrastructure environment with dedicated networking, domain, file server and client roles.
+- Deploy and manage virtual machines, virtual switches and isolated virtual networks using Hyper-V.
+- Configure multi-NIC Windows Server networking, including RRAS and NAT.
 - Plan and implement IPv4 addressing for servers and client devices.
-- Deploy and administer Active Directory Domain Services.
-- Design an Active Directory domain, Organisational Unit structure and security group model.
+- Deploy and administer Active Directory Domain Services, including a domain, Organisational Unit structure and security group model.
 - Create and manage domain users, computers and security groups.
 - Configure AD-integrated DNS and troubleshoot name resolution.
 - Configure DHCP scopes, options and automatic client IP addressing.
@@ -92,12 +77,10 @@ This project is designed to demonstrate practical experience with:
 - Create and apply Group Policy Objects for centralised user, workstation and security configuration.
 - Configure Windows File Services and SMB network shares.
 - Implement group-based NTFS permissions using least-privilege principles.
-- Validate authorised and unauthorised access to network resources.
 - Test and troubleshoot DNS, DHCP, routing, authentication, Group Policy and file permissions from domain-joined clients.
-- Use Windows administrative and diagnostic tools to validate infrastructure configuration and connectivity.
 - Document infrastructure architecture, configuration decisions, testing and troubleshooting.
 
-### Future Improvements:  
+## Future Improvements:  
 Planned expansions to the environment include:
 > - Automate infrastructure administration with PowerShell.
 > - Deploy a second Domain Controller and configure AD/DNS replication.
