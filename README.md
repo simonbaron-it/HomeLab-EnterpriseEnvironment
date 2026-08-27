@@ -27,7 +27,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 
 ## Lab Documentation
 ### Hyper-V & Virtual Infrastructure
-- [Hyper-V host, virtual switch and virtual machine configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Hyper-V%20&%20Virtual%20Infrastructure/Hyper-V%20host%20and%20virtual%20switch%20configuration.md)
+- [Hyper-V host, virtual switch and virtual machine configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Hyper-V%20%26%20Virtual%20Infrastructure/Hyper-V%20host%2C%20virtual%20switch%20and%20VM%20configuration.md))
 
 ### Networking & RRAS
 - Network architecture and IP addressing
