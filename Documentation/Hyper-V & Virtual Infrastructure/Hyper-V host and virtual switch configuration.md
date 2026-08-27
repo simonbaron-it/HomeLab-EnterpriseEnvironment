@@ -24,6 +24,8 @@
 |`LAB-CLIENTS`|`Private`|`CLIENTS`|Connectivity between Windows 11 Client VM's and RTR01|
 |`LAB-SERVERS`|`Private`|`SERVERS`|Connectivity between Windows Server VM's and RTR01|
 
+<i>Insert RTR01 network adapter screenshot?</i>
+
 ### Virtual Machine Configuration
 
 |VM|Generation|CPU|RAM|Virtual Disk|Operating System|
