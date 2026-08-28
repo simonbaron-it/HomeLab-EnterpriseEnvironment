@@ -10,19 +10,28 @@
 |Hypervisor|`Microsoft Hyper-V`|
 |Processor|`AMD Ryzen 7 PRO 6850U`|
 |CPU Cores/Threads|`8 Cores` `16 Threads`|
-|Installed RAM|`32GB` `DDR5`|
-|Storage|`1TB` `SSD`|
+|Installed RAM|`32GB DDR5`|
+|Storage|`1TB SSD`|
 
 <i>Screenshot of Hyper-V Manager</i>
 
-### Virtual Switch and Network Adapter Configuration
-> Three Hyper-V virtual switches and network adapters are used to provide network segmentation.
+### Virtual Switch Configuration
+> Three Hyper-V virtual switches are used to separate external network, client and server traffic.
 
-|Virtual Switch|Switch Type|NIC|Purpose|
-|--------------|----|---|-------|
-|`LAB-WAN`| `Internal`|`WAN`|Connectivity between Hyper-V Host and RTR01|
-|`LAB-CLIENTS`|`Private`|`CLIENTS`|Connectivity between Windows 11 Client VM's and RTR01|
-|`LAB-SERVERS`|`Private`|`SERVERS`|Connectivity between Windows Server VM's and RTR01|
+|Virtual Switch|Type|Purpose|
+|--------------|----|-------|
+|`LAB-WAN`| `Internal`|Connectivity between Hyper-V Host and RTR01|
+|`LAB-CLIENTS`|`Private`|Isolated network for Windows client VMs|
+|`LAB-SERVERS`|`Private`|Isolated network for Windows server VMs|
+
+### RTR01 Network Adapters
+> RTR01 connects all three virtual networks.
+
+|Adapter|Virtual Switch|
+|---|---|
+|`WAN`|`LAB-WAN`|
+|`CLIENTS`|`LAB-CLIENTS`|
+|`SERVERS`|`LAB-SERVERS`|
 
 <i>Insert RTR01 network adapter screenshot?</i>
 
@@ -35,11 +44,19 @@
 |`FS01`|`Gen 2`|`X`|`X`|`X`|`Windows Server 2025`|
 |`CLIENT01`|`Gen 2`|`X`|`X`|`X`|`Windows 11`|
 
-<i>Insert virtual switch layout diagram</i>
+<i>Insert VM/vswitch layout diagram</i>
 
->IP addressing, subnet design and default gateways are documented in <i>Network Architecture.</i>
+<b>Notes:</b>  
+>- IP addressing, subnet design and default gateways are documented in <i>Network Architecture.</i>
 >
->RRAS routing and NAT configuration are documented in <i>RRAS.</i>
+>- RRAS routing and NAT configuration are documented in <i>RRAS.</i>
 
 ### Powershell Validation?
-### Skills Demonstrated?
+### Skills Demonstrated
+- Configure and manage Hyper-V virtual machines.
+- Create and configure Hyper-V virtual switches.
+- Design isolated client and server network segments.
+- Configure multi-NIC virtual machines.
+- Allocate VM compute, memory and storage resources.
+- Map virtual machines to appropriate network segments.
+- Validate Hyper-V configuration using PowerShell.
