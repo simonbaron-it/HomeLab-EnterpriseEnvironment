@@ -14,11 +14,11 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 <i>Insert final network architecture diagram</i>
 
 ## Network Design
-|Network|Subnet|Subnet Mask|RTR01 Interface|
-|---|---|---|---|
-|`WAN`|`172.16.0.0`|`?`|`172.16.0.1`|
-|`SERVERS`|`10.10.10.0`|`255.255.255.0`|`10.10.10.1`|
-|`CLIENTS`|`10.10.20.0`|`255.255.255.0`|`10.10.20.1`|
+|Network|Subnet|Gateway|
+|---|---|---|
+|`WAN`|`172.16.0.0/24`|`Insert NAT details?`|
+|`SERVERS`|`10.10.10.0/24`|`10.10.10.1`|
+|`CLIENTS`|`10.10.20.0/24`|`10.10.20.1`|
 
 ## IP Addressing Plan
 ### RTR01
@@ -28,13 +28,13 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 |`SERVERS`|`10.10.10.1`|`Server network gateway`|
 |`CLIENTS`|`10.10.20.1`|`Client network gateway`|
 ### Server Network
-|Device|Role|IP Address|Assignment|Default Gateway|DNS|
+|Device|Role|IP Address|Assignment|Gateway|DNS|
 |---|---|---|---|---|---|
 |`RTR01`|`Gateway`|`10.10.10.1`|`Static`|`N/A`|`N/A`|
 |`DC01`|`AD DS/DNS/DHCP`|`10.10.10.10`|`Static`|`10.10.10.1`|`10.10.10.10`|
 |`FS01`|`File Server`|`10.10.10.20`|`Static`|`10.10.10.1`|`10.10.10.10`|
 ### Client Network
-|Device|Role|IP Address|Assignment|Default Gateway|DNS|
+|Device|Role|IP Address|Assignment|Gateway|DNS|
 |---|---|---|---|---|---|
 |`RTR01`|`Gateway`|`10.10.20.1`|`Static`|`N/A`|`N/A`|
 |`CLIENT01`|`Windows 11 Workstation`|`DHCP`|`Dynamic`|`10.10.20.1`|`10.10.10.10`|
