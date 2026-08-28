@@ -30,7 +30,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 - [Hyper-V host, virtual switch and virtual machine configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Hyper-V%20%26%20Virtual%20Infrastructure/Hyper-V%20host%2C%20virtual%20switch%20and%20VM%20configuration.md)
 
 ### Networking & RRAS
-- Network architecture and IP addressing
+- [Network architecture and IP addressing](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md)
 - RRAS routing and NAT configuration
 - Network testing and validation
 
