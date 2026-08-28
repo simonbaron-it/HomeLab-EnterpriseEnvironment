@@ -37,5 +37,5 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 - Assign static addresses to infrastructure systems.
 - Use dynamic addressing for client devices.
 - Configure appropriate default gateways and DNS servers.
-- Validate host network configuration and connectivity.
+- Validate addressing and connectivity across multiple subnets.
 
