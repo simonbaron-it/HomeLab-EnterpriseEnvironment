@@ -6,7 +6,7 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 
 |Network|Switch|Subnet|Gateway|Purpose|
 |---|---|---|---|---|
-|`WAN`|`LAB-WAN`|`172.16.0.0/24`|`x.x.x.x`|Connectivity to Hyper-V host|
+|`WAN`|`LAB-WAN`|`172.16.0.0/24`|`172.16.0.2`|Connectivity to Hyper-V host|
 |`SERVERS`|`LAB-SERVERS`|`10.10.10.0/24`|`10.10.10.1`|Isolated network for Windows servers|
 |`CLIENTS`|`LAB-CLIENTS`|`10.10.20.0/24`|`10.10.20.1`|Isolated network for Windows client devices|
 
@@ -29,6 +29,8 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 |Device|Role|IP Address|Assignment|Gateway|DNS|
 |---|---|---|---|---|---|
 |`CLIENT01`|`Windows 11 Workstation`|`DHCP`|`Dynamic`|`10.10.20.1`|`10.10.10.10`|
+
+<i>Powershell screenshots?</i>
 
 ## Skills Demonstrated
 - Design a segmented multi-subnet network.
