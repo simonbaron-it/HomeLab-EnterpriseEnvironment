@@ -27,11 +27,11 @@
 ### RTR01 Network Adapters
 > RTR01 connects all three virtual networks.
 
-|Adapter|Virtual Switch|
-|---|---|
-|`WAN`|`LAB-WAN`|
-|`CLIENTS`|`LAB-CLIENTS`|
-|`SERVERS`|`LAB-SERVERS`|
+|Virtual Switch|Adapter|IP Address|
+|---|---|---|
+|`LAB-WAN`|`WAN`|`172.16.0.1`|
+|`LAB-CLIENTS`|`CLIENTS`|`10.10.20.1`|
+|`LAB-SERVERS`|`SERVERS`|`10.10.10.1`|
 
 <i>Insert RTR01 network adapter screenshot?</i>
 
