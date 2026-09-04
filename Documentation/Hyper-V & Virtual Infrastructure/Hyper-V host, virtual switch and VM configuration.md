@@ -41,9 +41,10 @@
 >
 >- RRAS and NAT are documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20&%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).</i>
 
+## Powershell Validation
+> PowerShell was used to confirm each VM is connected to the correct virtual switches.
 
-
-### Powershell Validation?
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Validation%20-%20Switches.png" width="700" height="800"/><p>
 ### Skills Demonstrated
 - Configure and manage Hyper-V virtual machines.
 - Create and configure Hyper-V virtual switches.
