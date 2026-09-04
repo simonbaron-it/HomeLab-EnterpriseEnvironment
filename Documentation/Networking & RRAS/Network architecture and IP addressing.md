@@ -6,29 +6,31 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 
 |Network|Switch|Subnet|Gateway|Purpose|
 |---|---|---|---|---|
-|`WAN`|`LAB-WAN`|`172.16.0.0/24`|`172.16.0.2`|Connectivity to Hyper-V host|
+|`WAN`|`LAB-WAN`|`172.16.0.0/24`|`172.16.0.1`|Connectivity to Hyper-V host|
 |`SERVERS`|`LAB-SERVERS`|`10.10.10.0/24`|`10.10.10.1`|Isolated network for Windows servers|
 |`CLIENTS`|`LAB-CLIENTS`|`10.10.20.0/24`|`10.10.20.1`|Isolated network for Windows client devices|
 
 ## Network Topology
-<i>Insert final network architecture diagram</i>
+<p align="center">
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="600"/><p>
+</p>
 
 ## IP Addressing Plan
 ### RTR01
 |Interface|IP Address|Purpose|
 |---|---|---|
-|`WAN`|`172.16.0.1`|Upstream connectivity|
+|`WAN`|`172.16.0.2`|Upstream connectivity|
 |`SERVERS`|`10.10.10.1`|Server network gateway|
 |`CLIENTS`|`10.10.20.1`|Client network gateway|
 ### Server Network
-|Device|Role|IP Address|Assignment|Gateway|DNS|
-|---|---|---|---|---|---|
-|`DC01`|`AD DS/DNS/DHCP`|`10.10.10.10`|`Static`|`10.10.10.1`|`10.10.10.10`|
-|`FS01`|`File Server`|`10.10.10.20`|`Static`|`10.10.10.1`|`10.10.10.10`|
+|Device|Operating System|Role|IP Address|Assignment|Gateway|DNS|
+|---|---|---|---|---|---|---|
+|`DC01`|`Windows Server 2025`|`AD DS/DNS/DHCP`|`10.10.10.10`|`Static`|`10.10.10.1`|`10.10.10.10`|
+|`FS01`|`Windows Server 2025`|`File Server`|`10.10.10.20`|`Static`|`10.10.10.1`|`10.10.10.10`|
 ### Client Network
-|Device|Role|IP Address|Assignment|Gateway|DNS|
-|---|---|---|---|---|---|
-|`CLIENT01`|`Windows 11 Workstation`|`DHCP`|`Dynamic`|`10.10.20.1`|`10.10.10.10`|
+|Device|Operating System|Role|IP Address|Assignment|Gateway|DNS|
+|---|---|---|---|---|---|---|
+|`CLIENT01`|`Windows 11`|`Domain Workstation`|`DHCP`|`Dynamic`|`10.10.20.1`|`10.10.10.10`|
 
 <i>Powershell screenshots?</i>
 
