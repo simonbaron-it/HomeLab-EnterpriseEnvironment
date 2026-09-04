@@ -30,25 +30,25 @@ The Remote Access role was installed on `RTR01` and RRAS was configured to provi
 - Default gateway functionality for both internal subnets.
 
 ### RRAS Management Console
->RRAS IPv4 interface overview showing the `WAN`, `SERVER` and `CLIENT` interfaces operational on `RTR01`.
+>RRAS IPv4 interface overview showing the `WAN`, `SERVERS` and `CLIENTS` interfaces operational on `RTR01`.
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20General.png" width="900"/>
 
 ## Internal Routing
 `RTR01` provides Layer 3 connectivity between the two isolated internal networks:
 
-|Source Network|Destination Network|Router Interface|
+|Source Network|Destination Network|RTR01 Interface|
 |---|---|---|
 |`10.10.10.0/24`|`10.10.20.0/24`|`10.10.10.1`|
 |`10.10.20.0/24`|`10.10.10.0/24`|`10.10.20.1`|
 
-This allows systems on the client network to communicate with infrastructure services hosted on the server network while keeping the two networks logically separated.
+Devices on each internal subnet use the corresponding `RTR01` interface as their default gateway. `RTR01` then forwards traffic between the directly connected `SERVERS` and `CLIENTS` networks.
 
 ## NAT Configuration
 Network Address Translation is configured to allow systems on the private lab networks to access upstream networks. Traffic originating from the internal `10.10.10.0/24` and `10.10.20.0/24` networks is translated through the `WAN` interface.
 
 |Interface|NAT Role|
 |---|---|
-|`WAN`|`Public interface connected to the Internet`|
+|`WAN`|`Public interface connected to the upstream network`|
 |`SERVERS`|`Private interface`|
 |`CLIENTS`|`Private interface`|
 
@@ -67,27 +67,27 @@ Because `CLIENT01` resides on a different subnet from the DHCP server on `DC01`,
 |DHCP Relay Destination|`10.10.10.10`|
 
 ### RRAS DHCP Relay Agent
->Configured on the `CLIENTS` interface, forwarding DHCP requests from the isolated client subnet to the DHCP server on DC01.
+>Configured on the `CLIENTS` interface, forwarding DHCP requests from the isolated client subnet to the DHCP server on `DC01`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20DHCP%20Relay.png" width="900"/>
 
 ## Routing Table
 The IPv4 routing table was reviewed to verify that `RTR01` had routes for each directly connected network and a default route to the upstream gateway.
 
-### Filtered IPv4 routing table
->Showing the directly connected `WAN`, `SERVER` and `CLIENT` networks, plus the default route to the upstream Hyper-V host at `172.16.0.1`.
+### Filtered IPv4 Routing Table
+>Showing the directly connected `WAN`, `SERVERS` and `CLIENTS` networks, plus the default route to the upstream Hyper-V host at `172.16.0.1`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RTR01%20Routing%20Table.png" width="900"/>
 
 ## Configuration Validation
 Connectivity testing was performed from `CLIENT01` to verify inter-subnet routing and upstream connectivity through `RTR01`.
 
-### Tracert 10.10.10.10
+### Tracert to `DC01`
 >Confirms that `CLIENT01` can reach `DC01` across the `CLIENTS` and `SERVERS` networks through `RTR01`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Tracert%20to%20DC01.png" width="900"/>
 
-### Ping 1.1.1.1
+### Ping upstream network
 >Confirms that traffic from the isolated client network can reach an upstream network through NAT on `RTR01`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Ping%20to%20upstream%20network.png" width="900"/>
