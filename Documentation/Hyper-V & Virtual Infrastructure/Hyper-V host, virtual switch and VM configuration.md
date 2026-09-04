@@ -13,43 +13,35 @@
 |Installed RAM|`32GB DDR5`|
 |Storage|`1TB SSD`|
 
-<i>Screenshot of Hyper-V Manager</i>
-
-### Virtual Switch Configuration
-> Three Hyper-V virtual switches are used to separate external network, client and server traffic.
-
-|Virtual Switch|Type|Purpose|
-|--------------|----|-------|
-|`LAB-WAN`| `Internal`|Connectivity between Hyper-V Host and RTR01|
-|`LAB-CLIENTS`|`Private`|Isolated network for Windows client VMs|
-|`LAB-SERVERS`|`Private`|Isolated network for Windows server VMs|
-
-### RTR01 Network Adapters
-> RTR01 connects all three virtual networks.
-
-|Virtual Switch|Adapter|IP Address|
-|---|---|---|
-|`LAB-WAN`|`WAN`|`172.16.0.1`|
-|`LAB-CLIENTS`|`CLIENTS`|`10.10.20.1`|
-|`LAB-SERVERS`|`SERVERS`|`10.10.10.1`|
-
-<i>Insert RTR01 network adapter screenshot?</i>
-
 ### Virtual Machine Configuration
 
-|VM|Generation|CPU|RAM|Virtual Disk|Operating System|
+|VM|Generation|vCPU|vRAM|vDisk|Operating System|
 |--|----------|---|---|------------|----------------|
-|`RTR01`|`Gen 2`|`X`|`X`|`X`|`Windows Server 2025`|
-|`DC01`|`Gen 2`|`X`|`X`|`X`|`Windows Server 2025`|
-|`FS01`|`Gen 2`|`X`|`X`|`X`|`Windows Server 2025`|
-|`CLIENT01`|`Gen 2`|`X`|`X`|`X`|`Windows 11`|
+|`RTR01`|`Gen 2`|`2`|`4GB`|`40GB`|`Windows Server 2025`|
+|`DC01`|`Gen 2`|`2`|`4GB`|`50GB`|`Windows Server 2025`|
+|`FS01`|`Gen 2`|`2`|`4GB`|`50GB` `20GB`|`Windows Server 2025`|
+|`CLIENT01`|`Gen 2`|`2`|`4GB`|`60GB`|`Windows 11`|
 
-<i>Insert VM/vswitch layout diagram</i>
+### Hyper-V Manager
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Hyper-V%20Manager.png" width="900" height="700"/><p>
+
+## Virtual Network Configuration
+> Three Hyper-V virtual switches segment WAN, server, and client traffic. `RTR01` connects all three networks and provides routing between them.
+
+|Virtual Switch|Type|Subnet|RTR01 Adapter|Gateway|Purpose|
+|---|---|---|---|---|---|
+|`LAB-WAN`| `Internal`|`172.16.0.0/24`|`WAN`|`172.16.0.2`|Upstream Internet/NAT path|
+|`LAB-CLIENTS`|`Private`|`10.10.20.0/24`|`CLIENTS`|`10.10.20.1`|Isolated network for Windows client VMs|
+|`LAB-SERVERS`|`Private`|`10.10.10.0/24`|`SERVERS`|`10.10.10.1`|Isolated network for Windows server VMs|
+<br>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Adapters.png" width="600" height="700"/><p>
 
 <b>Notes:</b>  
->- IP addressing, subnet design and default gateways are documented in <i>Network Architecture.</i>
+>- IP addressing, subnet design and default gateways are documented in [Network Architecture and IP Addressing.](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md)
 >
->- RRAS routing and NAT configuration are documented in <i>RRAS.</i>
+>- RRAS and NAT are documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20&%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).</i>
+
+
 
 ### Powershell Validation?
 ### Skills Demonstrated
