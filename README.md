@@ -19,7 +19,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 
 ### Networking & RRAS
 - [Network architecture and IP addressing](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md)
-- [RRAS routing and NAT configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/RRAS%20Routing%20%26%20NAT%20Configuration.md)
+- [RRAS routing and NAT configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md)
 
 ### Domain Controller
 - Active Directory Domain setup, OU structure and security groups
