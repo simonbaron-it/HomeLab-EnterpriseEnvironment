@@ -10,7 +10,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 
 ## Current Lab Environment:
 <p align="center">
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="600" height="700"/><p>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="600"/>
 </p>
 
 ## Lab Documentation
@@ -37,8 +37,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 - File-share and NTFS permission validation
 
 <i>Old docs</i>
-- #### Network Architecture
-  - [Network topology, IP configuration](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Network-Achitecture.md)
+
 - #### Windows Server 2022 - Domain Controller
   - [Domain setup, Organisational Unit structure, security groups](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Active-Directory.md)
   - [Group Policy Objects](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group-Policy.md)
