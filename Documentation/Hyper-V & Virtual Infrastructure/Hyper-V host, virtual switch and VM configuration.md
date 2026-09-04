@@ -30,7 +30,7 @@
 
 |Virtual Switch|Type|RTR01 Adapter|Purpose|
 |---|---|---|---|
-|`LAB-WAN`| `Internal`|`WAN`|Upstream Internet/NAT path|
+|`LAB-WAN`| `Internal`|`WAN`|Connectivity between Hyper-V host and RTR01|
 |`LAB-CLIENTS`|`Private`|`CLIENTS`|Isolated network for Windows client VMs|
 |`LAB-SERVERS`|`Private`|`SERVERS`|Isolated network for Windows server VMs|
 <br>
@@ -39,10 +39,10 @@
 <b>Notes:</b>  
 >- IP addressing, subnet design and default gateways are documented in [Network Architecture and IP Addressing.](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md)
 >
->- RRAS and NAT are documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20&%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).</i>
+>- RRAS and NAT are documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20&%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).
 
 ## PowerShell Validation
-> PowerShell was used to confirm each VM is connected to the correct virtual switches.
+> PowerShell was used from the Hyper-V host to verify the virtual switch configuration and confirm each VM was connected to the correct network segment.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Validation%20-%20Switches.png" width="700"/><p>
 ### Skills Demonstrated
@@ -52,4 +52,4 @@
 - Configure multi-NIC virtual machines.
 - Allocate VM compute, memory and storage resources.
 - Map virtual machines to appropriate network segments.
-- Validate Hyper-V configuration using PowerShell.
+- Validate Hyper-V virtual switch and network adapter configuration using PowerShell.
