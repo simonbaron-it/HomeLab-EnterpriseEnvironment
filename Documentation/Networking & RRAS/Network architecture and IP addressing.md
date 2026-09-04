@@ -1,4 +1,4 @@
-# Network Architecture & IP Addressing
+# Network Architecture and IP Addressing
 >This section documents the logical network design, subnet structure and IP addressing used throughout the home lab.
 
 ## Network Design
