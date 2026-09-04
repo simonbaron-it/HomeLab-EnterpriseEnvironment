@@ -1,7 +1,7 @@
 # Hyper-V & Virtual Infrastructure
 > This section documents the Hyper-V host, virtual switches and virtual machines used to provide the virtualisation platform for the home lab.
 > 
-> The objective was to create a virtualisation platform capable of hosting multiple Windows Server and client virtual machines while maintaining an isolated internal lab network with controlled external connectivity through a dedicated RRAS server.
+> The objective was to create a virtualisation platform capable of hosting multiple Windows Server and client virtual machines while maintaining isolated internal lab networks with controlled external connectivity through a dedicated RRAS server.
 
 ## Hyper-V Host
 |Component|Configuration|
@@ -13,9 +13,9 @@
 |Installed RAM|`32GB DDR5`|
 |Storage|`1TB SSD`|
 
-### Virtual Machine Configuration
+## Virtual Machine Configuration
 
-|VM|Generation|vCPU|vRAM|vDisk|Operating System|
+|VM|Generation|vCPU|vRAM|vDisk(s)|Operating System|
 |--|----------|---|---|------------|----------------|
 |`RTR01`|`Gen 2`|`2`|`4GB`|`40GB`|`Windows Server 2025`|
 |`DC01`|`Gen 2`|`2`|`4GB`|`50GB`|`Windows Server 2025`|
@@ -44,8 +44,8 @@
 ## PowerShell Validation
 > PowerShell was used from the Hyper-V host to verify the virtual switch configuration and confirm each VM was connected to the correct network segment.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Validation%20-%20Switches.png" width="700"/><p>
-### Skills Demonstrated
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Validation%20-%20Switches.png" width="800"/><p>
+## Skills Demonstrated
 - Configure and manage Hyper-V virtual machines.
 - Create and configure Hyper-V virtual switches.
 - Design isolated client and server network segments.
