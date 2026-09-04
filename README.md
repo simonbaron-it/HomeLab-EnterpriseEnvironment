@@ -9,21 +9,9 @@ The environment is hosted using Hyper-V and consists of multiple Windows Server 
 All labs are documented with Markdown files and screenshots for clarity and portfolio presentation.
 
 ## Current Lab Environment:
-### RTR01 - Network/Routing Server  
-- <b>Operating system:</b> Windows Server 2025  
-- <b>Roles:</b> `RRAS` `Routing` `NAT` `Hyper-V Networking`
-
-### DC01 - Domain Controller  
-- <b>Operating system:</b> Windows Server 2025  
-- <b>Roles:</b> `Active Directory` `DNS` `DHCP` `Group Policy`
-
-### FS01 - File Server
-- <b>Operating system:</b> Windows Server 2025 
-- <b>Roles:</b> `SMB` `File Services` `NTFS Permissions`
-
-### CLIENT01 - Domain Workstation
-- <b>Operating System:</b> Windows 11  
-- <b>Roles:</b> `Testing` `Validation` 
+<p align="center">
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="600" height="700"/><p>
+</p>
 
 ## Lab Documentation
 ### Hyper-V & Virtual Infrastructure
