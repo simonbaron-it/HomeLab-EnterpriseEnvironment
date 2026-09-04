@@ -1,4 +1,4 @@
-# RRAS Routing & NAT Configuration
+# RRAS Routing and NAT Configuration
 >This section documents the Routing and Remote Access Service (RRAS) configuration used on `RTR01` to route traffic between the lab networks and provide NAT for upstream connectivity.
 
 ## RRAS Server
