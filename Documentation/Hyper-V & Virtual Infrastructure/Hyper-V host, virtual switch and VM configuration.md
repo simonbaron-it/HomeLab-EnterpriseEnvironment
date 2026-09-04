@@ -23,28 +23,28 @@
 |`CLIENT01`|`Gen 2`|`2`|`4GB`|`60GB`|`Windows 11`|
 
 ### Hyper-V Manager
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Hyper-V%20Manager.png" width="900" height="700"/><p>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Hyper-V%20Manager.png" width="900"/><p>
 
 ## Virtual Network Configuration
 > Three Hyper-V virtual switches segment WAN, server, and client traffic. `RTR01` connects all three networks and provides routing between them.
 
-|Virtual Switch|Type|Subnet|RTR01 Adapter|Gateway|Purpose|
-|---|---|---|---|---|---|
-|`LAB-WAN`| `Internal`|`172.16.0.0/24`|`WAN`|`172.16.0.2`|Upstream Internet/NAT path|
-|`LAB-CLIENTS`|`Private`|`10.10.20.0/24`|`CLIENTS`|`10.10.20.1`|Isolated network for Windows client VMs|
-|`LAB-SERVERS`|`Private`|`10.10.10.0/24`|`SERVERS`|`10.10.10.1`|Isolated network for Windows server VMs|
+|Virtual Switch|Type|RTR01 Adapter|Purpose|
+|---|---|---|---|
+|`LAB-WAN`| `Internal`|`WAN`|Upstream Internet/NAT path|
+|`LAB-CLIENTS`|`Private`|`CLIENTS`|Isolated network for Windows client VMs|
+|`LAB-SERVERS`|`Private`|`SERVERS`|Isolated network for Windows server VMs|
 <br>
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Adapters.png" width="600" height="700"/><p>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Adapters.png" width="650"/><p>
 
 <b>Notes:</b>  
 >- IP addressing, subnet design and default gateways are documented in [Network Architecture and IP Addressing.](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md)
 >
 >- RRAS and NAT are documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20&%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).</i>
 
-## Powershell Validation
+## PowerShell Validation
 > PowerShell was used to confirm each VM is connected to the correct virtual switches.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Validation%20-%20Switches.png" width="700" height="800"/><p>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Validation%20-%20Switches.png" width="700"/><p>
 ### Skills Demonstrated
 - Configure and manage Hyper-V virtual machines.
 - Create and configure Hyper-V virtual switches.
