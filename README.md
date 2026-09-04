@@ -10,7 +10,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 
 ## Current Lab Environment:
 <p align="center">
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="600"/>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="500"/>
 </p>
 
 ## Lab Documentation
