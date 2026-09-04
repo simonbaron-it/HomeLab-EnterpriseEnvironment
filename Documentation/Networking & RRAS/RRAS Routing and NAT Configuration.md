@@ -23,7 +23,7 @@
 > Full subnet design and device addressing are documented in [Network Architecture and IP Addressing](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md).
 
 ## RRAS Configuration
-The Remote Access role was installed on `RTR01` and RRAS was configured to provide:
+The Remote Access server role was installed on `RTR01` and RRAS was configured to provide:
 
 - IPv4 routing between the `SERVERS` and `CLIENTS` networks.
 - NAT for traffic leaving the lab through the `WAN` interface.
@@ -87,7 +87,7 @@ Connectivity testing was performed from `CLIENT01` to verify inter-subnet routin
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Tracert%20to%20DC01.png" width="900"/>
 
-### Ping upstream network
+### Ping Upstream Network
 >Confirms that traffic from the isolated client network can reach an upstream network through NAT on `RTR01`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Ping%20to%20upstream%20network.png" width="900"/>
