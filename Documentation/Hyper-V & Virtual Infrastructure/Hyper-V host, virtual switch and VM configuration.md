@@ -26,7 +26,7 @@
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Hyper-V%20Manager.png" width="900"/><p>
 
 ## Virtual Network Configuration
-> Three Hyper-V virtual switches segment WAN, server, and client traffic. `RTR01` connects all three networks and provides routing between them.
+Three Hyper-V virtual switches segment WAN, server, and client traffic. `RTR01` connects all three networks and provides routing between them.
 
 |Virtual Switch|Type|RTR01 Adapter|Purpose|
 |---|---|---|---|
@@ -42,7 +42,7 @@
 >- RRAS and NAT are documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20&%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).
 
 ## PowerShell Validation
-> PowerShell was used from the Hyper-V host to verify the virtual switch configuration and confirm each VM was connected to the correct network segment.
+PowerShell was used from the Hyper-V host to verify the virtual switch configuration and confirm each VM was connected to the correct network segment.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Validation%20-%20Switches.png" width="800"/><p>
 ## Skills Demonstrated
