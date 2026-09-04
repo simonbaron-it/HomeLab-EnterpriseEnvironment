@@ -22,6 +22,7 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 |`WAN`|`172.16.0.2`|Upstream connectivity|
 |`SERVERS`|`10.10.10.1`|Server network gateway|
 |`CLIENTS`|`10.10.20.1`|Client network gateway|
+
 ### Server Network
 |Device|Operating System|Role|IP Address|Assignment|Gateway|DNS|
 |---|---|---|---|---|---|---|
@@ -32,7 +33,15 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 |---|---|---|---|---|---|---|
 |`CLIENT01`|`Windows 11`|`Domain Workstation`|`DHCP`|`Dynamic`|`10.10.20.1`|`10.10.10.10`|
 
-<i>Powershell screenshots?</i>
+## Configuration Validation
+### RTR01
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20RTR01.png" width="700"/><p>
+### DC01
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20DC01.png" width="700"/><p>
+### FS01
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20FS01.png" width="700"/><p>
+### CLIENT01
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20CLIENT01.png" width="700"/><p>
 
 ## Skills Demonstrated
 - Design a segmented multi-subnet network.
