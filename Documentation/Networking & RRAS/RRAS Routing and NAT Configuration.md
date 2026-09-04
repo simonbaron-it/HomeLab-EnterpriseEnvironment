@@ -30,7 +30,7 @@ The Remote Access role was installed on `RTR01` and RRAS was configured to provi
 - Default gateway functionality for both internal subnets.
 
 ### RRAS Management Console
->RRAS IPv4 interface overview showing the WAN, Server and Client interfaces operational on RTR01.
+>RRAS IPv4 interface overview showing the `WAN`, `SERVER` and `CLIENT` interfaces operational on `RTR01`.
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20General.png" width="900"/>
 
 ## Internal Routing
@@ -52,8 +52,8 @@ Network Address Translation is configured to allow systems on the private lab ne
 |`SERVERS`|`Private interface`|
 |`CLIENTS`|`Private interface`|
 
-### RRAS NAT overview 
->Showing the WAN interface actively translating traffic from the isolated server and client networks to the upstream network.
+### RRAS NAT Overview 
+>Showing the `WAN` interface actively translating traffic from the isolated server and client networks to the upstream network.
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20NAT.png" width="900"/>
 
 ## DHCP Relay
@@ -67,17 +67,30 @@ Because `CLIENT01` resides on a different subnet from the DHCP server on `DC01`,
 |DHCP Relay Destination|`10.10.10.10`|
 
 ### RRAS DHCP Relay Agent
->Configured on the CLIENTS interface, forwarding DHCP requests from the isolated client subnet to the DHCP server on DC01.
+>Configured on the `CLIENTS` interface, forwarding DHCP requests from the isolated client subnet to the DHCP server on DC01.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20DHCP%20Relay.png" width="900"/>
 
 ## Routing Table
-A routing table was used to verify that `RTR01` had routes for each directly connected network and an upstream default route.
+The IPv4 routing table was reviewed to verify that `RTR01` had routes for each directly connected network and a default route to the upstream gateway.
 
-### Filtered IPv4 routing table on RTR01
->Showing the directly connected WAN, Server and Client networks, plus the default route to the upstream Hyper-V host at 172.16.0.1.
+### Filtered IPv4 routing table
+>Showing the directly connected `WAN`, `SERVER` and `CLIENT` networks, plus the default route to the upstream Hyper-V host at `172.16.0.1`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RTR01%20Routing%20Table.png" width="900"/>
+
+## Configuration Validation
+Connectivity testing was performed from `CLIENT01` to verify inter-subnet routing and upstream connectivity through `RTR01`.
+
+### Tracert 10.10.10.10
+>Confirms that `CLIENT01` can reach `DC01` across the `CLIENTS` and `SERVERS` networks through `RTR01`.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Tracert%20to%20DC01.png" width="900"/>
+
+### Ping 1.1.1.1
+>Confirms that traffic from the isolated client network can reach an upstream network through NAT on `RTR01`.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Ping%20to%20upstream%20network.png" width="900"/>
 
 ## Skills Demonstrated
 - Install and configure Windows Server Routing and Remote Access.
@@ -87,3 +100,5 @@ A routing table was used to verify that `RTR01` had routes for each directly con
 - Configure appropriate internal and external RRAS interfaces.
 - Configure DHCP relay across routed network segments.
 - Interpret and validate Windows routing tables.
+- Validate inter-subnet routing and upstream NAT connectivity.
+- Troubleshoot routed network connectivity using Windows networking tools.
