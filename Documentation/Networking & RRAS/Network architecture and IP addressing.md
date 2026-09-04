@@ -10,11 +10,6 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 |`SERVERS`|`LAB-SERVERS`|`10.10.10.0/24`|`10.10.10.1`|Isolated network for Windows servers|
 |`CLIENTS`|`LAB-CLIENTS`|`10.10.20.0/24`|`10.10.20.1`|Isolated network for Windows client devices|
 
-## Network Topology
-<p align="center">
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="600"/><p>
-</p>
-
 ## IP Addressing Plan
 ### RTR01
 |Interface|IP Address|Purpose|
@@ -33,7 +28,13 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 |---|---|---|---|---|---|---|
 |`CLIENT01`|`Windows 11`|`Domain Workstation`|`DHCP`|`Dynamic`|`10.10.20.1`|`10.10.10.10`|
 
+## Network Diagram
+<p align="center">
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="500"/>
+</p>
+
 ## Configuration Validation
+`ipconfig` was used to verify that each system's IPv4 address, subnet, default gateway and DNS configuration matched the documented addressing plan.
 ### RTR01
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20RTR01.png" width="700"/><p>
 ### DC01
@@ -43,6 +44,13 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 ### CLIENT01
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20CLIENT01.png" width="700"/><p>
 
+### Validation Confirmed:
+- `RTR01` is configured with interfaces on all three network segments.
+- `DC01` and `FS01` use static addressing on the 10.10.10.0/24 server network.
+- `CLIENT01` receives dynamic addressing on the 10.10.20.0/24 client network.
+- Server and client systems use the appropriate RTR01 interface as their default gateway.
+- Domain members use `DC01` (10.10.10.10) for DNS.
+
 ## Skills Demonstrated
 - Design a segmented multi-subnet network.
 - Plan and document IPv4 addressing.
@@ -50,5 +58,5 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 - Assign static addresses to infrastructure systems.
 - Use dynamic addressing for client devices.
 - Configure appropriate default gateways and DNS servers.
-- Validate addressing and connectivity across multiple subnets.
+- Validate IPv4 addressing, default gateway and DNS configuration.
 
