@@ -78,7 +78,7 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 ## Configuration Validation
 
 ### DNS Resolution
-> DNS resolution was tested from a domain-joined system to verify that internal hostnames could be resolved using DC01.  
+> DNS resolution was tested from a domain-joined system to verify that internal hostnames could be resolved using `DC01`.  
 
 <i>Insert screenshot</i>
 
@@ -88,7 +88,7 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 <i>Insert screenshot</i>
 
 ### `CLIENT01` DHCP Configuration
-> `ipconfig /all` was used to confirm that `CLIENT01` received its IPv4 configuration dynamically from DC01.  
+> `ipconfig /all` was used to confirm that `CLIENT01` received its IPv4 configuration dynamically from `DC01`.  
 
 <i>Insert screenshot</i>
 
