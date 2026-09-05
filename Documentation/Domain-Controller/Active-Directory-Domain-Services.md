@@ -8,7 +8,7 @@
 |Server|`DC01`|
 |Operating System|`Windows Server 2025`|
 |Role|`Active Directory Domain Services`|
-|Additional Services|`DNS` `DHCP` `Group Policy`|
+|Additional Services|`DNS` `DHCP`|
 |Domain|`baron.example.com`|
 |IP Address|`10.10.10.10`|
 
@@ -101,7 +101,7 @@ Example:
 >File-share permissions and NTFS access control are documented separately in <i>File Services</i>.
 
 ### AGDLP Validation
-> PowerShell was used to validate the above example's ADGLP model implementation.
+> PowerShell was used to validate the above example's AGDLP model implementation.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/AGDLP%20Validation.png" width="900"/>
 
