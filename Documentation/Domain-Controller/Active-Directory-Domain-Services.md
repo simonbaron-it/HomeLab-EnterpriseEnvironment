@@ -53,16 +53,20 @@ Users, organisational units and security groups were configured using `Active Di
 ## Security Groups
 >Security groups were implemented using the AGDLP model to separate user and role membership from resource permissions.
 
-#### Global Security Groups
+### Global Security Groups
 |Group|Scope|Type|Purpose|
 |---|---|---|---|
+|`Finance_Managers`|`Global`|`Security`|Represents Finance department managers for role-based access|
 |`Finance_Users`|`Global`|`Security`|Represents Finance department users for role-based access|
+|`HR_Managers`|`Global`|`Security`|Represents HR department managers for role-based access|
 |`HR_Users`|`Global`|`Security`|Represents HR department users for role-based access|
 |`IT_Admins`|`Global`|`Security`|Represents privileged IT administrator accounts|
 |`IT_Users`|`Global`|`Security`|Represents IT department users for role-based access|
 |`Sales_Users`|`Global`|`Security`|Represents Sales department users for role-based access|
 
-#### Domain Local Security Groups
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Global%20Groups.png" width="900"/>
+
+### Domain Local Security Groups
 |Group|Scope|Type|Purpose|
 |---|---|---|---|
 |`Finance_Folder_Management`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\Finance\Management`|
@@ -73,11 +77,32 @@ Users, organisational units and security groups were configured using `Active Di
 |`HR_Folder_RW`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\HR`|
 |`IT_Folder_RO`|`Domain Local`|`Security`|Assigns Read-only permissions to: `\\FS01\IT`|
 |`IT_Folder_RW`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\IT`|
+|`Public_Folder_RO`|`Domain Local`|`Security`|Assigns Read & Execute permissions to: `\\FS01\Public`|
 |`Sales_Folder_RO`|`Domain Local`|`Security`|Assigns Read-only permissions to: `\\FS01\Sales`|
 |`Sales_Folder_RW`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\Sales`|
 
-## Group-Based Access Control
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Domain%20Local%20Groups.png" width="900"/>
 
+### Group-Based Access Control
+The AGDLP model is implemented where applicable. Users are assigned to role-based Global security groups, which are then added to Domain Local groups used to grant access to resources.
+
+`Domain User`  
+&nbsp;&nbsp;&nbsp;↳`Role Based Global Security Group`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Domain Local Resource Security Group`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`File Permissions`  
+
+Example:  
+`Sarah Jones`  
+&nbsp;&nbsp;&nbsp;↳`Finance_Users`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Finance_Folder_RW`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify permissions to `\\FS01\Finance`
+
+>File-share permissions and NTFS access control are documented separately in <i>File Services</i>.
+
+### AGDLP Validation
+>PowerShell was used to validate the above example's ADGLP model implementation.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/AGDLP%20Validation.png" width="900"/>
 
 ## Skills Demonstrated
 - Install and configure Active Directory Domain Services.
