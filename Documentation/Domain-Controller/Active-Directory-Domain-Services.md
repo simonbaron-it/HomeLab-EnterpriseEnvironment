@@ -7,13 +7,14 @@
 |---|---|
 |Server|`DC01`|
 |Operating System|`Windows Server 2025`|
-|Role|`AD DS` `DNS` `DHCP` `Group Policy`|
-|Domain|`Baron.example.com`|
+|Role|`Active Directory Domain Services`|
+|Additional Services|`DNS` `DHCP` `Group Policy`|
+|Domain|`baron.example.com`|
 |IP Address|`10.10.10.10`|
 
 ## Domain Setup
 
-The Active Directory Domain Services role was installed on `DC01` and the server was promoted as the first domain controller in a new Active Directory forest using: `Baron.example.com`.
+The Active Directory Domain Services role was installed on `DC01` and the server was promoted as the first domain controller in a new Active Directory forest using: `baron.example.com`.
 
 The domain provides:
 
@@ -26,7 +27,7 @@ The domain provides:
 # Active Directory Users and Computers
 Users, organisational units and security groups were configured using `Active Directory Users and Computers` to simulate how identity, computers, departments and access could be managed within a small organisation.
 
->- DNS and DHCP is documented in <i>[DNS and DHCP configuration]</i>
+>- DNS and DHCP are documented in <i>[DNS and DHCP configuration]</i>
 >- Group Policy is documented in <i>[Group Policy Configuration]</i>
 ## Organisational Unit Design
 >Organisational Units were created to logically separate users, workstations, servers and administrative objects.
@@ -51,7 +52,7 @@ Users, organisational units and security groups were configured using `Active Di
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory.png" width="900"/>
 
 ## Security Groups
->Security groups were implemented using the AGDLP model to separate user and role membership from resource permissions.
+> Security groups were implemented using the AGDLP model to separate user and role membership from resource permissions.
 
 ### Global Security Groups
 |Group|Scope|Type|Purpose|
@@ -69,38 +70,38 @@ Users, organisational units and security groups were configured using `Active Di
 ### Domain Local Security Groups
 |Group|Scope|Type|Purpose|
 |---|---|---|---|
-|`Finance_Folder_Management`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\Finance\Management`|
-|`Finance_Folder_RO`|`Domain Local`|`Security`|Assigns Read-only permissions to: `\\FS01\Finance`|
-|`Finance_Folder_RW`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\Finance`|
-|`HR_Folder_Management`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\HR\Management`|
-|`HR_Folder_RO`|`Domain Local`|`Security`|Assigns Read-only permissions to: `\\FS01\HR`|
-|`HR_Folder_RW`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\HR`|
-|`IT_Folder_RO`|`Domain Local`|`Security`|Assigns Read-only permissions to: `\\FS01\IT`|
-|`IT_Folder_RW`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\IT`|
-|`Public_Folder_RO`|`Domain Local`|`Security`|Assigns Read & Execute permissions to: `\\FS01\Public`|
-|`Sales_Folder_RO`|`Domain Local`|`Security`|Assigns Read-only permissions to: `\\FS01\Sales`|
-|`Sales_Folder_RW`|`Domain Local`|`Security`|Assigns Modify permissions to: `\\FS01\Sales`|
+|`Finance_Folder_Management`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\Finance\Management`|
+|`Finance_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\Finance`|
+|`Finance_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\Finance`|
+|`HR_Folder_Management`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\HR\Management`|
+|`HR_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\HR`|
+|`HR_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\HR`|
+|`IT_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\IT`|
+|`IT_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\IT`|
+|`Public_Folder_RO`|`Domain Local`|`Security`|Used to grant Read & Execute access to: `\\FS01\Public`|
+|`Sales_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\Sales`|
+|`Sales_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\Sales`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Domain%20Local%20Groups.png" width="900"/>
 
-### Group-Based Access Control
-The AGDLP model is implemented where applicable. Users are assigned to role-based Global security groups, which are then added to Domain Local groups used to grant access to resources.
+## Group-Based Access Control
+The AGDLP model is implemented where applicable. User accounts are assigned to role-based Global security groups, which are nested within Domain Local resource groups. Permissions are then assigned to the Domain Local groups rather than directly to individual users.
 
-`Domain User`  
-&nbsp;&nbsp;&nbsp;↳`Role Based Global Security Group`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Domain Local Resource Security Group`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`File Permissions`  
+`Account`  
+&nbsp;&nbsp;&nbsp;↳`Global Security Group`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Domain Local Security Group`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Permission`  
 
 Example:  
 `Sarah Jones`  
 &nbsp;&nbsp;&nbsp;↳`Finance_Users`  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Finance_Folder_RW`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify permissions to `\\FS01\Finance`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\Finance`
 
 >File-share permissions and NTFS access control are documented separately in <i>File Services</i>.
 
 ### AGDLP Validation
->PowerShell was used to validate the above example's ADGLP model implementation.
+> PowerShell was used to validate the above example's ADGLP model implementation.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/AGDLP%20Validation.png" width="900"/>
 
