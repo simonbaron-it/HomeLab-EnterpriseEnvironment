@@ -1,6 +1,7 @@
 # DNS and DHCP Configuration
 > This section documents the DNS and DHCP services configured on `DC01` to provide name resolution and dynamic IPv4 addressing for the home lab.
->
+
+## Overview
 > `DC01` provides centralised DNS resolution for the Active Directory domain and DHCP services for devices on the `CLIENTS` network.
 
 ### Server Configuration
@@ -42,8 +43,8 @@ External DNS queries that cannot be resolved by the internal DNS server are forw
 
 |Configuration|Value|
 |---|---|
-|DNS Forwarder|`1.1.1.1`|
-|DNS Forwarder|`8.8.8.8`|
+|DNS Forwarder 1|`1.1.1.1`|
+|DNS Forwarder 2|`8.8.8.8`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DNS%20Forwarders.png" width="350"/>
 
@@ -59,7 +60,7 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 |DHCP Server IP|`10.10.10.10`|
 |Scope Name|`Client Scope`|
 |Network|`10.10.20.0/24`|
-|Address Range|`10.10.20.100>` - `10.10.20.199`|
+|Address Range|`10.10.20.100` - `10.10.20.199`|
 |Excluded Addresses|`N/A`|
 |Lease Duration|`8 days`|
 |003 Router|`10.10.20.1`|
@@ -69,7 +70,7 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Scope.png" width="800"/>
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Scope%20Options.png" width="800"/>
 
-#### DHCP Relay
+### DHCP Relay
 
 `CLIENT01` resides on the `10.10.20.0/24` network while `DC01` resides on the `10.10.10.0/24` server network. The DHCP Relay Agent configured on `RTR01` forwards DHCP requests from the `CLIENTS` network to `DC01`. DHCP Relay configuration is documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).  
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Relay%20diagram.png" width="500"/>
@@ -82,7 +83,7 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 <i>Insert screenshot</i>
 
 ### DHCP Lease
-> DHCP leases were reviewed on DC01 to verify that CLIENT01 successfully obtained an address from the client scope.  
+> DHCP leases were reviewed on `DC01` to verify that `CLIENT01` successfully obtained an address from the client scope.  
 
 <i>Insert screenshot</i>
 
