@@ -25,7 +25,7 @@ DNS was installed alongside Active Directory Domain Services and provides name r
 |Forward Lookup Zone|`baron.example.com`|
 |Reverse Lookup Zone 1|`10.10.10.in-addr.arpa` (`10.10.10.0/24`)| 
 |Reverse Lookup Zone 2|`20.10.10.in-addr.arpa` (`10.10.20.0/24`)|
-|DNS Zone Types|`Active Directory-Integrated`|
+|DNS Zone Type|`Active Directory-Integrated`|
 |Dynamic Updates|`Secure only`|
 
 ### DNS Records
@@ -88,7 +88,7 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Lease%20Validation.png" width="800"/>
 
-### `CLIENT01` DHCP Configuration
+### CLIENT01 DHCP Configuration
 > `ipconfig /all` was used to confirm that `CLIENT01` received its IPv4 configuration dynamically from `DC01`.  
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20CLIENT01.png" width="800"/>
@@ -99,7 +99,7 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 - External DNS queries are resolved through the configured DNS forwarders.
 - `CLIENT01` receives an active lease from the `10.10.20.0/24` DHCP scope.
 - DHCP provides the correct default gateway, DNS server and DNS domain.
-- DHCP successfully services the routed `CLIENTS` network through the DHCP Relay Agent on `RTR01`.
+- DHCP successfully provides addressing to the routed `CLIENTS` network through the DHCP Relay Agent on `RTR01`.
 
 ## Skills Demonstrated
 - Install and configure Windows Server DNS.
