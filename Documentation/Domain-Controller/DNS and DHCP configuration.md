@@ -26,6 +26,7 @@ DNS was installed alongside Active Directory Domain Services and provides name r
 |Reverse Lookup Zone 1|`10.10.10.in-addr.arpa` (`10.10.10.0/24`)| 
 |Reverse Lookup Zone 2|`20.10.10.in-addr.arpa` (`10.10.20.0/24`)|
 |DNS Zone Types|`Active Directory-Integrated`|
+|Dynamic Updates|`Secure only`|
 
 ### DNS Records
 DNS host records allow systems within the domain to resolve hostnames to IPv4 addresses.
@@ -78,19 +79,27 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 ## Configuration Validation
 
 ### DNS Resolution
-> DNS resolution was tested from a domain-joined system to verify that internal hostnames could be resolved using `DC01`.  
+> DNS resolution was tested from a domain-joined system to verify internal forward and reverse lookups, along with external name resolution through `DC01`. 
 
-<i>Insert screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DNS%20Validation.png" width="800"/>
 
 ### DHCP Lease
-> DHCP leases were reviewed on `DC01` to verify that `CLIENT01` successfully obtained an address from the client scope.  
+> PowerShell was used on `DC01` to verify that `CLIENT01` obtained an active lease from the `10.10.20.0/24` client scope. 
 
-<i>Insert screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Lease%20Validation.png" width="800"/>
 
 ### `CLIENT01` DHCP Configuration
 > `ipconfig /all` was used to confirm that `CLIENT01` received its IPv4 configuration dynamically from `DC01`.  
 
-<i>Insert screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20CLIENT01.png" width="800"/>
+
+### Validation Confirmed
+- Internal forward DNS records resolve through `DC01`.
+- Reverse DNS resolves IPv4 addresses to the appropriate hostnames.
+- External DNS queries are resolved through the configured DNS forwarders.
+- `CLIENT01` receives an active lease from the `10.10.20.0/24` DHCP scope.
+- DHCP provides the correct default gateway, DNS server and DNS domain.
+- DHCP successfully services the routed `CLIENTS` network through the DHCP Relay Agent on `RTR01`.
 
 ## Skills Demonstrated
 - Install and configure Windows Server DNS.
