@@ -24,7 +24,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 ### Domain Controller
 - [Active Directory Domain setup, OU structure and security groups](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Active-Directory-Domain-Services.md)
 - [DNS and DHCP Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md)
-- Group Policy configuration
+- [Group Policy configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md)
 
 
 ### File Services
