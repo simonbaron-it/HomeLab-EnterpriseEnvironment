@@ -19,7 +19,7 @@ The Group Policy design provides:
 
 ### Group Policy Design
 
-|GPO|Linked To|Purpose|
+|GPO|Scope|Purpose|
 |---|---|---|
 |`Domain-Account-Policy`|`baron.example.com`|Password/lockout security|
 |`Workstation-Security-Baseline`|`Workstations`|Endpoint hardening|
@@ -33,74 +33,138 @@ Group Policies are linked to the relevant OUs rather than applied indiscriminate
 
 ## Domain Account Policy
 
-Purpose  
-Scope  
-Configuration  
-Security rationale  
-Testing  
-Result  
+### Purpose
+The `Domain-Account-Policy` GPO defines domain-wide password and account lockout requirements for user accounts in the `baron.example.com` domain.
 
-> A domain account GPO was created to apply consistent security settings to user accounts when logged into domain-joined Windows client devices.
+### Scope  
+| Setting | Value |
+|---|---|
+|Linked To|`baron.example.com` domain root|
+|Configuration Type|`Computer Configuration`|
+|Security Filtering|`Authenticated Users`|
 
+### Configuration  
 |Configuration Area|Policy|
 |---|---|
-|`<AREA>`|`<SETTING>`|
-|`<AREA>`|`<SETTING>`|
-|`<AREA>`|`<SETTING>`|
-|`<AREA>`|`<SETTING>`|
+|`Enforce password history`|`10 passwords remembered`|
+|`Maximum password age`|`90 days`|
+|`Minimum password age`|`1 day`|
+|`Password must meet complexity requirements`|`Enabled`|
+|`Account lockout duration`|`0 minutes`|
+|`Account lockout threshold`|`5 invalid logon attempts`|
+|`Allow administrator account lockout`|`Enabled`|
+|`Reset account lockout counter after`|`15 minutes`|
 
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain-Account-Policy%20GPO.png" width="900"/>
 
+### Validation
 
 ## Workstation Security Baseline Policy
 
-Purpose  
-Scope  
-Configuration  
-Security rationale  
-Testing  
-Result 
+### Purpose
+The `Domain-Account-Policy` GPO defines domain-wide password and account lockout requirements for user accounts in the `baron.example.com` domain.
 
+### Scope  
+| Setting | Value |
+|---|---|
+|Linked To|`baron.example.com` domain root|
+|Configuration Type|`Computer Configuration`|
+|Security Filtering|`Authenticated Users`|
 
+### Configuration  
+|Configuration Area|Policy|
+|---|---|
+|`Enforce password history`|`10 passwords remembered`|
+|`Maximum password age`|`90 days`|
+|`Minimum password age`|`1 day`|
+|`Password must meet complexity requirements`|`Enabled`|
+|`Account lockout duration`|`0 minutes`|
+|`Account lockout threshold`|`5 invalid logon attempts`|
+|`Allow administrator account lockout`|`Enabled`|
+|`Reset account lockout counter after`|`15 minutes`|
+
+### Validation
 
 ## User Drive Mapping Policy
 
-Purpose  
-Scope  
-Configuration  
-Security rationale  
-Testing  
-Result 
+### Purpose
+The `Domain-Account-Policy` GPO defines domain-wide password and account lockout requirements for user accounts in the `baron.example.com` domain.
 
-> Group Policy was used to centrally control membership of the local `Administrators` group on domain-joined workstations.
-
-|Configuration|Value|
+### Scope  
+| Setting | Value |
 |---|---|
-|GPO|`<GPO-NAME>`|
-|Target OU|`Workstations`|
-|Local Group|`Administrators`|
-|Authorised Domain Group|`<GROUP-NAME>`|
+|Linked To|`baron.example.com` domain root|
+|Configuration Type|`Computer Configuration`|
+|Security Filtering|`Authenticated Users`|
 
-Administrative access is granted through an Active Directory security group rather than by manually assigning individual domain accounts to local administrator groups.
+### Configuration  
+|Configuration Area|Policy|
+|---|---|
+|`Enforce password history`|`10 passwords remembered`|
+|`Maximum password age`|`90 days`|
+|`Minimum password age`|`1 day`|
+|`Password must meet complexity requirements`|`Enabled`|
+|`Account lockout duration`|`0 minutes`|
+|`Account lockout threshold`|`5 invalid logon attempts`|
+|`Allow administrator account lockout`|`Enabled`|
+|`Reset account lockout counter after`|`15 minutes`|
 
-text
-Administrative Account
-        │
-        ▼
-AD Security Group
-        │
-        ▼
-Local Administrators Group
-        │
-        ▼
-Domain Workstation
+### Validation
+
 
 ## Workstation Local Administrator Policy
 
+### Purpose
+The `Domain-Account-Policy` GPO defines domain-wide password and account lockout requirements for user accounts in the `baron.example.com` domain.
+
+### Scope  
+| Setting | Value |
+|---|---|
+|Linked To|`baron.example.com` domain root|
+|Configuration Type|`Computer Configuration`|
+|Security Filtering|`Authenticated Users`|
+
+### Configuration  
+|Configuration Area|Policy|
+|---|---|
+|`Enforce password history`|`10 passwords remembered`|
+|`Maximum password age`|`90 days`|
+|`Minimum password age`|`1 day`|
+|`Password must meet complexity requirements`|`Enabled`|
+|`Account lockout duration`|`0 minutes`|
+|`Account lockout threshold`|`5 invalid logon attempts`|
+|`Allow administrator account lockout`|`Enabled`|
+|`Reset account lockout counter after`|`15 minutes`|
+
+### Validation
+
+
 ## Windows LAPS Policy
 
-## GPO Links and Inheritance
-## Configuration Validation
-## Validation Confirmed
+### Purpose
+The `Domain-Account-Policy` GPO defines domain-wide password and account lockout requirements for user accounts in the `baron.example.com` domain.
+
+### Scope  
+| Setting | Value |
+|---|---|
+|Linked To|`baron.example.com` domain root|
+|Configuration Type|`Computer Configuration`|
+|Security Filtering|`Authenticated Users`|
+
+### Configuration  
+|Configuration Area|Policy|
+|---|---|
+|`Enforce password history`|`10 passwords remembered`|
+|`Maximum password age`|`90 days`|
+|`Minimum password age`|`1 day`|
+|`Password must meet complexity requirements`|`Enabled`|
+|`Account lockout duration`|`0 minutes`|
+|`Account lockout threshold`|`5 invalid logon attempts`|
+|`Allow administrator account lockout`|`Enabled`|
+|`Reset account lockout counter after`|`15 minutes`|
+
+### Validation
+
 ## Skills Demonstrated
 - Create and manage Active Directory Group Policy Objects.
 - Design OU-based Group Policy targeting.
