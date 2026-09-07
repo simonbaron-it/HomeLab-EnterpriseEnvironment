@@ -7,7 +7,7 @@
 The Group Policy design provides:
 
 - Centralised security configuration for domain-joined workstations.
-- Controlled local administrator membership.
+- Centralised assignment of administrative access to domain-joined workstations.
 - Automated management of local administrator credentials using Windows LAPS.
 - Consistent configuration across domain-joined systems.
 - OU-based targeting of computer and user policies.
@@ -85,7 +85,7 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 ### Configuration  
 |Configuration Area|Policy|
 |---|---|
-|`Accounts: Guest account access`|`Disabled`|
+|`Accounts: Guest account status`|`Disabled`|
 |`Interactive Logon: Machine inactivity limit`|`300 seconds`|
 |`Firewall state`|`On`|
 |`Inbound connections`|`Block`|
@@ -95,6 +95,8 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Security-Baseline%20GPO.png" width="900"/>
 
 ### Validation
+    gpresult /r /scope computer
+    
     Get-NetFirewallProfile |
     Select-Object Name, Enabled, DefaultInboundAction, DefaultOutboundAction
 
@@ -126,7 +128,7 @@ The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for do
 ### Validation
 <i>File explorer screenshot</i>
 
-## Workstation Local Administrator Policy
+## Workstation Local Administrator GPO
 
 ### Purpose
 The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group is added to the local `Administrators` group on domain-joined workstations, providing centralised administrative access without assigning individual domain accounts directly.
@@ -187,11 +189,12 @@ The `Windows-LAPS` GPO centrally manages and rotates the local administrator cre
 
 ## Validation Summary
 Validation confirmed:
-- The domain password and account lockout policy is applied at the domain level.
-- `CLIENT01` receives the expected workstation computer policies.
-- The `CompanyData` drive is mapped for domain users.
+- The configured password and account lockout policy is effective across the `baron.example.com` domain.
+- `CLIENT01` receives the expected workstation Group Policy Objects.
+- Workstation firewall settings are applied through the security baseline GPO.
+- The `CompanyData` share is automatically mapped as drive `E:` for domain users.
 - `BARON\IT_Admins` is added to the local `Administrators` group on domain workstations.
-- Windows LAPS automatically manages the designated local administrator account.
+- Windows LAPS automatically manages and rotates the designated local administrator credentials.
 - LAPS credential information is securely backed up to Active Directory.
 
 
