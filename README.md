@@ -37,12 +37,9 @@ All labs are documented with Markdown files and screenshots for clarity and port
 - Group Policy validation
 - File-share and NTFS permission validation
 
+
 <i>Old docs</i>
 
-- #### Windows Server 2022 - Domain Controller
-  - [Domain setup, Organisational Unit structure, security groups](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Active-Directory.md)
-  - [Group Policy Objects](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group-Policy.md)
-  - [DNS/DHCP setup and configuration](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS-DHCP.md)
 - #### Windows Server 2022 - File Server
   - [Shared file structure, NTFS permissions](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File-Server/NTFS-Permissions.md)
 - #### Windows 11 - Workstation
