@@ -1,4 +1,3 @@
-# Template
 # Group Policy Configuration
 > This section documents the Group Policy Objects implemented within the `baron.example.com` domain to centrally manage workstation security, local administrator access and Windows LAPS.
 
@@ -19,19 +18,19 @@ The Group Policy design provides:
 
 ## Group Policy Design
 
-|GPO|Scope|Purpose|
+|GPO|Linked To|Purpose|
 |---|---|---|
 |`Domain-Account-Policy`|`baron.example.com`|Password/lockout security|
 |`Workstation-Security-Baseline`|`Workstations`|Endpoint hardening|
 |`User-Drive-Mappings`|`Baron Users`|Role-based file access|
-|`Workstation-Local-Admins`|`Workstations`|Least privilege|
+|`Workstation-Local-Admins`|`Workstations`|Local administrator access|
 |`Windows-LAPS`|`Workstations`|Local credential rotation|
 
-Group Policies are linked to the relevant OUs rather than applied indiscriminately across the entire domain.
+GPOs are linked at the narrowest appropriate scope. The domain account policy is linked at the domain root, while workstation and user policies are targeted through the relevant Organisational Units.
 
 > Active Directory OU design is documented in [Active Directory Domain Services](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Active%20Directory%20Domain%20Services.md).
 
-## Domain Account Policy
+## Domain Account Policy GPO
 
 ### Purpose
 The `Domain-Account-Policy` GPO defines domain-wide password and account lockout requirements for user accounts in the `baron.example.com` domain.
@@ -50,7 +49,7 @@ The `Domain-Account-Policy` GPO defines domain-wide password and account lockout
 |`Maximum password age`|`90 days`|
 |`Minimum password age`|`1 day`|
 |`Password must meet complexity requirements`|`Enabled`|
-|`Account lockout duration`|`0 minutes`|
+|`Account lockout duration`|`0 minutes` `(administrator unlock required)`|
 |`Account lockout threshold`|`5 invalid logon attempts`|
 |`Allow administrator account lockout`|`Enabled`|
 |`Reset account lockout counter after`|`15 minutes`|
@@ -58,8 +57,20 @@ The `Domain-Account-Policy` GPO defines domain-wide password and account lockout
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain-Account-Policy%20GPO.png" width="900"/>
 
 ### Validation
+> PowerShell was used on `DC01` to verify the effective domain password and account lockout policy.
 
-## Workstation Security Baseline Policy
+<img src="INSERT-SCREENSHOT" width="900"/>
+
+    Get-ADDefaultDomainPasswordPolicy |
+    Select-Object ComplexityEnabled,
+              PasswordHistoryCount,
+              MaxPasswordAge,
+              MinPasswordAge,
+              LockoutThreshold,
+              LockoutDuration,
+              LockoutObservationWindow
+
+## Workstation Security Baseline GPO
 
 ### Purpose
 The `Workstation-Security-Baseline` GPO applies centralised security settings to domain-joined Windows workstations.
@@ -67,7 +78,7 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 ### Scope  
 | Setting | Value |
 |---|---|
-|Linked To|`Workstations` OU|
+|Linked To|`Workstations`|
 |Configuration Type|`Computer Configuration`|
 |Security Filtering|`Authenticated Users`|
 
@@ -84,23 +95,25 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Security-Baseline%20GPO.png" width="900"/>
 
 ### Validation
+    Get-NetFirewallProfile |
+    Select-Object Name, Enabled, DefaultInboundAction, DefaultOutboundAction
 
-## User Drive Mapping Policy
+## User Drive Mapping GPO
 
 ### Purpose
-The `User-Drive-Mappings` GPO maps `CompanyData` file share. Access to department folders within file share are managed by NTFS permissions.
+The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for domain users. Access to departmental folders within the share is controlled separately through NTFS permissions and Active Directory security groups.
 
 ### Scope  
 | Setting | Value |
 |---|---|
-|Linked To|`Baron Users` OU|
+|Linked To|`Baron Users`|
 |Configuration Type|`User Configuration`|
 |Security Filtering|`Authenticated Users`|
 
 ### Configuration  
 |Configuration Area|Policy|
 |---|---|
-|`Letter`|`E`|
+|`Letter`|`E:`|
 |`Location`|`\\FS01\CompanyData`|
 |`Reconnect`|`Disabled`|
 |`Label as`|`CompanyData`|
@@ -111,17 +124,17 @@ The `User-Drive-Mappings` GPO maps `CompanyData` file share. Access to departmen
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20GPO.png" width="900"/>
 
 ### Validation
-
+<i>File explorer screenshot</i>
 
 ## Workstation Local Administrator Policy
 
 ### Purpose
-The `Workstation-Local-Admins` GPO centrally controls membership of the local `Administrators` group on domain-joined workstations.
+The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group is added to the local `Administrators` group on domain-joined workstations, providing centralised administrative access without assigning individual domain accounts directly.
 
 ### Scope  
 | Setting | Value |
 |---|---|
-|Linked To|`Workstations` OU|
+|Linked To|`Workstations`|
 |Configuration Type|`Computer Configuration`|
 |Security Filtering|`Authenticated Users`|
 
@@ -137,9 +150,9 @@ The `Workstation-Local-Admins` GPO centrally controls membership of the local `A
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Local-Admins%20GPO.png" width="900"/>
 
 ### Validation
+    Get-LocalGroupMember -Group "Administrators"
 
-
-## Windows LAPS Policy
+## Windows LAPS GPO
 
 ### Purpose
 The `Windows-LAPS` GPO centrally manages and rotates the local administrator credentials of domain-joined workstations.
@@ -147,7 +160,7 @@ The `Windows-LAPS` GPO centrally manages and rotates the local administrator cre
 ### Scope  
 | Setting | Value |
 |---|---|
-|Linked To|`Workstations` OU|
+|Linked To|`Workstations`|
 |Configuration Type|`Computer Configuration`|
 |Security Filtering|`Authenticated Users`|
 
@@ -157,27 +170,39 @@ The `Windows-LAPS` GPO centrally manages and rotates the local administrator cre
 |`Configure automatic account management`|`Manage a custom admin account`|
 |`Automatic account name (or name prefix)`|`LabLaps`|
 |`Enable the managed account`|`Enabled`|
-|`Randomize the name of the managed account`|`Enabled`|
+|`Randomise the name of the managed account`|`Enabled`|
 |`Configure password backup directory`|`Enabled`|
 |`Backup directory`|`Active Directory`|
-|`Do not allow password expiration time longer than reguired by policy`|`Enabled`|
+|`Do not allow password expiration time longer than required by policy`|`Enabled`|
 |`Enable password encryption`|`Enabled`|
 |`Password complexity`|`Large letters + small letters + numbers + specials`|
 |`Password length`|`14`|
 |`Password age (days)`|`30`|
-|`Passphrase length (Words)`|`6`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Windows-LAPS%20GPO.png" width="900"/>
 
 ### Validation
+    Get-LapsADPassword -Identity CLIENT01 |
+    Select-Object ComputerName, Account, PasswordUpdateTime, ExpirationTimestamp
+
+## Validation Summary
+Validation confirmed:
+- The domain password and account lockout policy is applied at the domain level.
+- `CLIENT01` receives the expected workstation computer policies.
+- The `CompanyData` drive is mapped for domain users.
+- `BARON\IT_Admins` is added to the local `Administrators` group on domain workstations.
+- Windows LAPS automatically manages the designated local administrator account.
+- LAPS credential information is securely backed up to Active Directory.
+
 
 ## Skills Demonstrated
 - Create and manage Active Directory Group Policy Objects.
-- Design OU-based Group Policy targeting.
+- Design domain-level and OU-based Group Policy targeting.
+- Configure domain password and account lockout policies.
 - Apply centralised workstation security configuration.
-- Manage local administrator membership through Group Policy.
-- Configure Windows LAPS using Group Policy.
-- Validate applied Group Policy using gpresult.
+- Deploy file-share mappings through Group Policy Preferences.
+- Manage local administrator access through Active Directory security groups.
+- Configure Windows LAPS automatic account management and credential rotation.
 - Validate local group membership using PowerShell.
 - Validate Windows LAPS configuration using PowerShell.
 
