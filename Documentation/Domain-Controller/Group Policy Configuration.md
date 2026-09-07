@@ -1,3 +1,4 @@
+# Edit validation
 # Group Policy Configuration
 > This section documents the Group Policy Objects implemented within the `baron.example.com` domain to centrally manage workstation security, local administrator access and Windows LAPS.
 
@@ -121,7 +122,6 @@ The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for do
 |`Label as`|`CompanyData`|
 |`Use first available`|`Disabled`|
 |`Hide/show this drive`|`Show`|
-|`Hide/show all drives`|`No change`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20GPO.png" width="900"/>
 
