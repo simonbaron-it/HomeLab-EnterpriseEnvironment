@@ -27,8 +27,8 @@ The domain provides:
 # Active Directory Users and Computers
 Users, organisational units and security groups were configured using `Active Directory Users and Computers` to simulate how identity, computers, departments and access could be managed within a small organisation.
 
->- DNS and DHCP are documented in <i>[DNS and DHCP configuration]</i>
->- Group Policy is documented in <i>[Group Policy Configuration]</i>
+>- DNS and DHCP are documented in [DNS and DHCP configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md)
+>- Group Policy is documented in [Group Policy Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md)
 ## Organisational Unit Design
 >Organisational Units were created to logically separate users, workstations, servers and administrative objects.
 
