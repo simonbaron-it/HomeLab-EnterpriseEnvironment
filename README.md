@@ -28,8 +28,7 @@ All labs are documented with Markdown files and screenshots for clarity and port
 
 
 ### File Services
-- File server setup and SMB share structure
-- NTFS permissions and access-control model
+- [File server and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
 
 ### Windows Client
 - Domain join and client configuration
@@ -40,8 +39,6 @@ All labs are documented with Markdown files and screenshots for clarity and port
 
 <i>Old docs</i>
 
-- #### Windows Server 2022 - File Server
-  - [Shared file structure, NTFS permissions](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File-Server/NTFS-Permissions.md)
 - #### Windows 11 - Workstation
   - [Successful domain join, DNS & DHCP contact](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/Domain-Join.md)   
   - [Group Policy Object validation](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/GPO-Checks.md)
