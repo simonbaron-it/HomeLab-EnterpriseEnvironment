@@ -30,26 +30,19 @@ All labs are documented with Markdown files and screenshots for clarity and port
 - [File server and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
  
 ## Skills Demonstrated:
-- Build and configure a multi-VM Windows Server 2025 infrastructure environment with dedicated networking, domain, file server and client roles.
-- Deploy and manage virtual machines, virtual switches and isolated virtual networks using Hyper-V.
-- Configure multi-NIC Windows Server networking, including RRAS and NAT.
-- Plan and implement IPv4 addressing for servers and client devices.
-- Deploy and administer Active Directory Domain Services, including a domain, Organisational Unit structure and security group model.
-- Create and manage domain users, computers and security groups.
-- Configure AD-integrated DNS and troubleshoot name resolution.
-- Configure DHCP scopes, options and automatic client IP addressing.
-- Join Windows 11 client machines to an Active Directory domain.
-- Create and apply Group Policy Objects for centralised user, workstation and security configuration.
-- Configure Windows File Services and SMB network shares.
-- Implement group-based NTFS permissions using least-privilege principles.
-- Test and troubleshoot DNS, DHCP, routing, authentication, Group Policy and file permissions from domain-joined clients.
-- Document infrastructure architecture, configuration decisions, testing and troubleshooting.
+- Build and configure a multi-server Windows Server 2025 infrastructure environment using Hyper-V.
+- Deploy and manage virtual machines, virtual switches and segmented client/server networks.
+- Configure IPv4 addressing, multi-NIC routing, RRAS, NAT and DHCP relay.
+- Deploy and administer Active Directory Domain Services, including OU design, users, computers and security groups.
+- Configure AD-integrated DNS, DHCP scopes and client network configuration.
+- Create and apply Group Policy for workstation security, drive mappings, local administrator access and Windows LAPS.
+- Configure Windows File Services, SMB shares and AGDLP-based NTFS permissions using least-privilege principles.
+- Validate and troubleshoot routing, DNS, DHCP, Group Policy, authentication and file access using Windows administration tools and PowerShell.
 
 ## Future Improvements:  
 Planned expansions to the environment include:
-> - Automate infrastructure administration with PowerShell.
-> - Deploy a second Domain Controller and configure AD/DNS replication.
-> - Implement backup and recovery testing.
-> - Introduce centralised monitoring and logging.
-> - Add Linux Server administration to the environment.
-> - Extend the lab into Azure to explore hybrid infrastructure. 
+> - Automate common infrastructure administration and validation tasks using PowerShell.
+> - Deploy a second Domain Controller and configure Active Directory/DNS replication and redundancy.
+> - Implement and test backup and recovery procedures.
+> - Introduce centralised monitoring and logging for infrastructure health and troubleshooting.
+> - Extend the environment into Azure to explore hybrid infrastructure and Infrastructure as Code.
