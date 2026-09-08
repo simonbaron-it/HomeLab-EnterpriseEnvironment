@@ -41,7 +41,7 @@ Users, organisational units and security groups were configured using `Active Di
 |`Baron Security Groups`|Parent OU for security groups used for role membership and resource access|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Resource Groups`|Stores domain local security groups assigned permissions to resources|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Role Groups`|Stores global security groups representing user roles and departments|
-|`Baron Servers`|Stores domain-joined Windows servers and provides a target for server-specific GPOs|
+|`Baron Servers`|Stores domain-joined member servers and provides a target for server-specific GPOs|
 |`Baron Users`|Parent OU for standard domain user accounts|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Disabled Users`|Stores disabled domain user accounts|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Finance Users`|Stores Finance department domain user accounts|
@@ -70,17 +70,17 @@ Users, organisational units and security groups were configured using `Active Di
 ### Domain Local Security Groups
 |Group|Scope|Type|Purpose|
 |---|---|---|---|
-|`Finance_Folder_Management`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\Finance\Management`|
-|`Finance_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\Finance`|
-|`Finance_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\Finance`|
-|`HR_Folder_Management`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\HR\Management`|
-|`HR_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\HR`|
-|`HR_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\HR`|
-|`IT_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\IT`|
-|`IT_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\IT`|
-|`Public_Folder_RO`|`Domain Local`|`Security`|Used to grant Read & Execute access to: `\\FS01\Public`|
-|`Sales_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\Sales`|
-|`Sales_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\Sales`|
+|`Finance_Folder_Management`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\Finance\Management`|
+|`Finance_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\CompanyData\Finance`|
+|`Finance_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\Finance`|
+|`HR_Folder_Management`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\HR\Management`|
+|`HR_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\CompanyData\HR`|
+|`HR_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\HR`|
+|`IT_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\CompanyData\IT`|
+|`IT_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\IT`|
+|`Public_Folder_RO`|`Domain Local`|`Security`|Used to grant Read & Execute access to: `\\FS01\CompanyData\Public`|
+|`Sales_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\CompanyData\Sales`|
+|`Sales_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\Sales`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Domain%20Local%20Groups.png" width="900"/>
 
@@ -96,9 +96,24 @@ Example:
 `Sarah Jones`  
 &nbsp;&nbsp;&nbsp;↳`Finance_Users`  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Finance_Folder_RW`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\Finance`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\CompanyData\Finance`
 
->File-share permissions and NTFS access control are documented separately in <i>File Services</i>.
+>File-share permissions and NTFS access control are documented separately in [File Services and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md).
+
+## Configuration Validation
+
+> PowerShell was used on `DC01` to verify the Active Directory domain and implemented Organisational Units.
+
+```powershell
+Get-ADDomain |
+Select-Object DNSRoot, NetBIOSName, DomainMode
+```
+
+```powershell
+Get-ADOrganizationalUnit -Filter * |
+Where-Object Name -Like "Baron*" |
+Select-Object Name, DistinguishedName
+```
 
 ### AGDLP Validation
 > PowerShell was used to validate the above example's AGDLP model implementation.
@@ -113,3 +128,4 @@ Example:
 - Manage Active Directory users, computers and security groups.
 - Apply role-based group membership for access control.
 - Use Global and Domain Local security groups to manage resource permissions.
+- Implement and validate AGDLP-based group nesting for resource access.
