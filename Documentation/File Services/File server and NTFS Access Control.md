@@ -32,7 +32,7 @@ A dedicated virtual disk was provisioned for shared organisational data, separat
 |`C:`|`50GB`|Operating system|
 |`E:`|`20GB`|Shared organisational data|
 
-### Disk Management
+> Disk Management showing the dedicated `20GB` data volume used for organisational file storage.
 
 <i>Disk Management screenshot</i>
 
@@ -67,9 +67,9 @@ The `CompanyData` folder was published as an SMB share to allow domain users to 
 |UNC Path|`\\FS01\CompanyData`|
 
 ### Share Permissions
->Share permissions provide access to the SMB share, while detailed departmental access is controlled using NTFS permissions.
+SMB share permissions control access to the `CompanyData` share itself, while granular departmental access is enforced through NTFS permissions.
 
-|Principal|Permission|
+|Principal|Share Permission|
 |---|---|
 |`GROUP/PRINCIPAL`|`PERMISSION`|
 |`GROUP/PRINCIPAL`|`PERMISSION`|
@@ -79,7 +79,7 @@ The `CompanyData` folder was published as an SMB share to allow domain users to 
 ## NTFS Permission Design
 NTFS permissions are assigned to Domain Local resource groups rather than directly to individual users.
 
-|Folder|Security Group|Access|
+|Folder|Security Group|NTFS Permission|
 |---|---|---|
 |`E:\CompanyData\Finance`|`Finance_Folder_RO`|`Read & Execute`|
 |`E:\CompanyData\Finance`|`Finance_Folder_RW`|`Modify`|
@@ -95,7 +95,15 @@ NTFS permissions are assigned to Domain Local resource groups rather than direct
 
 <i>Screenshot</i>
 
-### Permission Inheritance?
+### Permission Inheritance
+NTFS inheritance is used throughout the departmental folder structure where appropriate. Inheritance was modified on restricted management folders to prevent general departmental permissions from granting access to management-only resources.
+
+|Folder|Inheritance|Purpose|
+|---|---|---|
+|`E:\CompanyData\Finance`|`Enabled`|Departmental permissions inherited by standard child objects|
+|`E:\CompanyData\Finance\Management`|`Disabled`|Restricted to authorised Finance management groups|
+|`E:\CompanyData\HR`|`Enabled`|Departmental permissions inherited by standard child objects|
+|`E:\CompanyData\HR\Management`|`Disabled`|Restricted to authorised HR management groups|
 
 ## AGDLP Access Model
 The AGDLP model separates user role membership from resource permissions. This approach allows permissions to be managed through Active Directory groups rather than assigning access directly to individual user accounts.
@@ -121,7 +129,7 @@ Example:
 |`HR_Managers`|`HR_Folder_Management`|`\\FS01\CompanyData\HR\Management`|`Modify`|
 |`IT_Users`|`IT_Folder_RW`|`\\FS01\CompanyData\IT`|`Modify`|
 |`Sales_Users`|`Sales_Folder_RW`|`\\FS01\CompanyData\Sales`|`Modify`|
-|`Finance_Users` `HR_Users` `IT_Users` `Sales_Users`|`Public_Folder_RO`|`\\FS01\CompanyData\Public`|`Read & Execute`|
+|`Finance_Users`, `HR_Users`, `IT_Users`, `Sales_Users`|`Public_Folder_RO`|`\\FS01\CompanyData\Public`|`Read & Execute`|
 
 ## Configuration Validation
 
@@ -129,7 +137,11 @@ Example:
 
     Get-SmbShareAccess -Name CompanyData
 
-    (Get-Acl "E:\CompanyData\Finance").Access -Select-Object IdentityReference, FileSystemRights, AccessControlType
+    (Get-Acl "E:\CompanyData\Finance").Access |
+    Select-Object IdentityReference, FileSystemRights, AccessControlType
+
+    (Get-Acl "E:\CompanyData\Finance\Management").Access |
+    Select-Object IdentityReference, FileSystemRights, AccessControlType
 
     Authorised + unauthorised access screenshots
 
