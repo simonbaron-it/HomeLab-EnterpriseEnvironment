@@ -7,10 +7,11 @@
 
 The Group Policy design provides:
 
+- Domain-wide password and account lockout security.
 - Centralised security configuration for domain-joined workstations.
+- Centralised mapping of shared organisational storage for domain users.
 - Centralised assignment of administrative access to domain-joined workstations.
-- Automated management of local administrator credentials using Windows LAPS.
-- Consistent configuration across domain-joined systems.
+- Automated management and rotation of local administrator credentials using Windows LAPS.
 - OU-based targeting of computer and user policies.
 
 ### Group Policy Management
@@ -23,7 +24,7 @@ The Group Policy design provides:
 |---|---|---|
 |`Domain-Account-Policy`|`baron.example.com`|Password/lockout security|
 |`Workstation-Security-Baseline`|`Workstations`|Endpoint hardening|
-|`User-Drive-Mappings`|`Baron Users`|Role-based file access|
+|`User-Drive-Mappings`|`Baron Users`|Centralised file-share mapping|
 |`Workstation-Local-Admins`|`Workstations`|Local administrator access|
 |`Windows-LAPS`|`Workstations`|Local credential rotation|
 
@@ -91,6 +92,7 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 |`Firewall state`|`On`|
 |`Inbound connections`|`Block`|
 |`Outbound connections`|`Allow`|
+|`Firewall profiles`|`Domain / Private / Public`|
 |`Windows Defender firewall: Protect all network connections`|`Enabled`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Security-Baseline%20GPO.png" width="900"/>
@@ -105,6 +107,8 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 
 ### Purpose
 The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for domain users. Access to departmental folders within the share is controlled separately through NTFS permissions and Active Directory security groups.
+
+> SMB share configuration, NTFS permissions and AGDLP-based resource access are documented in [File Services and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
 
 ### Scope  
 | Setting | Value |
@@ -155,7 +159,8 @@ The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group 
     Get-LocalGroupMember -Group "Administrators"
 
 ## Windows LAPS GPO
-
+> The `Workstation-Local-Admins` GPO grants administrative access to the domain `BARON\IT_Admins` group, while the `Windows-LAPS` GPO manages a separate local administrator account and its credentials. The two policies therefore provide different administrative access mechanisms.
+> 
 ### Purpose
 The `Windows-LAPS` GPO centrally manages and rotates the local administrator credentials of domain-joined workstations.
 
@@ -208,4 +213,5 @@ Validation confirmed:
 - Configure Windows LAPS automatic account management and credential rotation.
 - Validate local group membership using PowerShell.
 - Validate Windows LAPS configuration using PowerShell.
+- Validate applied Group Policy using `gpresult`.
 
