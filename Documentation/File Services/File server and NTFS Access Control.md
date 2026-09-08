@@ -58,19 +58,18 @@ E:\CompanyData
 <i>Folder structure screenshot</i>
 
 ## SMB Share Configuration
-The CompanyData folder was published as an SMB share to allow domain users to access organisational data across the network.
+The `CompanyData` folder was published as an SMB share to allow domain users to access organisational data across the network.
 
 |Setting|Configuration|
 |---|---|
 |Share Name|`CompanyData`|
 |Local Path|`E:\CompanyData`|
 |UNC Path|`\\FS01\CompanyData`|
-|Access Based Enumeration|`??`|
 
 ### Share Permissions
 >Share permissions provide access to the SMB share, while detailed departmental access is controlled using NTFS permissions.
 
-|Principle|Permission|
+|Principal|Permission|
 |---|---|
 |`GROUP/PRINCIPAL`|`PERMISSION`|
 |`GROUP/PRINCIPAL`|`PERMISSION`|
@@ -82,20 +81,21 @@ NTFS permissions are assigned to Domain Local resource groups rather than direct
 
 |Folder|Security Group|Access|
 |---|---|---|
-|`\\FS01\CompanyData\Finance`|`Finance_Folder_RO`|`Read & Execute`|
-|`\\FS01\CompanyData\Finance`|`Finance_Folder_RW`|`Modify`|
-|`\\FS01\CompanyData\Finance\Management`|`Finance_Folder_Management`|`Modify`|
-|`\\FS01\CompanyData\HR`|`HR_Folder_RO`|`Read & Execute`|
-|`\\FS01\CompanyData\HR`|`HR_Folder_RW`|`Modify`|
-|`\\FS01\CompanyData\HR\Management`|`HR_Folder_Management`|`Modify`|
-|`\\FS01\CompanyData\IT`|`IT_Folder_RO`|`Read & Execute`|
-|`\\FS01\CompanyData\IT`|`IT_Folder_RW`|`Modify`|
-|`\\FS01\CompanyData\Sales`|`Sales_Folder_RO`|`Read & Execute`|
-|`\\FS01\CompanyData\Sales`|`Sales_Folder_RW`|`Modify`|
-|`\\FS01\CompanyData\Public`|`Public_Folder_RO`|`Read & Execute`|
-
+|`E:\CompanyData\Finance`|`Finance_Folder_RO`|`Read & Execute`|
+|`E:\CompanyData\Finance`|`Finance_Folder_RW`|`Modify`|
+|`E:\CompanyData\Finance\Management`|`Finance_Folder_Management`|`Modify`|
+|`E:\CompanyData\HR`|`HR_Folder_RO`|`Read & Execute`|
+|`E:\CompanyData\HR`|`HR_Folder_RW`|`Modify`|
+|`E:\CompanyData\HR\Management`|`HR_Folder_Management`|`Modify`|
+|`E:\CompanyData\IT`|`IT_Folder_RO`|`Read & Execute`|
+|`E:\CompanyData\IT`|`IT_Folder_RW`|`Modify`|
+|`E:\CompanyData\Sales`|`Sales_Folder_RO`|`Read & Execute`|
+|`E:\CompanyData\Sales`|`Sales_Folder_RW`|`Modify`|
+|`E:\CompanyData\Public`|`Public_Folder_RO`|`Read & Execute`|
 
 <i>Screenshot</i>
+
+### Permission Inheritance?
 
 ## AGDLP Access Model
 The AGDLP model separates user role membership from resource permissions. This approach allows permissions to be managed through Active Directory groups rather than assigning access directly to individual user accounts.
@@ -109,14 +109,14 @@ Example:
 `Sarah Jones`  
 &nbsp;&nbsp;&nbsp;↳`Finance_Users`  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Finance_Folder_RW`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\Finance`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\CompanyData\Finance`
 
 ### Department Access Model
 
 |Role Group|Resource Group|Resource|Access|
 |---|---|---|---|
 |`Finance_Users`|`Finance_Folder_RW`|`\\FS01\CompanyData\Finance`|`Modify`|
-|`Finance_Managers`|`Finance_Folder_Management`|`\\FS01\CompanyData\Finance`|`Modify`|
+|`Finance_Managers`|`Finance_Folder_Management`|`\\FS01\CompanyData\Finance\Management`|`Modify`|
 |`HR_Users`|`HR_Folder_RW`|`\\FS01\CompanyData\HR`|`Modify`|
 |`HR_Managers`|`HR_Folder_Management`|`\\FS01\CompanyData\HR\Management`|`Modify`|
 |`IT_Users`|`IT_Folder_RW`|`\\FS01\CompanyData\IT`|`Modify`|
@@ -125,6 +125,35 @@ Example:
 
 ## Configuration Validation
 
+    Get-SmbShare -Name CompanyData
+
+    Get-SmbShareAccess -Name CompanyData
+
+    (Get-Acl "E:\CompanyData\Finance").Access -Select-Object IdentityReference, FileSystemRights, AccessControlType
+
+    Authorised + unauthorised access screenshots
+
 ### Validation Summary
+Validation confirmed:
+- `FS01` hosts the `CompanyData` SMB share on a dedicated data volume.
+- SMB share permissions provide network access to the shared resource.
+- Departmental access is controlled using NTFS permissions assigned to Domain Local security groups.
+- Global role groups are nested within the appropriate Domain Local resource groups using AGDLP.
+- Authorised users can access and modify resources appropriate to their role.
+- Users without the required group membership are denied access to restricted resources.
+- Management folders apply additional access restrictions for authorised management groups.
 
 ## Skills Demonstrated
+
+- Install and configure Windows Server File Services.
+- Provision dedicated storage for shared organisational data.
+- Create and configure SMB file shares.
+- Design structured departmental file storage.
+- Configure SMB share permissions.
+- Configure NTFS file and folder permissions.
+- Manage NTFS permission inheritance.
+- Implement AGDLP-based access control.
+- Apply group-based least-privilege access to shared resources.
+- Separate SMB share permissions from NTFS resource permissions.
+- Validate SMB and NTFS configuration using PowerShell.
+- Test authorised and unauthorised resource access.
