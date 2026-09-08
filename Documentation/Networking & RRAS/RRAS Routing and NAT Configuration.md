@@ -36,7 +36,7 @@ The Remote Access server role was installed on `RTR01` and RRAS was configured t
 ## Internal Routing
 `RTR01` provides Layer 3 connectivity between the two isolated internal networks:
 
-|Source Network|Destination Network|RTR01 Interface|
+|Source Network|Destination Network|Source Gateway|
 |---|---|---|
 |`10.10.10.0/24`|`10.10.20.0/24`|`10.10.10.1`|
 |`10.10.20.0/24`|`10.10.10.0/24`|`10.10.20.1`|
@@ -91,6 +91,13 @@ Connectivity testing was performed from `CLIENT01` to verify inter-subnet routin
 >Confirms that traffic from the isolated client network can reach an upstream network through NAT on `RTR01`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Ping%20to%20upstream%20network.png" width="900"/>
+
+### Validation Confirmed
+- `RTR01` successfully routes traffic between the `CLIENTS` and `SERVERS` networks.
+- `CLIENT01` can reach `DC01` across the routed network boundary.
+- Traffic from the private client network can reach the upstream network through NAT.
+- `RTR01` maintains directly connected routes for all three network segments and a default route through `172.16.0.1`.
+- DHCP requests from the `CLIENTS` network are relayed to `DC01`.
 
 ## Skills Demonstrated
 - Install and configure Windows Server Routing and Remote Access.
