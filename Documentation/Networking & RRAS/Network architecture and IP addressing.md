@@ -28,6 +28,7 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 |---|---|---|---|---|---|---|
 |`DC01`|`Windows Server 2025`|`AD DS/DNS/DHCP`|`10.10.10.10`|`Static`|`10.10.10.1`|`10.10.10.10`|
 |`FS01`|`Windows Server 2025`|`File Server`|`10.10.10.20`|`Static`|`10.10.10.1`|`10.10.10.10`|
+
 ### Client Network
 |Device|Operating System|Role|IP Address|Assignment|Gateway|DNS|
 |---|---|---|---|---|---|---|
@@ -49,6 +50,7 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 
 ### Validation Confirmed
 - `RTR01` is configured with interfaces on all three network segments.
+- Only the `WAN` interface on `RTR01` is configured with an upstream default gateway (`172.16.0.1`).
 - `DC01` and `FS01` use static addressing on the `10.10.10.0/24` server network.
 - `CLIENT01` receives dynamic addressing on the `10.10.20.0/24` client network.
 - Server and client systems use the appropriate RTR01 interface as their default gateway.
@@ -60,6 +62,6 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 - Separate client and server infrastructure into dedicated networks.
 - Assign static addresses to infrastructure systems.
 - Use dynamic addressing for client devices.
-- Configure appropriate default gateways and DNS servers.
+- Configure appropriate default gateway and DNS settings across multiple network segments.
 - Validate IPv4 addressing, default gateway and DNS configuration.
 
