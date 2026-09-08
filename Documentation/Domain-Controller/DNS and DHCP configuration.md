@@ -35,7 +35,7 @@ DNS host records allow systems within the domain to resolve hostnames to IPv4 ad
 |---|---|---|
 |`DC01`|`DC01.baron.example.com`|`10.10.10.10`|
 |`FS01`|`FS01.baron.example.com`|`10.10.10.20`|
-|`CLIENT01`|`CLIENT01.baron.example.com`|`DHCP`|
+|`CLIENT01`|`CLIENT01.baron.example.com`|`10.10.20.100` `(DHCP)`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DNS%20Manager.png" width="800"/>
 
