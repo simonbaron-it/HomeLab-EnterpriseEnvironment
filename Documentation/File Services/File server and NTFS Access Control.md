@@ -40,7 +40,7 @@ A dedicated virtual disk was provisioned for shared organisational data, separat
 A central `CompanyData` folder was created on the dedicated data volume and organised into departmental folders. This structure provides centralised storage while allowing access to individual folders to be controlled independently through NTFS permissions.
 
 ```text
-D:\CompanyData
+E:\CompanyData
 │
 ├── Finance
 │   └── Management
@@ -82,8 +82,18 @@ NTFS permissions are assigned to Domain Local resource groups rather than direct
 
 |Folder|Security Group|Access|
 |---|---|---|
-|`\\FS01\Finance`|`Finance_Folder_RO`|`Read & Execute`|
-|`\\FS01\Finance`|`Finance_Folder_RW`|`Modify`|
+|`\\FS01\CompanyData\Finance`|`Finance_Folder_RO`|`Read & Execute`|
+|`\\FS01\CompanyData\Finance`|`Finance_Folder_RW`|`Modify`|
+|`\\FS01\CompanyData\Finance\Management`|`Finance_Folder_Management`|`Modify`|
+|`\\FS01\CompanyData\HR`|`HR_Folder_RO`|`Read & Execute`|
+|`\\FS01\CompanyData\HR`|`HR_Folder_RW`|`Modify`|
+|`\\FS01\CompanyData\HR\Management`|`HR_Folder_Management`|`Modify`|
+|`\\FS01\CompanyData\IT`|`IT_Folder_RO`|`Read & Execute`|
+|`\\FS01\CompanyData\IT`|`IT_Folder_RW`|`Modify`|
+|`\\FS01\CompanyData\Sales`|`Sales_Folder_RO`|`Read & Execute`|
+|`\\FS01\CompanyData\Sales`|`Sales_Folder_RW`|`Modify`|
+|`\\FS01\CompanyData\Public`|`Public_Folder_RO`|`Read & Execute`|
+
 
 <i>Screenshot</i>
 
@@ -105,8 +115,13 @@ Example:
 
 |Role Group|Resource Group|Resource|Access|
 |---|---|---|---|
-|`Finance_Users`|`Finance_Folder_RW`|`\\FS01\Finance`|`Modify`|
-|`Finance_Managers`|`Finance_Folder_Management`|`\\FS01\Finance\Management`|`Modify`|
+|`Finance_Users`|`Finance_Folder_RW`|`\\FS01\CompanyData\Finance`|`Modify`|
+|`Finance_Managers`|`Finance_Folder_Management`|`\\FS01\CompanyData\Finance`|`Modify`|
+|`HR_Users`|`HR_Folder_RW`|`\\FS01\CompanyData\HR`|`Modify`|
+|`HR_Managers`|`HR_Folder_Management`|`\\FS01\CompanyData\HR\Management`|`Modify`|
+|`IT_Users`|`IT_Folder_RW`|`\\FS01\CompanyData\IT`|`Modify`|
+|`Sales_Users`|`Sales_Folder_RW`|`\\FS01\CompanyData\Sales`|`Modify`|
+|`Finance_Users` `HR_Users` `IT_Users` `Sales_Users`|`Public_Folder_RO`|`\\FS01\CompanyData\Public`|`Read & Execute`|
 
 ## Configuration Validation
 
