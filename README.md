@@ -26,23 +26,8 @@ All labs are documented with Markdown files and screenshots for clarity and port
 - [DNS and DHCP Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md)
 - [Group Policy configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md)
 
-
 ### File Services
 - [File server and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
-
-### Windows Client
-- Domain join and client configuration
-- DNS and DHCP validation
-- Group Policy validation
-- File-share and NTFS permission validation
-
-
-<i>Old docs</i>
-
-- #### Windows 11 - Workstation
-  - [Successful domain join, DNS & DHCP contact](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/Domain-Join.md)   
-  - [Group Policy Object validation](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/GPO-Checks.md)
-  - [NTFS permission validation](https://github.com/Simonb316/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Workstation/NTFS-Validation.md)
  
 ## Skills Demonstrated:
 - Build and configure a multi-VM Windows Server 2025 infrastructure environment with dedicated networking, domain, file server and client roles.
