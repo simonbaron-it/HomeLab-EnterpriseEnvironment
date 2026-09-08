@@ -10,6 +10,7 @@
 |Role|`Active Directory Domain Services`|
 |Additional Services|`DNS` `DHCP`|
 |Domain|`baron.example.com`|
+|NetBIOS Name|`BARON`|
 |IP Address|`10.10.10.10`|
 
 ## Domain Setup
@@ -111,14 +112,21 @@ Select-Object DNSRoot, NetBIOSName, DomainMode
 
 ```powershell
 Get-ADOrganizationalUnit -Filter * |
-Where-Object Name -Like "Baron*" |
-Select-Object Name, DistinguishedName
+Select-Object Name, DistinguishedName |
+Sort-Object DistinguishedName
 ```
 
 ### AGDLP Validation
 > PowerShell was used to validate the above example's AGDLP model implementation.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/AGDLP%20Validation.png" width="900"/>
+
+### Validation Confirmed
+- `DC01` hosts the `baron.example.com` Active Directory domain.
+- The implemented OU hierarchy separates users, workstations, servers, privileged accounts and security groups.
+- Global security groups represent departmental and administrative roles.
+- Domain Local security groups are used to assign permissions to file-system resources.
+- AGDLP group nesting separates user membership from resource permissions.
 
 ## Skills Demonstrated
 - Install and configure Active Directory Domain Services.
