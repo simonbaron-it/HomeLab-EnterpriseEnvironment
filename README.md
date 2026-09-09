@@ -1,5 +1,5 @@
 # Windows Server 2025 Enterprise-Style Infrastructure Lab
-> A multi-server Windows infrastructure lab built with Windows Server 2025 and Hyper-V to develop practical Infrastructure Engineering, networking, virtualisation, security and systems administration skills.
+> A multi-server Windows infrastructure lab built with Windows Server 2025 and Hyper-V to develop practical infrastructure engineering, networking, virtualisation, security and systems administration skills.
 
 ## Project Overview
 This project is a self-built Windows infrastructure environment designed to simulate the core IT services of a small organisation.
@@ -41,14 +41,14 @@ The project focuses on practical infrastructure engineering, including Active Di
 
 ## Project Roadmap:
 
-> ### Phase 2 — Resilience & Operations
-> - Automate common infrastructure administration and validation tasks using PowerShell.
-> - Deploy a second Domain Controller and configure Active Directory/DNS replication and redundancy.
-> - Implement and test backup and recovery procedures.
-> - Introduce centralised monitoring and logging for infrastructure health and troubleshooting.
-> 
-> ### Phase 3 — Hybrid Azure
-> - Extend the environment into Azure.
-> - Implement hybrid identity and networking.
-> - Explore Azure infrastructure services and management.
-> - Introduce Infrastructure as Code for Azure deployments.
+### Phase 2 — Resilience & Operations
+- Automate common infrastructure administration and validation tasks using PowerShell.
+- Deploy a second Domain Controller and configure Active Directory/DNS replication and redundancy.
+- Implement and test backup and recovery procedures.
+- Introduce centralised monitoring and logging for infrastructure health and troubleshooting.
+
+### Phase 3 — Hybrid Azure
+- Extend the environment into Azure.
+- Implement hybrid identity and networking.
+- Explore Azure infrastructure services and management.
+- Introduce Infrastructure as Code for Azure deployments.
