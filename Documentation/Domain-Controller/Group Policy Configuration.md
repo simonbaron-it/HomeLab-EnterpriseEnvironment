@@ -1,5 +1,5 @@
 # Group Policy Configuration
-> This section documents the Group Policy Objects implemented within the `baron.example.com` domain to centrally manage workstation security, local administrator access and Windows LAPS.
+> This section documents the Group Policy Objects implemented within the `baron.example.com` domain to centrally manage domain account security, workstation configuration, file-share mappings, local administrator access and Windows LAPS.
 
 ## Overview
 > Group Policy is managed from `DC01` and applied to Active Directory objects based on their Organisational Unit placement.
@@ -118,7 +118,7 @@ The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for do
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20GPO.png" width="900"/>
 
 ### Validation
-> A domain user account signed into 'CLIENT01' to verify the shared drive mapped correctly.
+> A domain user account signed into `CLIENT01` to verify the shared drive mapped correctly.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20Validation.png" width="900"/>
 
@@ -146,7 +146,7 @@ The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Local-Admins%20GPO.png" width="900"/>
 
 ### Validation
-> PowerShell was used on 'CLIENT01' to verify that AD group 'BARON\IT_Admins' was added to local administrators.
+> PowerShell was used on `CLIENT01` to verify that AD group `BARON\IT_Admins` was added to local administrators.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Local-Admins%20Validation.png" width="900"/>
 
@@ -181,9 +181,14 @@ The `Windows-LAPS` GPO centrally manages and rotates the local administrator cre
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Windows-LAPS%20GPO.png" width="900"/>
 
 ### Validation
-> PowerShell was used on 'DC01' to verify the LAPS account and rotating password for 'CLIENT01'
+> PowerShell was used on `DC01` to verify that Windows LAPS was managing `CLIENT01` and storing the managed account metadata in Active Directory.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Windows-LAPS%20Validation.png" width="900"/>
+
+### Applied GPO Validation
+> `gpresult` was used on `CLIENT01` to verify that the expected computer-based Group Policy Objects were successfully applied.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/GPResult%20Validation.png" width="900"/>
 
 ## Validation Summary
 Validation confirmed:
@@ -205,4 +210,5 @@ Validation confirmed:
 - Configure Windows LAPS automatic account management and credential rotation.
 - Validate local group membership using PowerShell.
 - Validate Windows LAPS configuration using PowerShell.
+- Validate applied Group Policy using `gpresult`.
 
