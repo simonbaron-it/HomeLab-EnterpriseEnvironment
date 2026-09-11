@@ -102,8 +102,6 @@ NTFS inheritance is used throughout the departmental folder structure where appr
 |`E:\CompanyData\HR`|`Enabled`|Departmental permissions inherited by standard child objects|
 |`E:\CompanyData\HR\Management`|`Disabled`|Explicit permissions restrict access to authorised HR management groups|
 
-> Department managers are also members of their corresponding departmental user group, providing normal departmental access in addition to access to restricted management resources.
-
 ## AGDLP Access Model
 The AGDLP model separates user role membership from resource permissions. This approach allows permissions to be managed through Active Directory groups rather than assigning access directly to individual user accounts.
 
@@ -120,7 +118,9 @@ The AGDLP model separates user role membership from resource permissions. This a
 |`Finance_Users`, `HR_Users`, `IT_Users`, `Sales_Users`|`Public_Folder_RO`|`\\FS01\CompanyData\Public`|`Read & Execute`|
 |`Finance_Managers`|`HR_Folder_RO`|`\\FS01\CompanyData\HR`|`Read & Execute`|
 |`HR_Managers`|`Finance_Folder_RO`|`\\FS01\CompanyData\Finance`|`Read & Execute`|
-|`HR_Managers` `Finance_Managers`|`Sales_Folder_RO`|`\\FS01\CompanyData\Sales`|`Read & Execute`|
+|`HR_Managers`, `Finance_Managers`|`Sales_Folder_RO`|`\\FS01\CompanyData\Sales`|`Read & Execute`|
+
+> Department managers are also members of their corresponding departmental user group, providing normal departmental access in addition to access to restricted management resources.
 
 `Account`  
 &nbsp;&nbsp;&nbsp;↳`Global Security Group`  
@@ -134,7 +134,7 @@ Example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\CompanyData\Finance`
 
 ## Configuration Validation
-> `CLIENT01` was logged into by the above Finance user account `Sarah Jones`, to verify NTFS permissions.
+> The Finance user `Sarah Jones` signed in to `CLIENT01` to validate authorised and unauthorised access to the `CompanyData` share.
 
 #### Modify access to `\\FS01\CompanyData\Finance`
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20Finance%20modify%20access.png" width="800"/>
