@@ -118,6 +118,9 @@ The AGDLP model separates user role membership from resource permissions. This a
 |`IT_Users`|`IT_Folder_RW`|`\\FS01\CompanyData\IT`|`Modify`|
 |`Sales_Users`|`Sales_Folder_RW`|`\\FS01\CompanyData\Sales`|`Modify`|
 |`Finance_Users`, `HR_Users`, `IT_Users`, `Sales_Users`|`Public_Folder_RO`|`\\FS01\CompanyData\Public`|`Read & Execute`|
+|`Finance_Managers`|`HR_Folder_RO`|`\\FS01\CompanyData\HR`|`Read & Execute`|
+|`HR_Managers`|`Finance_Folder_RO`|`\\FS01\CompanyData\Finance`|`Read & Execute`|
+|`HR_Managers` `Finance_Managers`|`Sales_Folder_RO`|`\\FS01\CompanyData\Sales`|`Read & Execute`|
 
 `Account`  
 &nbsp;&nbsp;&nbsp;↳`Global Security Group`  
@@ -147,14 +150,6 @@ Example:
 #### Denied access to `\\FS01\CompanyData\HR`
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20HR.png" width="600"/>
 
-
-#### Denied access to `\\FS01\CompanyData\IT`
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20IT.png" width="600"/>
-
-
-#### Denied access to `\\FS01\CompanyData\Sales`
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20Sales.png" width="600"/>
-
 ### Validation Summary
 Validation confirmed:
 - `FS01` hosts the `CompanyData` SMB share on a dedicated data volume.
@@ -177,5 +172,4 @@ Validation confirmed:
 - Implement AGDLP-based access control.
 - Apply group-based least-privilege access to shared resources.
 - Separate SMB share permissions from NTFS resource permissions.
-- Validate SMB and NTFS configuration using PowerShell.
 - Test authorised and unauthorised resource access.
