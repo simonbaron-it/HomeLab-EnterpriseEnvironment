@@ -93,7 +93,7 @@ NTFS permissions are assigned to Domain Local resource groups rather than direct
 |`E:\CompanyData\Public`|`Public_Folder_RO`|`Read & Execute`|
 
 ### Permission Inheritance
-NTFS inheritance is used throughout the departmental folder structure where appropriate. Inheritance was modified on restricted management folders to prevent general departmental permissions from granting access to management-only resources.
+NTFS inheritance is used throughout the departmental folder structure where appropriate. Inheritance was disabled on restricted management folders and inherited departmental permissions were removed, allowing access to be assigned explicitly to authorised management groups.
 
 |Folder|Inheritance|Purpose|
 |---|---|---|
@@ -101,6 +101,8 @@ NTFS inheritance is used throughout the departmental folder structure where appr
 |`E:\CompanyData\Finance\Management`|`Disabled`|Explicit permissions restrict access to authorised Finance management groups|
 |`E:\CompanyData\HR`|`Enabled`|Departmental permissions inherited by standard child objects|
 |`E:\CompanyData\HR\Management`|`Disabled`|Explicit permissions restrict access to authorised HR management groups|
+
+> Department managers are also members of their corresponding departmental user group, providing normal departmental access in addition to access to restricted management resources.
 
 ## AGDLP Access Model
 The AGDLP model separates user role membership from resource permissions. This approach allows permissions to be managed through Active Directory groups rather than assigning access directly to individual user accounts.
