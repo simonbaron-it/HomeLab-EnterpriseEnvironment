@@ -118,7 +118,7 @@ The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for do
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20GPO.png" width="900"/>
 
 ### Validation
-> A domain user account signed into `CLIENT01` to verify the shared drive mapped correctly.
+> A domain user signed in to `CLIENT01` to verify that the `CompanyData` share was automatically mapped as drive `E:`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20Validation.png" width="900"/>
 
@@ -146,7 +146,7 @@ The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Local-Admins%20GPO.png" width="900"/>
 
 ### Validation
-> PowerShell was used on `CLIENT01` to verify that AD group `BARON\IT_Admins` was added to local administrators.
+> PowerShell was used on `CLIENT01` to verify that the Active Directory security group `BARON\IT_Admins` was added to the local `Administrators` group.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Local-Admins%20Validation.png" width="900"/>
 
@@ -185,7 +185,7 @@ The `Windows-LAPS` GPO centrally manages and rotates the local administrator cre
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Windows-LAPS%20Validation.png" width="900"/>
 
-### Applied GPO Validation
+## Applied GPO Validation
 > `gpresult` was used on `CLIENT01` to verify that the expected computer-based Group Policy Objects were successfully applied.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/GPResult%20Validation.png" width="900"/>
@@ -198,6 +198,7 @@ Validation confirmed:
 - `BARON\IT_Admins` is added to the local `Administrators` group on domain workstations.
 - Windows LAPS automatically manages and rotates the designated local administrator credentials.
 - LAPS credential information is securely backed up to Active Directory.
+- The expected workstation Group Policy Objects are successfully applied to `CLIENT01`.
 
 
 ## Skills Demonstrated
