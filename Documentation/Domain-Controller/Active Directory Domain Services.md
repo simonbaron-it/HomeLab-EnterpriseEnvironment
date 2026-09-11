@@ -28,8 +28,8 @@ The domain provides:
 # Active Directory Users and Computers
 Users, organisational units and security groups were configured using `Active Directory Users and Computers` to simulate how identity, computers, departments and access could be managed within a small organisation.
 
->- DNS and DHCP are documented in [DNS and DHCP configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md)
->- Group Policy is documented in [Group Policy Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md)
+>- DNS and DHCP are documented in [DNS and DHCP configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md).
+>- Group Policy is documented in [Group Policy Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md).
 ## Organisational Unit Design
 >Organisational Units were created to logically separate users, workstations, servers and administrative objects.
 
@@ -105,18 +105,14 @@ Example:
 
 > PowerShell was used on `DC01` to verify the Active Directory domain and implemented Organisational Units.
 
-```powershell
-Get-ADDomain |
-Select-Object DNSRoot, NetBIOSName, DomainMode
-```
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain%20Validation.png" width="900"/>
 
-```powershell
-Get-ADOrganizationalUnit -Filter * |
-Select-Object Name, DistinguishedName |
-Sort-Object DistinguishedName
-```
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/OU%20Validation.png" width="900"/>
 
-### AGDLP Validation
+> PowerShell was used on `CLIENT01` to verify successful domain-join.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain-join%20Validation.png" width="900"/>
+
 > PowerShell was used to validate the above example's AGDLP model implementation.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/AGDLP%20Validation.png" width="900"/>
