@@ -1,4 +1,3 @@
-# Editing 
 # File Services and NTFS Access Control
 
 > This section documents the Windows File Services configuration implemented on `FS01`, including storage configuration, SMB file sharing, NTFS permissions and Active Directory group-based access control.
@@ -34,7 +33,7 @@ A dedicated virtual disk was provisioned for shared organisational data, separat
 
 > Disk Management showing the dedicated `20GB` data volume used for organisational file storage.
 
-<i>Disk Management screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/FS01%20Disk%20Management.png" width="900"/>
 
 ## File Share Structure
 A central `CompanyData` folder was created on the dedicated data volume and organised into departmental folders. This structure provides centralised storage while allowing access to individual folders to be controlled independently through NTFS permissions.
@@ -55,7 +54,7 @@ E:\CompanyData
 └── Public
 ```
 
-<i>Folder structure screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/FS01%20File%20Structure.png" width="400"/>
 
 ## SMB Share Configuration
 The `CompanyData` folder was published as an SMB share to allow domain users to access organisational data across the network.
@@ -71,10 +70,10 @@ SMB share permissions control access to the `CompanyData` share itself, while gr
 
 |Principal|Share Permission|
 |---|---|
-|`GROUP/PRINCIPAL`|`PERMISSION`|
-|`GROUP/PRINCIPAL`|`PERMISSION`|
+|`NT AUTHORITY\Authenticated Users`|`Change`|
+|`BUILTIN\Administrators`|`Full`|
 
-<i>SMB share screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/SMB%20Permissions.png" width="900"/>
 
 ## NTFS Permission Design
 NTFS permissions are assigned to Domain Local resource groups rather than directly to individual users.
@@ -93,8 +92,6 @@ NTFS permissions are assigned to Domain Local resource groups rather than direct
 |`E:\CompanyData\Sales`|`Sales_Folder_RW`|`Modify`|
 |`E:\CompanyData\Public`|`Public_Folder_RO`|`Read & Execute`|
 
-<i>Screenshot</i>
-
 ### Permission Inheritance
 NTFS inheritance is used throughout the departmental folder structure where appropriate. Inheritance was modified on restricted management folders to prevent general departmental permissions from granting access to management-only resources.
 
@@ -108,17 +105,6 @@ NTFS inheritance is used throughout the departmental folder structure where appr
 ## AGDLP Access Model
 The AGDLP model separates user role membership from resource permissions. This approach allows permissions to be managed through Active Directory groups rather than assigning access directly to individual user accounts.
 
-`Account`  
-&nbsp;&nbsp;&nbsp;↳`Global Security Group`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Domain Local Security Group`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Permission`  
-
-Example:  
-`Sarah Jones`  
-&nbsp;&nbsp;&nbsp;↳`Finance_Users`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Finance_Folder_RW`  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\CompanyData\Finance`
-
 ### Department Access Model
 
 |Role Group|Resource Group|Resource|Access|
@@ -131,19 +117,41 @@ Example:
 |`Sales_Users`|`Sales_Folder_RW`|`\\FS01\CompanyData\Sales`|`Modify`|
 |`Finance_Users`, `HR_Users`, `IT_Users`, `Sales_Users`|`Public_Folder_RO`|`\\FS01\CompanyData\Public`|`Read & Execute`|
 
+`Account`  
+&nbsp;&nbsp;&nbsp;↳`Global Security Group`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Domain Local Security Group`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Permission`  
+
+Example:  
+`Sarah Jones`  
+&nbsp;&nbsp;&nbsp;↳`Finance_Users`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Finance_Folder_RW`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\CompanyData\Finance`
+
 ## Configuration Validation
+> `CLIENT01` was logged into by the above Finance user account `Sarah Jones`, to verify NTFS permissions.
 
-    Get-SmbShare -Name CompanyData
+#### Modify access to `\\FS01\CompanyData\Finance`
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20Finance%20modify%20access.png" width="800"/>
 
-    Get-SmbShareAccess -Name CompanyData
 
-    (Get-Acl "E:\CompanyData\Finance").Access |
-    Select-Object IdentityReference, FileSystemRights, AccessControlType
+#### Read & Execute access to `\\FS01\CompanyData\Public`
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20Public%20read%20access.png" width="800"/>
 
-    (Get-Acl "E:\CompanyData\Finance\Management").Access |
-    Select-Object IdentityReference, FileSystemRights, AccessControlType
 
-    Authorised + unauthorised access screenshots
+#### Denied access to `\\FS01\CompanyData\Finance\Management`
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20Management.png" width="600"/>
+
+#### Denied access to `\\FS01\CompanyData\HR`
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20HR.png" width="600"/>
+
+
+#### Denied access to `\\FS01\CompanyData\IT`
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20IT.png" width="600"/>
+
+
+#### Denied access to `\\FS01\CompanyData\Sales`
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20Sales.png" width="600"/>
 
 ### Validation Summary
 Validation confirmed:
