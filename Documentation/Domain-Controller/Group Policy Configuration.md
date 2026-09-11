@@ -193,12 +193,13 @@ The `Windows-LAPS` GPO centrally manages and rotates the local administrator cre
 ## Validation Summary
 Validation confirmed:
 - The configured password and account lockout policy is effective across the `baron.example.com` domain.
+- The expected workstation Group Policy Objects are successfully applied to `CLIENT01`.
 - Workstation firewall settings are applied through the security baseline GPO.
 - The `CompanyData` share is automatically mapped as drive `E:` for domain users.
 - `BARON\IT_Admins` is added to the local `Administrators` group on domain workstations.
 - Windows LAPS automatically manages and rotates the designated local administrator credentials.
 - LAPS credential information is securely backed up to Active Directory.
-- The expected workstation Group Policy Objects are successfully applied to `CLIENT01`.
+
 
 
 ## Skills Demonstrated
