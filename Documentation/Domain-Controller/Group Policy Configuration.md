@@ -154,7 +154,17 @@ The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group 
 > The `Workstation-Local-Admins` GPO grants administrative access to the domain `BARON\IT_Admins` group, while the `Windows-LAPS` GPO manages a separate local administrator account and its credentials. The two policies therefore provide different administrative access mechanisms.
 > 
 ### Purpose
-The `Windows-LAPS` GPO centrally manages and rotates the local administrator credentials of domain-joined workstations.
+The `Windows-LAPS` GPO centrally creates, manages and rotates a dedicated local administrator account on domain-joined workstations. Password information is securely backed up to Active Directory rather than using a shared or manually maintained local administrator password.
+
+### Active Directory Preparation
+Using PowerShell, the Active Directory schema was extended from `DC01` and the required self-permissions were delegated to the Workstations OU.
+
+```Powershell
+Update-LapsADSchema
+
+Set-LapsADComputerSelfPermission `
+-Identity "OU=Workstations,OU=Baron Computers,DC=baron,DC=example,DC=com"
+```
 
 ### Scope  
 | Setting | Value |
@@ -162,6 +172,7 @@ The `Windows-LAPS` GPO centrally manages and rotates the local administrator cre
 |Linked To|`Workstations`|
 |Configuration Type|`Computer Configuration`|
 |Security Filtering|`Authenticated Users`|
+|Password Backup Location|`Active Directory`|
 
 ### Configuration  
 |Configuration Area|Policy|
