@@ -1,5 +1,5 @@
 # Windows Server 2025 Enterprise-Style Infrastructure Lab
-> A multi-server Windows infrastructure lab built with Windows Server 2025 and Hyper-V to develop practical infrastructure engineering, networking, virtualisation, security and systems administration skills.
+> A multi-server Windows infrastructure lab demonstrating infrastructure engineering, networking, virtualisation, security and systems administration skills using Windows Server 2025 and Hyper-V.
 
 ## Project Overview
 This project is a self-built Windows infrastructure environment designed to simulate the core IT services of a small organisation.
@@ -8,12 +8,13 @@ Hosted on Hyper-V, the environment uses dedicated Windows Server 2025 virtual ma
 
 The project focuses on practical infrastructure engineering, including Active Directory, DNS, DHCP, Group Policy, Windows LAPS, SMB/NTFS access control and PowerShell-based validation.
 
-## Current Lab Environment:
+## Current Lab Environment
 <p align="center">
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="500"/>
 </p>
 
 ## Lab Documentation
+> ### Phase 1 - Core Infrastructure
 ### Hyper-V & Virtual Infrastructure
 - [Hyper-V Host, Virtual Switch and Virtual Machine Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Hyper-V%20%26%20Virtual%20Infrastructure/Hyper-V%20host%2C%20virtual%20switch%20and%20VM%20configuration.md)
 
@@ -29,7 +30,7 @@ The project focuses on practical infrastructure engineering, including Active Di
 ### File Services
 - [File Server and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
  
-## Skills Demonstrated:
+## Skills Demonstrated
 - Build and configure a multi-server Windows Server 2025 infrastructure environment using Hyper-V.
 - Deploy and manage virtual machines, virtual switches and segmented client/server networks.
 - Configure IPv4 addressing, multi-NIC routing, RRAS, NAT and DHCP relay.
@@ -39,7 +40,7 @@ The project focuses on practical infrastructure engineering, including Active Di
 - Configure Windows File Services, SMB shares and AGDLP-based NTFS permissions using least-privilege principles.
 - Validate and troubleshoot infrastructure configuration using Windows administration tools, networking utilities and PowerShell.
 
-## Project Roadmap:
+## Project Roadmap
 
 ### Phase 2 — Resilience & Operations
 - Automate common infrastructure administration and validation tasks using PowerShell.
