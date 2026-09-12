@@ -52,9 +52,21 @@ Network Address Translation is configured to allow systems on the private lab ne
 |`SERVERS`|`Private interface`|
 |`CLIENTS`|`Private interface`|
 
-### RRAS NAT Overview 
->Showing the `WAN` interface actively translating traffic from the isolated server and client networks to the upstream network.
+### Hyper-V Host Upstream Connectivity
+The `LAB-WAN` Hyper-V switch provides an isolated upstream network between `RTR01` and the Windows 11 Hyper-V host.
+
+|System|Interface|IP Address|Purpose|
+|---|---|---|---|
+|`Hyper-V Host`|`vEthernet (LAB-WAN)`|`172.16.0.1/24`|Upstream gateway for RTR01|
+|`RTR01`|`WAN`|`172.16.0.2/24`|RRAS external interface|
+
+> RRAS console shows the `WAN` interface actively translating traffic from the isolated server and client networks to the upstream network.
+ 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20NAT.png" width="900"/>
+
+> The Hyper-V host provides NAT between the `172.16.0.0/24` LAB-WAN network and its physical network connection.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Get-NetNat.png" width="900"/>
 
 ## DHCP Relay
 Because `CLIENT01` resides on a different subnet from the DHCP server on `DC01`, DHCP relay is used to forward DHCP requests between the client and server networks.
