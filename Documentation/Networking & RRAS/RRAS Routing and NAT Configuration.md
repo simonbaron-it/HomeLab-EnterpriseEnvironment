@@ -52,6 +52,10 @@ Network Address Translation is configured to allow systems on the private lab ne
 |`SERVERS`|`Private interface`|
 |`CLIENTS`|`Private interface`|
 
+> RRAS console shows the `WAN` interface actively translating traffic from the isolated server and client networks to the upstream network.
+ 
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20NAT.png" width="900"/>
+
 ### Hyper-V Host Upstream Connectivity
 The `LAB-WAN` Hyper-V switch provides an isolated upstream network between `RTR01` and the Windows 11 Hyper-V host.
 
@@ -59,10 +63,6 @@ The `LAB-WAN` Hyper-V switch provides an isolated upstream network between `RTR0
 |---|---|---|---|
 |`Hyper-V Host`|`vEthernet (LAB-WAN)`|`172.16.0.1/24`|Upstream gateway for RTR01|
 |`RTR01`|`WAN`|`172.16.0.2/24`|RRAS external interface|
-
-> RRAS console shows the `WAN` interface actively translating traffic from the isolated server and client networks to the upstream network.
- 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/RRAS%20Management%20Console%20-%20NAT.png" width="900"/>
 
 > The Hyper-V host provides NAT between the `172.16.0.0/24` LAB-WAN network and its physical network connection.
 
@@ -95,19 +95,19 @@ The IPv4 routing table was reviewed to verify that `RTR01` had routes for each d
 Connectivity testing was performed from `CLIENT01` to verify inter-subnet routing and upstream connectivity through `RTR01`.
 
 ### Tracert to `DC01`
->Confirms that `CLIENT01` can reach `DC01` across the `CLIENTS` and `SERVERS` networks through `RTR01`.
+> Confirms that `CLIENT01` can reach `DC01` across the `CLIENTS` and `SERVERS` networks through `RTR01`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Tracert%20to%20DC01.png" width="900"/>
 
 ### Ping Upstream Network
->Confirms that traffic from the isolated client network can reach an upstream network through NAT on `RTR01`.
+> Confirms that traffic originating from `CLIENT01` can traverse `RTR01` and reach an external IP address through the lab's NAT path.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/CLIENT01%20Ping%20to%20upstream%20network.png" width="900"/>
 
 ### Validation Confirmed
 - `RTR01` successfully routes traffic between the `CLIENTS` and `SERVERS` networks.
 - `CLIENT01` can reach `DC01` across the routed network boundary.
-- Traffic from the private client network can reach the upstream network through NAT.
+- Traffic from the private client network successfully reaches external networks through the RRAS and Hyper-V host NAT path.
 - `RTR01` maintains directly connected routes for all three network segments and a default route through `172.16.0.1`.
 - DHCP Relay is configured to forward requests from the `CLIENTS` network to `DC01`
 
