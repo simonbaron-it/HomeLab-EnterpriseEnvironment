@@ -109,7 +109,7 @@ Connectivity testing was performed from `CLIENT01` to verify inter-subnet routin
 - `CLIENT01` can reach `DC01` across the routed network boundary.
 - Traffic from the private client network successfully reaches external networks through the RRAS and Hyper-V host NAT path.
 - `RTR01` maintains directly connected routes for all three network segments and a default route through `172.16.0.1`.
-- DHCP Relay is configured to forward requests from the `CLIENTS` network to `DC01`
+- DHCP Relay is configured to forward requests from the `CLIENTS` network to `DC01`.
 
 ## Skills Demonstrated
 - Install and configure Windows Server Routing and Remote Access.
