@@ -56,8 +56,6 @@ The `Domain-Account-Policy` GPO defines domain-wide password and account lockout
 |`Allow administrator account lockout`|`Enabled`|
 |`Reset account lockout counter after`|`15 minutes`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain-Account-Policy%20GPO.png" width="900"/>
-
 ### Validation
 > PowerShell was used on `DC01` to verify the effective domain password and account lockout policy.
 
@@ -86,8 +84,6 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 |`Firewall profiles`|`Domain / Private / Public`|
 |`Windows Defender firewall: Protect all network connections`|`Enabled`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Security-Baseline%20GPO.png" width="900"/>
-
 ### Validation
 > PowerShell was used on `CLIENT01` to verify the effective firewall profile policy.
 
@@ -115,8 +111,6 @@ The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for do
 |`Label as`|`CompanyData`|
 |`Hide/show this drive`|`Show`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20GPO.png" width="900"/>
-
 ### Validation
 > A domain user signed in to `CLIENT01` to verify that the `CompanyData` share was automatically mapped as drive `E:`.
 
@@ -142,8 +136,6 @@ The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group 
 |`Delete all member users`|`Disabled`|
 |`Delete all member groups`|`Disabled`|
 |`Add members`|`BARON\IT_Admins`|
-
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Local-Admins%20GPO.png" width="900"/>
 
 ### Validation
 > PowerShell was used on `CLIENT01` to verify that the Active Directory security group `BARON\IT_Admins` was added to the local `Administrators` group.
@@ -189,8 +181,6 @@ Set-LapsADComputerSelfPermission `
 |`Password length`|`14`|
 |`Password age (days)`|`30`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Windows-LAPS%20GPO.png" width="900"/>
-
 ### Validation
 > PowerShell was used on `DC01` to verify that Windows LAPS was managing `CLIENT01` and storing the managed account metadata in Active Directory.
 
@@ -210,8 +200,6 @@ Validation confirmed:
 - `BARON\IT_Admins` is added to the local `Administrators` group on domain workstations.
 - Windows LAPS automatically manages and rotates the designated local administrator credentials.
 - LAPS credential information is securely backed up to Active Directory.
-
-
 
 ## Skills Demonstrated
 - Create and manage Active Directory Group Policy Objects.
