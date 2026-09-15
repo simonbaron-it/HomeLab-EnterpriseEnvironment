@@ -1,1 +1,0 @@
-# AD and DNS Resilience
