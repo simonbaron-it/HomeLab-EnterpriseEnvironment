@@ -30,7 +30,7 @@ The implementation covers:
 |Scope Network|`10.10.20.0/24`|
 |Address Pool|`10.10.20.100` - `10.10.20.199`|
 |Lease Duration|`8 days`|
-|Default gateway|`10.10.20.1`|
+|Default Gateway|`10.10.20.1`|
 |DNS Servers|`10.10.10.10`, `10.10.10.11`|
 |DNS Domain|`baron.example.com`|
 |DHCP Relay|`RTR01`|
@@ -51,9 +51,9 @@ The DHCP Server role was installed on `DC02` and authorised in Active Directory 
 |Primary Server|`DC01`|
 |Partner Server|`DC02`|
 |Mode|`Load Balance`|
-|ScopeID|`10.10.20.0`|
+|Scope ID|`10.10.20.0`|
 |Load Balance Percentage|`50`|
-|Max Client Lead Time|`01:00:00`|
+|Maximum Client Lead Time|`01:00:00`|
 |Shared Secret|`Configured`|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Failover%20Validation.png" width="800"/>
@@ -76,6 +76,8 @@ DHCP Relay on `RTR01` was updated to forward requests from the `CLIENTS` network
 ## Configuration Validation
 
 ### Failover State Validation
+PowerShell validation confirms the `DC01-DC02-Failover` relationship is operational and configured in Load Balance mode.
+
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Failover%20State%20Validation.png" width="800"/>
 
 ### Normal Operation
@@ -92,14 +94,13 @@ A controlled failure test was performed by making `DC01` unavailable and renewin
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/IPConfig%20-%20DHCP%20Failover%20Test.png" width="800"/>
 
-## Validation Summary:
+## Validation Summary
 - `DC01` and `DC02` are both authorised DHCP servers in Active Directory.
 - The `10.10.20.0/24` client scope is configured for DHCP failover.
 - DHCP scope configuration is available on both failover partners.
 - Lease information is synchronised between `DC01` and `DC02`.
 - `CLIENT01` receives the correct IP address, gateway, DNS and domain options.
 - DHCP requests from the `CLIENTS` network continue to traverse `RTR01` using DHCP Relay.
-- Client lease allocation remains available when one DHCP server is unavailable.
 - `CLIENT01` successfully obtains DHCP service from `DC02` while `DC01` is unavailable, confirming DHCP service continuity.
 
 ## Skills Demonstrated
