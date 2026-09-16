@@ -1,5 +1,5 @@
 # Active Directory and DNS Resilience
-> This section documents the Phase 2 deployment of an additional Domain Controller to improve Active Directory and DNS availability within the baron.example.com environment.
+> This section documents the Phase 2 deployment of an additional Domain Controller to improve Active Directory and DNS availability within the `baron.example.com` environment.
 
 ## Overview
 The implementation covers:
@@ -34,7 +34,7 @@ The implementation covers:
 |Default Gateway|`10.10.10.1`|
 |Preferred DNS|`10.10.10.10`|
 
-#### Domain Controller Promotion
+### Domain Controller Promotion
 
 |Setting|Configuration|
 |---|---|
@@ -68,10 +68,10 @@ Both Domain Controllers host DNS and the `baron.example.com` zone is Active Dire
 |Setting|Configuration|
 |---|---|
 |Zone Name|`baron.example.com`|
-|Zone Type|`Active Directory Integrated`|
+|Zone Type|`Active Directory-Integrated`|
 |Dynamic Updates|`Secure only`|
-|DNS Server 1|`DC01` `10.10.10.10`|
-|DNS Server 2|`DC02` `10.10.10.11`|
+|DNS Server 1|`DC01` (`10.10.10.10`)|
+|DNS Server 2|`DC02` (`10.10.10.11`)|
 
 ### DNS Replication Validation
 DNS records were verified on both Domain Controllers to confirm that AD-integrated DNS data replicated successfully.
@@ -122,7 +122,7 @@ With `DC01` powered off, `CLIENT01` successfully obtained fresh Kerberos authent
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Domain%20Resource%20Access%20Test.png" width="800"/>
 
-## Validation Sumamry
+## Validation Summary
 - `DC02` operates as an additional Domain Controller and Global Catalog for `baron.example.com`.
 - Active Directory replication between `DC01` and `DC02` is healthy.
 - Directory changes created on one Domain Controller successfully replicate to the other.
