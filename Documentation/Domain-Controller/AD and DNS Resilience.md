@@ -34,6 +34,17 @@ The implementation covers:
 |Default Gateway|`10.10.10.1`|
 |Preferred DNS|`10.10.10.10`|
 
+#### Domain Controller Promotion
+
+|Setting|Configuration|
+|---|---|
+|Deployment Type|`Add a domain controller to an existing domain`|
+|Domain|`baron.example.com`|
+|DNS Server|`Enabled`|
+|Global Catalog|`Enabled`|
+|Read-Only Domain Controller|`Disabled`|
+|Site|`Default-First-Site-Name`|
+
 ## Active Directory Replication
 Active Directory replication ensures directory changes made on one Domain Controller are replicated to the other.
 ### Replication Validation
@@ -43,7 +54,7 @@ PowerShell and Active Directory replication tools were used to verify replicatio
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Global%20catalog.png" width="800"/>
 
-### Functional Replication test
+### Functional Replication Test
 A `Replication Test User` was created inside the `IT Staff` Active Directory OU on `DC01` and then verified on `DC02` to confirm successful replication.
 > User created on DC01
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Replication%20test%20DC01.png" width="800"/>
@@ -56,7 +67,7 @@ Both Domain Controllers host DNS and the `baron.example.com` zone is Active Dire
 
 |Setting|Configuration|
 |---|---|
-|Primary Zone|`baron.example.com`|
+|Zone Name|`baron.example.com`|
 |Zone Type|`Active Directory Integrated`|
 |Dynamic Updates|`Secure only`|
 |DNS Server 1|`DC01` `10.10.10.10`|
@@ -72,7 +83,7 @@ Domain-joined systems were configured to use both Domain Controllers for DNS res
 
 |System Type|Preferred DNS|Alternate DNS|
 |---|---|---|
-|DC01|`10.10.10.11`(`DC02`)|`10.10.10.10` (`DC01`)|
+|DC01|`10.10.10.11` (`DC02`)|`10.10.10.10` (`DC01`)|
 |DC02|`10.10.10.10` (`DC01`)|`10.10.10.11` (`DC02`)|
 |Servers|`10.10.10.10` (`DC01`)|`10.10.10.11` (`DC02`)|
 |Clients via DHCP|`10.10.10.10` (`DC01`)|`10.10.10.11` (`DC02`)|
@@ -111,14 +122,16 @@ With `DC01` powered off, `CLIENT01` successfully obtained fresh Kerberos authent
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Domain%20Resource%20Access%20Test.png" width="800"/>
 
-## Validation Confirmed
-- `DC02` operates as an additional Domain Controller for `baron.example.com`.
+## Validation Sumamry
+- `DC02` operates as an additional Domain Controller and Global Catalog for `baron.example.com`.
 - Active Directory replication between `DC01` and `DC02` is healthy.
-- Both Domain Controllers host the AD-integrated DNS zone.
+- Directory changes created on one Domain Controller successfully replicate to the other.
+- Both Domain Controllers host the AD-integrated `baron.example.com` DNS zone.
 - DNS records replicate successfully between `DC01` and `DC02`.
 - Domain-joined systems are configured with redundant DNS servers.
-- Authentication and internal DNS resolution remain available when one Domain Controller is unavailable.
-- Domain resources remain accessible during a single Domain Controller outage.
+- `CLIENT01` successfully authenticates against `DC02` while `DC01` is unavailable.
+- Internal and external DNS resolution remain available through `DC02`.
+- Fresh Kerberos authentication and access to domain resources remain available during a `DC01` outage.
 
 ## Skills Demonstrated
 - Deploy an additional Windows Server Domain Controller.
