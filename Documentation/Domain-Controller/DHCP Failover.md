@@ -20,7 +20,7 @@ The implementation covers:
 |IP Address|`10.10.10.10`|`10.10.10.11`|
 |Domain|`baron.example.com`|`baron.example.com`|
 |DHCP Authorised in AD|`Yes`|`Yes`|
-|Failover Partner|`DC02` `10.10.10.11`|`DC01` `10.10.10.10`|
+|Failover Partner|`DC02` (`10.10.10.11`)|`DC01` (`10.10.10.10`)|
 
 ### Existing DHCP Scope
 
@@ -31,7 +31,7 @@ The implementation covers:
 |Address Pool|`10.10.20.100` - `10.10.20.199`|
 |Lease Duration|`8 days`|
 |Default gateway|`10.10.20.1`|
-|DNS Servers|`10.10.10.10` `10.10.10.11`|
+|DNS Servers|`10.10.10.10`, `10.10.10.11`|
 |DNS Domain|`baron.example.com`|
 |DHCP Relay|`RTR01`|
 
@@ -69,11 +69,11 @@ Active leases were reviewed on both DHCP servers to verify that lease informatio
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Lease%20Sync%20Validation.png" width="800"/>
 
 ### DHCP Relay
-DHCP Relay was updated on `RTR01` to include `DC02`.
+DHCP Relay on `RTR01` was updated to forward requests from the `CLIENTS` network to both DHCP failover partners.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Relay%20update%20DC02.png" width="800"/>
 
-## Configuration Validaton
+## Configuration Validation
 
 ### Failover State Validation
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Failover%20State%20Validation.png" width="800"/>
@@ -88,7 +88,11 @@ A controlled failure test was performed by making `DC01` unavailable and renewin
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Failover%20DC01%20Offline%20Test.png" width="800"/>
 
-## Validation Confirmed:
+`CLIENT01` successfully obtained a lease from `DC02` (`10.10.10.11`), confirming that DHCP service remained available while `DC01` was offline.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/IPConfig%20-%20DHCP%20Failover%20Test.png" width="800"/>
+
+## Validation Summary:
 - `DC01` and `DC02` are both authorised DHCP servers in Active Directory.
 - The `10.10.20.0/24` client scope is configured for DHCP failover.
 - DHCP scope configuration is available on both failover partners.
@@ -96,6 +100,7 @@ A controlled failure test was performed by making `DC01` unavailable and renewin
 - `CLIENT01` receives the correct IP address, gateway, DNS and domain options.
 - DHCP requests from the `CLIENTS` network continue to traverse `RTR01` using DHCP Relay.
 - Client lease allocation remains available when one DHCP server is unavailable.
+- `CLIENT01` successfully obtains DHCP service from `DC02` while `DC01` is unavailable, confirming DHCP service continuity.
 
 ## Skills Demonstrated
 - Install and authorise the Windows Server DHCP role.
