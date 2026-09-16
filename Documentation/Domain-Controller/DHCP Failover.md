@@ -41,7 +41,7 @@ DHCP failover was configured between `DC01` and `DC02` for the existing `10.10.2
 ### DC02 DHCP Role Deployment
 The DHCP Server role was installed on `DC02` and authorised in Active Directory before the failover relationship was created.
 
-<i>Insert DHCP Authorisation Validation DC02</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Authorisation%20Validation%20DC02.png" width="800"/>
 
 ### Failover Relationship
 
@@ -56,24 +56,37 @@ The DHCP Server role was installed on `DC02` and authorised in Active Directory 
 |Max Client Lead Time|`01:00:00`|
 |Shared Secret|`Configured`|
 
-<i>Insert DHCP Failover Validation screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Failover%20Validation.png" width="800"/>
 
-#### Scope Replication
+### Scope Replication
 The DHCP scope configuration was replicated to `DC02` as part of the failover relationship.
 
-<i>Insert DHCP Scope Replication Validation screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Scope%20Replication%20Validation.png" width="800"/>
 
-#### Lease Synchronisation
+### Lease Synchronisation
 Active leases were reviewed on both DHCP servers to verify that lease information was synchronised between failover partners.
 
-<i>Insert Lease Sync Validation screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Lease%20Sync%20Validation.png" width="800"/>
 
 ### DHCP Relay
-DHCP Relay was updated on `RTR01` to include `DC02` as a DHCP server.
+DHCP Relay was updated on `RTR01` to include `DC02`.
 
-<i>Insert DHCP Relay Update DC02 screenshot</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Relay%20update%20DC02.png" width="800"/>
 
 ## Configuration Validaton
+
+### Failover State Validation
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Failover%20State%20Validation.png" width="800"/>
+
+### Normal Operation
+`CLIENT01` was used to verify that DHCP addressing continued to operate normally with both DHCP servers available.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Normal%20Operation%20Test.png" width="800"/>
+
+### Failover Test
+A controlled failure test was performed by making `DC01` unavailable and renewing the DHCP lease on `CLIENT01`.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Failover%20DC01%20Offline%20Test.png" width="800"/>
 
 ## Validation Confirmed:
 - `DC01` and `DC02` are both authorised DHCP servers in Active Directory.
