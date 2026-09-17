@@ -8,7 +8,7 @@ Hosted on Hyper-V, the environment uses dedicated Windows Server 2025 virtual ma
 
 The project focuses on practical infrastructure engineering, including Active Directory, DNS, DHCP, Group Policy, Windows LAPS, SMB/NTFS access control and PowerShell-based validation.
 
-## Current Lab Environment
+## Current Lab Environment: `Phase 1 Complete`
 <p align="center">
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="500"/>
 </p>
