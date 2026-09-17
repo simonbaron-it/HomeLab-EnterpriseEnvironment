@@ -29,6 +29,17 @@ The project focuses on practical infrastructure engineering, including Active Di
 
 ### File Services
 - [File Server and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
+
+> ### Phase 2 - Resilience & Operations
+### Resilience and High Availability
+- [Active Directory and DNS Resilience](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Domain-Controller/AD%20and%20DNS%20Resilience.md)
+- [DHCP Failover](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Domain-Controller/DHCP%20Failover.md)
+
+### Backup & Recovery
+
+### Monitoring & Logging
+
+### PowerShell Automation
  
 ## Skills Demonstrated
 - Build and configure a multi-server Windows Server 2025 infrastructure environment using Hyper-V.
