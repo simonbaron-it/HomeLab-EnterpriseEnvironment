@@ -36,6 +36,7 @@ The project focuses on practical infrastructure engineering, including Active Di
 - [DHCP Failover](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Domain-Controller/DHCP%20Failover.md)
 
 ### Backup & Recovery
+- [Windows Server Backup and Recovery](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Backup%20and%20Recovery/Windows%20Server%20Backup%20and%20Recovery.md)
 
 ### Monitoring & Logging
 
