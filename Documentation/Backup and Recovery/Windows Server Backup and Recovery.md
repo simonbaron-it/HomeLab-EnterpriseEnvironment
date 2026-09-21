@@ -4,14 +4,14 @@
 ## Overview
 The implementation covers:
 - Active Directory system state backup.
-- Backup of shared organisational data hosted on FS01.
-- Backup of Group Policy and DHCP.
+- Backup of shared organisational data hosted on `FS01`.
+- Backup of Group Policy and DHCP configuration.
 - Verification that backup jobs complete successfully.
 - Recovery testing for representative infrastructure and file-service scenarios.
 
 > PowerShell-based configuration backup automation is documented separately in [PowerShell Automation].
 
-### Backup Design
+## Backup Design
 
 |Component|Protected Data|Backup/Recovery Location|Recovery Purpose|
 |---|---|---|---|
