@@ -1,11 +1,11 @@
 # Windows Server Backup and Recovery
-> This section documents the Phase 2 backup and recovery implementation used to protect critical infrastructure configuration and organisational data within the baron.example.com environment.
+> This section documents the Phase 2 backup and recovery implementation used to protect critical infrastructure configuration and organisational data within the `baron.example.com` environment.
 
 ## Overview
 The implementation covers:
 - Active Directory system state backup.
 - Backup of shared organisational data hosted on FS01.
-- Backup of Group Policy, DHCP and other infrastructure configuration.
+- Backup of Group Policy and DHCP.
 - Verification that backup jobs complete successfully.
 - Recovery testing for representative infrastructure and file-service scenarios.
 
@@ -15,11 +15,11 @@ The implementation covers:
 
 |Component|Protected Data|Backup/Recovery Location|Recovery Purpose|
 |---|---|---|---|
-|`DC01`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`AD DS, SYSVOL, registry, OS recovery`|
-|`DC02`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`Secondary Domain Controller recovery source`|
-|`FS01`|`E:\CompanyData + System State + Critical Volumes`|`Dedicated B: backup VHDX`|`File data and server recovery`|
-|`Group Policy`|`All GPOs`|`B:\GPOBackups on DC01`|`Individual GPO rollback / restore`|
-|`DHCP`|`DHCP server configuration and leases`|`B:\DHCPBackups on DC01`|`Scope and DHCP configuration recovery`|
+|`DC01`|System State + Critical Volumes|Dedicated `B:` backup VHDX|AD DS, SYSVOL, registry, server recovery|
+|`DC02`|System State + Critical Volumes|Dedicated `B:` backup VHDX|Additional Domain Controller recovery|
+|`FS01`|`E:\CompanyData` + System State + Critical Volumes|Dedicated `B:` backup VHDX|File data and server recovery|
+|`Group Policy`|`All GPOs`|`B:\GPOBackups` on `DC01`|Individual GPO rollback / restore|
+|`DHCP`|DHCP server configuration and leases|`B:\DHCPBackups` on `DC01`|Scope and DHCP configuration recovery|
 
 > Active Directory Recycle Bin is also enabled to provide object-level recovery for accidentally deleted users, groups and organisational units without requiring a full System State restore.
 >
@@ -38,12 +38,12 @@ Windows Server Backup was used to protect the Active Directory system state and 
 ### Configuration
 `wbadmin` was executed from an elevated PowerShell session on each Domain Controller to create a backup containing system state and all critical volumes.
 
-```PowerShell
+```powershell
 wbadmin start backup -backupTarget:B: -allCritical -systemState -vssFull
 ```
 
 ### Validation
-
+> DC01 completed backup
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DC01%20Backup.png" width="900"/>
 
 ## File Server Backup
@@ -57,7 +57,7 @@ Windows Server Backup was configured on FS01 to protect the shared organisationa
 ### Configuration
 `wbadmin` was executed from an elevated PowerShell session on `FS01` to protect the server's critical volumes, system state and `E:\CompanyData`.
 
-```PowerShell
+```powershell
 wbadmin start backup -backupTarget:B: -include:E: -allCritical -systemState -vssFull
 ```
 
@@ -71,7 +71,7 @@ Infrastructure configuration is exported separately so key settings can be resto
 ### Group Policy
 All Group Policy Objects are backed up using PowerShell.
 
-```PowerShell
+```powershell
 New-Item `
     -Path "B:\GPOBackups" `
     -ItemType Directory `
@@ -90,7 +90,7 @@ Backup-GPO `
 ### DHCP
 The DHCP server configuration and lease data were exported separately to provide a faster recovery method than restoring an entire Domain Controller.
 
-```PowerShell
+```powershell
 New-Item `
     -Path "B:\DHCPBackups" `
     -ItemType Directory `
@@ -106,6 +106,14 @@ Export-DhcpServer `
 ### Validation
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Backup.png" width="900"/>
+
+## Backup Frequency and Retention
+
+|Backup|Frequency|Retention|
+|---|---|---|
+|Windows Server Backup|Manual / on-demand for Phase 2 recovery testing|Available backup versions retained on dedicated backup volume|
+|Group Policy|Before significant GPO changes and during infrastructure backup runs|Retained on `DC01` backup volume|
+|DHCP Configuration|After significant DHCP changes and during infrastructure backup runs|Retained on `DC01` backup volume|
 
 ## Recovery Testing
 Representative recovery tests were performed to verify that protected data and configuration could be restored successfully.
@@ -128,10 +136,16 @@ An unlinked test Group Policy Object was configured with a known registry-based 
 #### Restored GPO
 Following the restore, the policy value returned from `ModifiedValue` to its original value of `OriginalValue`.
 
+```powershell
+Restore-GPO `
+     -Name "Backup-Recovery-Test" `
+     -Path "B:\GPOBackups"
+```
+
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20GPO%20Original%20Value.png" width="900"/>
 
 ### Recovery Test 3 — DHCP Recovery Readiness
-The DHCP configuration export was validated by confirming that the exported backup contained the configured scope, options and lease information.
+The DHCP configuration export was inspected to confirm that the backup contained the configured scope, scope options and lease data required for a future recovery operation.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20DHCP%20Recovery%20Readiness.png" width="900"/>
 
