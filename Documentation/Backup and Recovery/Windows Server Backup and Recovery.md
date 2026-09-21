@@ -111,21 +111,24 @@ Export-DhcpServer `
 Representative recovery tests were performed to verify that protected data and configuration could be restored successfully.
 
 ### Recovery Test 1 — File Recovery
-A test file was created within `E:\CompanyData`, backed up, deleted and then restored from backup.
-
-#### Before Deletion
-<img src="INSERT-FILE-BEFORE-DELETION-SCREENSHOT" width="900"/>
+`Backup Recovery Test File.txt` was created within `E:\CompanyData\Finance`, backed up, deleted and then restored from backup.
 
 #### Recovery
-<img src="INSERT-FILE-RECOVERY-SCREENSHOT" width="900"/>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20FS01%20Recovery%20Complete.png" width="900"/>
 
 #### Restored File
-<img src="INSERT-FILE-RESTORE-VALIDATION-SCREENSHOT" width="900"/>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20FS01%20After%20Recovery.png" width="900"/>
 
 ### Recovery Test 2 — Group Policy Recovery
-A test Group Policy Object was backed up using `Backup-GPO`, modified or removed, and restored from the exported GPO backup.
+An unlinked test Group Policy Object was configured with a known registry-based policy value and backed up using `Backup-GPO`. The value was then deliberately modified before the GPO was restored from backup.
 
-<img src="INSERT-FILE-RESTORE-VALIDATION-SCREENSHOT" width="900"/>
+#### Modified GPO
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20GPO%20Modified%20Value.png" width="900"/>
+
+#### Restored GPO
+Following the restore, the policy value returned from `ModifiedValue` to its original value of `OriginalValue`.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20GPO%20Original%20Value.png" width="900"/>
 
 ### Recovery Test 3 — DHCP Recovery Readiness
 The DHCP configuration export was validated by confirming that the exported backup contained the configured scope, options and lease information.
