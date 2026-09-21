@@ -13,7 +13,7 @@ The implementation covers:
 
 ### Backup Design
 
-|Component|Protected Data|Backup/Recovery Location|Recovery purpose|
+|Component|Protected Data|Backup/Recovery Location|Recovery Purpose|
 |---|---|---|---|
 |`DC01`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`AD DS, SYSVOL, registry, OS recovery`|
 |`DC02`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`Secondary Domain Controller recovery source`|
@@ -51,7 +51,7 @@ Windows Server Backup was configured on FS01 to protect the shared organisationa
 
 |Component|Backup|
 |---|---|
-|`FS01`|`System State`|
+|`FS01`|`System State + Critical Volumes`|
 |`Source`|`E:\CompanyData`|
 
 ### Configuration
