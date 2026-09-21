@@ -5,7 +5,7 @@
 The implementation covers:
 - Active Directory System State backup.
 - Backup of shared organisational data hosted on FS01.
-- Backup of Group Policy, DHCP and other infrastructure configuration.
+- Backup of Group Policy, and other infrastructure configuration.
 - Verification that backup jobs complete successfully.
 - Recovery testing for representative infrastructure and file-service scenarios.
 
@@ -13,59 +13,70 @@ The implementation covers:
 
 ### Backup Design
 
-|Component|Protected Data|Backup Method|Destination|
+|Component|Protected Data|Backup Target|Primary Recovery purpose|
 |---|---|---|---|
-|`DC01`|`Active Directory/System State`|`?`|`?`|
-|`DC02`|`Active Directory/System State`|`?`|`?`|
-|`FS01`|`E:\CompanyData`|`?`|`?`|
-|`Group Policy`|`All GPO's`|`?`|`?`|
-|`DHCP`|`DHCP configuration and leases`|`?`|`?`|
-
-### Backup Storage
+|`DC01`|`Active Directory/System State`|`Local B: backup VHDX`|`AD DS, SYSVOL, registry, OS recovery`|
+|`DC02`|`Active Directory/System State`|`Local B: backup VHDX`|`Second independent AD recovery source`|
+|`FS01`|`E:\CompanyData`|`Local B: backup VHDX`|`OS/config + CompanyData recovery`|
+|`Group Policy`|`All GPO's`|`B:\GPOBackups on DC01`|`GPO rollback`|
+|`AD Objects`|`Deleted AD Objects`|`AD Recycle Bin`|`User/group/OU recovery`|
 
 ## Active Directory Backup
 System State backup protects the Active Directory database and supporting Domain Controller components required for recovery.
 
 ### Protected Domain Controllers
 
-|Domain Controller|Backup|Status|
-|---|---|---|
-|`DC01`|`System State`|`?`|
-|`DC02`|`System State`|`?`|
+|Domain Controller|Backup|
+|---|---|
+|`DC01`|`System State`|
+|`DC02`|`System State`|
 
 ### Configuration
+PowerShell was used to backup both `DC01` & `DC02`.
+
+```PowerShell
+wbadmin start backup -backupTarget:B: -allCritical -systemState -vssFull
+```
 
 ### Validation
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DC01%20Backup.png" width="900"/>
 
 ## File Server Backup
-The CompanyData share on FS01 contains organisational data and is backed up separately from the operating system volume.
 
-### Protected Data
-
-|Component|Protected Data|
+|Component|Backup|
 |---|---|
-|`Server`|`FS01`|
+|`FS01`|`System State`|
 |`Source`|`E:\CompanyData`|
-|`Backup Destination`|`?`|
-|`Backup Method`|`?`|
-|`Retention`|`?`|
 
 ### Configuration
+PowerShell was used to backup `FS01`, including `E:\CompanyData`.
+
+```PowerShell
+wbadmin start backup -backupTarget:B: -include:E: -allCritical -systemState -vssFull
+```
 
 ### Validation
 
-## Infrastructure Configuration Backup
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/FS01%20Backup.png" width="500"/>
+
+## Infrastructure Configuration Backup??
 Infrastructure configuration is exported separately so key settings can be restored without rebuilding them manually.
 
 ### Group Policy
 All Group Policy Objects are backed up using PowerShell.
-<i>Script?</i>
 
-### DHCP
-DHCP configuration is exported from the failover environment.
-<i>Script?</i>
+```PowerShell
+New-Item `
+    -Path "B:\GPOBackups" `
+    -ItemType Directory `
+    -Force
 
-### <i>Backup Schedule and Retention???</i>
+Backup-GPO `
+    -All `
+    -Path "B:\GPOBackups" `
+    -Comment "Phase 2 Backup & Recovery baseline"
+```
 
 ## Recovery Testing
 Representative recovery tests were performed to verify that protected data and configuration could be restored successfully.
