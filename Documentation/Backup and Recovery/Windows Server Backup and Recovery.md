@@ -125,18 +125,21 @@ A test file was created within `E:\CompanyData`, backed up, deleted and then res
 ### Recovery Test 2 — Group Policy Recovery
 A test Group Policy Object was backed up using `Backup-GPO`, modified or removed, and restored from the exported GPO backup.
 
-<i>Screenshot?</i>
+<img src="INSERT-FILE-RESTORE-VALIDATION-SCREENSHOT" width="900"/>
 
-### Recovery Test 3 — DHCP Configuration Recovery
+### Recovery Test 3 — DHCP Recovery Readiness
 The DHCP configuration export was validated by confirming that the exported backup contained the configured scope, options and lease information.
 
-<i>Screenshot?</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20DHCP%20Recovery%20Readiness.png" width="900"/>
 
 ### Active Directory Recovery Readiness
-System State backups were confirmed as available for both Domain Controllers using Windows Server Backup.
+System State backups were confirmed as available for both Domain Controllers using `WBAdmin Get Versions` in PowerShell.
 
-<i>Screenshot?</i>
-wbadmin get versions
+> DC01
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20AD%20Recovery%20Test%20DC01.png" width="900"/>
+
+> DC02
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20AD%20Recovery%20Test%20DC02.png" width="900"/>
 
 ## Validation Summary
 - Critical infrastructure data and configuration are included in the backup design.
