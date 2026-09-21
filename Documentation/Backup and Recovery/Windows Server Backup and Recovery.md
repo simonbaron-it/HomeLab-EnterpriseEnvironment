@@ -3,7 +3,7 @@
 
 ## Overview
 The implementation covers:
-- Active Directory System State backup.
+- Active Directory system state backup.
 - Backup of shared organisational data hosted on FS01.
 - Backup of Group Policy, DHCP and other infrastructure configuration.
 - Verification that backup jobs complete successfully.
@@ -18,8 +18,7 @@ The implementation covers:
 |`DC01`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`AD DS, SYSVOL, registry, OS recovery`|
 |`DC02`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`Secondary Domain Controller recovery source`|
 |`FS01`|`E:\CompanyData + System State`|`Dedicated B: backup VHDX`|`File data and server recovery`|
-|`Group Policy`|`All GPO's`|`B:\GPOBackups on DC01`|`Individual GPO rollback / restore`|
-|`AD Objects`|`Deleted AD Objects`|`AD Recycle Bin`|`User/group/OU recovery`|
+|`Group Policy`|`All GPOs`|`B:\GPOBackups on DC01`|`Individual GPO rollback / restore`|
 |`DHCP`|`DHCP server configuration and leases`|`B:\DHCPBackups`|`Scope and DHCP configuration recovery`|
 
 > Active Directory Recycle Bin is also enabled to provide object-level recovery for accidentally deleted users, groups and organisational units without requiring a full System State restore.
@@ -35,7 +34,7 @@ System State backup protects the Active Directory database and supporting Domain
 |`DC02`|`System State`|
 
 ### Configuration
-`wbadmin` was executed from an elevated PowerShell session on each Domain Controller to create a backup containing System State and all critical volumes.
+`wbadmin` was executed from an elevated PowerShell session on each Domain Controller to create a backup containing system state and all critical volumes.
 
 ```PowerShell
 wbadmin start backup -backupTarget:B: -allCritical -systemState -vssFull
@@ -53,7 +52,7 @@ wbadmin start backup -backupTarget:B: -allCritical -systemState -vssFull
 |`Source`|`E:\CompanyData`|
 
 ### Configuration
-PowerShell was used to backup `FS01`, including `E:\CompanyData`.
+`wbadmin` was executed from an elevated PowerShell session on `FS01` to protect the server's critical volumes, system state and `E:\CompanyData`.
 
 ```PowerShell
 wbadmin start backup -backupTarget:B: -include:E: -allCritical -systemState -vssFull
@@ -66,7 +65,7 @@ wbadmin start backup -backupTarget:B: -include:E: -allCritical -systemState -vss
 ## Infrastructure Configuration Backup
 Infrastructure configuration is exported separately so key settings can be restored without rebuilding them manually.
 
-### Group Policy
+### Group Policy Configuration
 All Group Policy Objects are backed up using PowerShell.
 
 ```PowerShell
@@ -81,7 +80,11 @@ Backup-GPO `
     -Comment "Phase 2 Backup & Recovery baseline"
 ```
 
-### DHCP
+### Validation
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/GPO%20Backup.png" width="900"/>
+
+### DHCP Configuration
 The DHCP server configuration and lease data were exported separately to provide a faster recovery method than restoring an entire Domain Controller.
 
 ```PowerShell
@@ -96,6 +99,10 @@ Export-DhcpServer `
     -Leases `
     -Force
 ```
+
+### Validation
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Backup.png" width="900"/>
 
 ## Recovery Testing
 Representative recovery tests were performed to verify that protected data and configuration could be restored successfully.
