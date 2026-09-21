@@ -17,21 +17,23 @@ The implementation covers:
 |---|---|---|---|
 |`DC01`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`AD DS, SYSVOL, registry, OS recovery`|
 |`DC02`|`System State + Critical Volumes`|`Dedicated B: backup VHDX`|`Secondary Domain Controller recovery source`|
-|`FS01`|`E:\CompanyData + System State`|`Dedicated B: backup VHDX`|`File data and server recovery`|
+|`FS01`|`E:\CompanyData + System State + Critical Volumes`|`Dedicated B: backup VHDX`|`File data and server recovery`|
 |`Group Policy`|`All GPOs`|`B:\GPOBackups on DC01`|`Individual GPO rollback / restore`|
-|`DHCP`|`DHCP server configuration and leases`|`B:\DHCPBackups`|`Scope and DHCP configuration recovery`|
+|`DHCP`|`DHCP server configuration and leases`|`B:\DHCPBackups on DC01`|`Scope and DHCP configuration recovery`|
 
 > Active Directory Recycle Bin is also enabled to provide object-level recovery for accidentally deleted users, groups and organisational units without requiring a full System State restore.
+>
+> **Lab storage note:** Backup VHDXs are attached as dedicated backup volumes to each virtual machine. In a production environment, backup copies would also be stored on separate/off-host storage to protect against Hyper-V host or underlying storage failure.
 
 ## Active Directory Backup
-System State backup protects the Active Directory database and supporting Domain Controller components required for recovery.
+Windows Server Backup was used to protect the Active Directory system state and critical operating system volumes on both Domain Controllers, providing recovery capability for AD DS, SYSVOL, the registry and other required server components.
 
 ### Protected Domain Controllers
 
 |Domain Controller|Backup|
 |---|---|
-|`DC01`|`System State`|
-|`DC02`|`System State`|
+|`DC01`|`System State + Critical Volumes`|
+|`DC02`|`System State + Critical Volumes`|
 
 ### Configuration
 `wbadmin` was executed from an elevated PowerShell session on each Domain Controller to create a backup containing system state and all critical volumes.
@@ -45,6 +47,7 @@ wbadmin start backup -backupTarget:B: -allCritical -systemState -vssFull
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DC01%20Backup.png" width="900"/>
 
 ## File Server Backup
+Windows Server Backup was configured on FS01 to protect the shared organisational data stored on `E:\CompanyData` together with the server's system state and critical operating system volumes.
 
 |Component|Backup|
 |---|---|
@@ -65,7 +68,7 @@ wbadmin start backup -backupTarget:B: -include:E: -allCritical -systemState -vss
 ## Infrastructure Configuration Backup
 Infrastructure configuration is exported separately so key settings can be restored without rebuilding them manually.
 
-### Group Policy Configuration
+### Group Policy
 All Group Policy Objects are backed up using PowerShell.
 
 ```PowerShell
@@ -84,7 +87,7 @@ Backup-GPO `
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/GPO%20Backup.png" width="900"/>
 
-### DHCP Configuration
+### DHCP
 The DHCP server configuration and lease data were exported separately to provide a faster recovery method than restoring an entire Domain Controller.
 
 ```PowerShell
