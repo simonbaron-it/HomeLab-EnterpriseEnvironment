@@ -144,7 +144,37 @@ Restore-GPO `
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20GPO%20Original%20Value.png" width="900"/>
 
-### Recovery Test 3 — DHCP Recovery Readiness
+### Recovery Test 3 — Active Directory Object Recovery
+A `Recovery Test User` Active Directory user was created and added to a security group before being deliberately deleted. The account was then restored using Active Directory Recycle Bin to validate object-level recovery without requiring a System State restore.
+
+#### Deleted Object
+`Recovery Test User` was deleted from Active Directory and confirmed as no longer present in its original OU.
+
+<img src="INSERT-AD-DELETED-USER-SCREENSHOT" width="900"/>
+
+#### Object Recovery
+The deleted user was identified and restored using PowerShell.
+
+```powershell
+Get-ADObject `
+    -Filter 'SamAccountName -eq "Recovery Test User"' `
+    -IncludeDeletedObjects |
+Restore-ADObject
+```
+
+#### Recovery Validation
+Following recovery, the user account was verified in its original OU and its relevant Active Directory attributes and group membership were reviewed.
+
+```powershell
+Get-ADUser `
+    -Identity "Recovery Test User" `
+    -Properties MemberOf |
+Select-Object Name, Enabled, DistinguishedName, MemberOf
+```
+
+<i>AD screenshot?</i>
+
+### Recovery Test 4 — DHCP Recovery Readiness
 The DHCP configuration export was inspected to confirm that the backup contained the configured scope, scope options and lease data required for a future recovery operation.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20DHCP%20Recovery%20Readiness.png" width="900"/>
@@ -164,6 +194,7 @@ System State backups were confirmed as available for both Domain Controllers usi
 - `E:\CompanyData` is protected by Windows Server Backup and stored on the dedicated `B:` backup volume.
 - Group Policy and DHCP configuration can be exported for recovery.
 - Deleted file data can be restored successfully from backup.
+- A deliberately deleted Active Directory user was successfully recovered using Active Directory Recycle Bin.
 
 ## Skills Demonstrated
 - Configure and validate Active Directory System State backup.
