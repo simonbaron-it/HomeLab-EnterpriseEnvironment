@@ -145,34 +145,24 @@ Restore-GPO `
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20GPO%20Original%20Value.png" width="900"/>
 
 ### Recovery Test 3 — Active Directory Object Recovery
-A `Recovery Test User` Active Directory user was created and added to a security group before being deliberately deleted. The account was then restored using Active Directory Recycle Bin to validate object-level recovery without requiring a System State restore.
+A `Recovery Test User` Active Directory user was created in the `IT Staff` OU and added to the `IT_Users` security group before being deliberately deleted. The account was then restored using Active Directory Recycle Bin to validate object-level recovery without requiring a System State restore.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Recovery.png" width="900"/>
 
 #### Deleted Object
 `Recovery Test User` was deleted from Active Directory and confirmed as no longer present in its original OU.
 
-<img src="INSERT-AD-DELETED-USER-SCREENSHOT" width="900"/>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Deletion.png" width="900"/>
 
 #### Object Recovery
-The deleted user was identified and restored using PowerShell.
+The deleted user was identified and restored using Active Directory Administrative Centre.
 
-```powershell
-Get-ADObject `
-    -Filter 'SamAccountName -eq "Recovery Test User"' `
-    -IncludeDeletedObjects |
-Restore-ADObject
-```
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Restore.png" width="900"/>
 
 #### Recovery Validation
 Following recovery, the user account was verified in its original OU and its relevant Active Directory attributes and group membership were reviewed.
 
-```powershell
-Get-ADUser `
-    -Identity "Recovery Test User" `
-    -Properties MemberOf |
-Select-Object Name, Enabled, DistinguishedName, MemberOf
-```
-
-<i>AD screenshot?</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Recovery%20Validation.png" width="900"/>
 
 ### Recovery Test 4 — DHCP Recovery Readiness
 The DHCP configuration export was inspected to confirm that the backup contained the configured scope, scope options and lease data required for a future recovery operation.
