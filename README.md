@@ -55,12 +55,6 @@ The project focuses on practical infrastructure engineering, including Active Di
 
 ## Project Roadmap
 
-### Phase 2 — Resilience & Operations
-- Automate common infrastructure administration and validation tasks using PowerShell.
-- Deploy a second Domain Controller and configure Active Directory/DNS replication + DHCP Failover.
-- Implement and test backup and recovery procedures.
-- Introduce centralised monitoring and logging for infrastructure health and troubleshooting.
-
 ### Phase 3 — Hybrid Azure
 - Extend the environment into Azure.
 - Implement hybrid identity and networking.
