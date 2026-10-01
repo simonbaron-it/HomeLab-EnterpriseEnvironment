@@ -39,7 +39,7 @@ The project focuses on practical infrastructure engineering, including Active Di
 - [Windows Server Backup and Recovery](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Backup%20and%20Recovery/Windows%20Server%20Backup%20and%20Recovery.md)
 
 ### Monitoring & Logging
-- [Windows Server Monitoring and Event Logging](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Monitoring%20and%20Logging/Windows%20Server%20Monitoring%20and%20Event%20Logging.md)
+- [Centralised Monitoring and Event Forwarding](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Monitoring%20and%20Logging/Centralised%20Monitoring%20and%20Event%20Forwarding.md)
 
 ### PowerShell Automation
  
