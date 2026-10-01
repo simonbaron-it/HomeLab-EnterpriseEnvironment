@@ -1,4 +1,4 @@
-# Windows Server Monitoring and Event Logging
+# Centralised Monitoring and Event Forwarding
 > This section documents the Phase 2 monitoring and logging implementation used to centralise Windows event data, monitor core infrastructure health and improve troubleshooting across the `baron.example.com` environment.
 
 ## Overview
