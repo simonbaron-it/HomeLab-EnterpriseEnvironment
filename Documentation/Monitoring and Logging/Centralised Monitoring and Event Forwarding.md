@@ -181,3 +181,30 @@ The subscription collects selected Security Event IDs:
 
 ### Audit Policy
 A dedicated `Infrastructure-Auditing` Group Policy Object was created.
+
+Policy Configuration:   
+> `Computer Configuration`   
+> → `Policies`   
+> → `Windows Settings`   
+> → `Security Settings`   
+> → `Advanced Audit Policy Configuration`    
+> → `Audit Policies`
+
+The following categories were enabled:
+> `Account Management`  
+> &nbsp;&nbsp;↳ `Audit User Account Management`   
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Success`   
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Failure`   
+>     
+> &nbsp;&nbsp;↳ `Audit Security Group Management`   
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Success`   
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Failure`   
+>
+> `Logon/Logoff`    
+> &nbsp;&nbsp;↳ `Audit Logon`   
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Failure`
+
+<i>Screenshot: Advanced Audit Policy configuration.</i>
+
+## Account Management Events
+Account lifecycle activity was tested using a disposable test account.
