@@ -46,7 +46,7 @@ A dedicated Windows Server virtual machine was created to prevent monitoring and
 |Default Gateway|`10.10.10.1`|
 |DNS|`10.10.10.10`, `10.10.10.11`|
 
-## Windows Admin Centre
+## Windows Admin Center
 Windows Admin Center was installed on MGMT01 to provide browser-based central administration.
 
 |Setting|Value|
@@ -131,7 +131,7 @@ Policy Configuration:
 > → `Event Forwarding`    
 > → `Configure target Subscription Manager`
 
-The GPO was scoped to members of `WEF_Forwarders`
+The GPO was linked to the `baron.example.com` domain root and scoped to members of `WEF_Forwarders`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Infrastructure%20Event%20Forwarding%20GPO.png" width="900"/>
 
@@ -156,11 +156,14 @@ A second subscription was created to centralise important identity and security 
 |Setting|Value|
 |---|---|
 |Name|`Identity-Security-Events`|
+|Type|`Source computer initiated`|
+|Source Group|`BARON\WEF_Forwarders`|
 |Destination|`Forwarded Events`|
+|Logs|`Security`|
 |Delivery|`Minimise Latency`|
 
 The subscription collects selected Security Event IDs:
-|Setting|Value|
+|Event ID|Event|
 |---|---|
 |`4625`|`Failed logon`|
 |`4720`|`User account created`|
@@ -176,7 +179,7 @@ The subscription collects selected Security Event IDs:
 ## Security Auditing
 
 ### Audit Policy
-A dedicated `Infrastructure-Auditing` Group Policy Object was created.
+A dedicated `Infrastructure-Auditing` Group Policy Object was created, linked to the `baron.example.com` domain root and scoped to members of `WEF_Forwarders`.
 
 Policy Configuration:   
 > `Computer Configuration`   
@@ -203,7 +206,7 @@ The following categories were enabled:
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Audit%20Policy%20GPO.png" width="900"/>
 
 ## Account Management Events
-Account lifecycle activity monitoring was tested using a disposable `Monitoring Test User` AD account. Forwarded account creation events were queried using PowerShell.
+Account lifecycle activity monitoring was tested using a disposable `Monitoring Test User` AD account. Forwarded account modification events were queried using PowerShell.
 
 > ### Account Created
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/PowerShell%20Monitoring%20-%20User%20Creation%20.png" width="900"/>
@@ -254,15 +257,26 @@ A controlled domain-controller outage was performed to confirm that infrastructu
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20DC01%20outage%203.png" width="900"/>
 
-## Outcome
-The environment now provides a centralised management and logging layer across the core Windows infrastructure. Rather than administrating and troubleshooting each server independently, MGMT01 provides a single operational location for:
+## Validation Summary
+- `MGMT01` provides a dedicated central management and monitoring layer for the lab.
+- Windows Admin Center provides browser-based administration and infrastructure performance visibility.
+- Server Manager provides centralised visibility of server availability, services, events and installed roles.
+- Windows Event Forwarding centralises relevant events from domain-joined infrastructure systems.
+- Critical and error events from the `Application` and `System` logs are forwarded to `MGMT01`.
+- Selected identity and security events are centrally collected through the `Identity-Security-Events` subscription.
+- Active Directory account modification and lockout activity can be identified centrally.
+- A controlled application error generated on `FS01` was successfully received by the Windows Event Collector.
+- A controlled `DC01` outage was visible through Server Manager and WEF subscription state.
+- Active Directory replication was confirmed healthy after `DC01` returned to service.
 
-- Server administration
-- Performance visibility
-- Infrastructure health monitoring
-- Central event collection
-- Security auditing
-- Identity monitoring
-- Failure investigation
-
-   
+## Skills Demonstrated
+- Deploy a dedicated Windows Server management and monitoring server.
+- Configure Windows Admin Center for centralised server administration.
+- Use Server Manager for multi-server infrastructure monitoring.
+- Configure Windows Event Collector and Windows Event Forwarding.
+- Implement source-initiated WEF subscriptions using Group Policy.
+- Configure Advanced Audit Policy for identity and security monitoring.
+- Monitor Active Directory account lifecycle and lockout events.
+- Query centralised Windows events using PowerShell.
+- Validate centralised logging using controlled event generation.
+- Detect and investigate infrastructure failures using centralised management and logging tools.
