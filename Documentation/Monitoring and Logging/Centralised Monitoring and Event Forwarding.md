@@ -67,7 +67,7 @@ Windows Admin Center was used to observe important infrastructure performance co
 ## Server Manager
 Server Manager on `MGMT01` was configured with the primary infrastructure servers: `DC01`, `DC02` & `FS01`
 
-<i>Screenshot: Server Manager All Servers view.</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Server%20Manager%20-%20All%20Servers.png" width="900"/>
 
 ### Health Monitoring
 
@@ -78,7 +78,7 @@ Server Manager was used to monitor:
 - Installed roles
 - Server availability
 
-<i>Screenshot: All Servers dashboard showing healthy infrastructure.</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Server%20Manager%20-%20Dashboard.png" width="900"/>
 
 ## Windows Event Forwarding
 ### Event Collector Configuration
@@ -97,8 +97,6 @@ The central destination for collected logs is:
 `Event Viewer`   
 → `Windows Logs`   
 → `Forwarded Events`
-
-<i>Screenshot: Forwarded Events log configuration??</i>
 
 ### WEF Forwarder Group
 A dedicated Active Directory security group was created to control which computers are authorised to forward events. `DC01`, `DC02`, `FS01` & `CLIENT01` were added as members.
@@ -120,7 +118,7 @@ Add-ADGroupMember `
     -Members $Computers
 ```
 
-<i>Screenshot: group membership (AD or PowerShell)</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/WEF_Forwarders%20Group.png" width="600"/>
 
 ### Event Forwarding Group Policy
 A new `Infrastructure-Event-Forwarding` Group Policy Object was created.
@@ -135,7 +133,7 @@ Policy Configuration:
 
 The GPO was scoped to members of `WEF_Forwarders`
 
-<i>Screenshot: Group Policy configuration for Event Forwarding.</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Infrastructure%20Event%20Forwarding%20GPO.png" width="900"/>
 
 ## Event Subscriptions
 
@@ -151,8 +149,6 @@ A source-initiated subscription was created on `MGMT01`.
 |Logs|`Application, System`|
 |Event Levels|`Critical, Error`|
 |Delivery|`Minimise Latency`|
-
-<i>Screenshot: Subscription configuration and active event sources.</i>
 
 ### Identity and Security Events
 A second subscription was created to centralise important identity and security events.
@@ -175,7 +171,7 @@ The subscription collects selected Security Event IDs:
 |`4738`|`User account changed`|
 |`4740`|`User account locked out`|
 
-<i>Screenshot: Identity-Security-Events subscription.</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Event%20Viewer%20Subscriptions.png" width="900"/>
 
 ## Security Auditing
 
@@ -204,7 +200,69 @@ The following categories were enabled:
 > &nbsp;&nbsp;↳ `Audit Logon`   
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Failure`
 
-<i>Screenshot: Advanced Audit Policy configuration.</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Audit%20Policy%20GPO.png" width="900"/>
 
 ## Account Management Events
-Account lifecycle activity was tested using a disposable test account.
+Account lifecycle activity monitoring was tested using a disposable `Monitoring Test User` AD account. Forwarded account creation events were queried using PowerShell.
+
+> ### Account Created
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/PowerShell%20Monitoring%20-%20User%20Creation%20.png" width="900"/>
+
+> ### Account Disabled
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/PowerShell%20Monitoring%20-%20User%20Disabled%20.png" width="900"/>
+
+> ### Account Deleted
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/PowerShell%20Monitoring%20-%20User%20Deletion%20.png" width="900"/>
+
+## Account Lockout Events
+A disposable standard user account was used to generate a controlled account lockout. Incorrect passwords were deliberately entered from CLIENT01 until the domain lockout policy was triggered.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Monitoring%20-%20User%20Locked%20.png" width="900"/>
+
+## Event Forwarding Test
+A controlled Application error was generated on FS01:
+
+```powershell
+eventcreate /T ERROR /ID 100 /L APPLICATION /SO BaronLab-Monitoring /D "Phase 2 WEF validation event generated on FS01"
+```
+
+Forwarded error events were then queried on `MGMT01` using PowerShell.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20FS01.png" width="900"/>
+
+## Infrastructure Failure Test
+A controlled domain-controller outage was performed to confirm that infrastructure failures could be identified centrally.
+
+### Procedure
+1. Confirmed DC01 and DC02 were healthy.
+2. Powered off DC01.
+3. Reviewed Server Manager.
+4. Reviewed WEF subscription state.
+5. Confirmed DC02 remained operational.
+6. Restarted DC01.
+7. Confirmed AD replication recovered.
+
+> #### Server Manager showing outage
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20DC01%20outage.png" width="900"/>
+
+> #### WEF Subscription state showing DC01 with an older `LastHeartbeatTime` than connected servers
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20DC01%20outage%202.png" width="900"/>
+
+> #### AD replication after DC01 recovery
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20DC01%20outage%203.png" width="900"/>
+
+## Outcome
+The environment now provides a centralised management and logging layer across the core Windows infrastructure. Rather than administrating and troubleshooting each server independently, MGMT01 provides a single operational location for:
+
+- Server administration
+- Performance visibility
+- Infrastructure health monitoring
+- Central event collection
+- Security auditing
+- Identity monitoring
+- Failure investigation
+
+   
