@@ -2,11 +2,13 @@
 > A multi-server Windows infrastructure lab demonstrating infrastructure engineering, networking, virtualisation, security and systems administration skills using Windows Server 2025 and Hyper-V.
 
 ## Project Overview
-This project is a self-built Windows infrastructure environment designed to simulate the core IT services of a small organisation.
+This project is a self-built Windows infrastructure environment designed to simulate the core IT services and operational practices of a small organisation.
 
-Hosted on Hyper-V, the environment uses dedicated Windows Server 2025 virtual machines for routing, identity and file services, alongside a Windows 11 domain workstation. Segmented server and client networks are connected through a dedicated RRAS router providing inter-subnet routing, NAT and DHCP relay.
+Hosted on Hyper-V, the environment uses dedicated Windows Server 2025 virtual machines for routing, identity, file services, centralised management and monitoring, alongside a Windows 11 domain workstation. Segmented server and client networks are connected through a dedicated RRAS router providing inter-subnet routing, NAT and DHCP relay.
 
-The project focuses on practical infrastructure engineering, including Active Directory, DNS, DHCP, Group Policy, Windows LAPS, SMB/NTFS access control and PowerShell-based validation.
+The environment includes redundant Active Directory, DNS and DHCP services across multiple Domain Controllers, centralised file services with AGDLP-based access control, Group Policy and Windows LAPS, Windows Server backup and recovery, Windows Event Forwarding, security auditing, infrastructure monitoring and PowerShell-based administration.
+
+> Phase 2 expands the lab beyond core infrastructure deployment into resilience and operations, with Active Directory and DNS redundancy, DHCP failover, tested backup and recovery procedures, centralised monitoring and logging, and PowerShell automation for health checks, user lifecycle management, configuration backup and operational reporting.
 
 ## Current Lab Environment: `Phase 2 Complete`
 <p align="center">
