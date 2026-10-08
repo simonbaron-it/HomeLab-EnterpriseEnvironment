@@ -9,7 +9,7 @@ The implementation covers:
 - Verification that backup jobs complete successfully.
 - Recovery testing for representative infrastructure and file-service scenarios.
 
-> PowerShell-based configuration backup automation is documented separately in [PowerShell Automation].
+> PowerShell-based configuration backup automation is documented separately in [PowerShell Infrastructure Automation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md).
 
 ## Backup Design
 
