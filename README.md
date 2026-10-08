@@ -10,7 +10,7 @@ The environment includes redundant Active Directory, DNS and DHCP services acros
 
 > Phase 2 expands the lab beyond core infrastructure deployment into resilience and operations, with Active Directory and DNS redundancy, DHCP failover, tested backup and recovery procedures, centralised monitoring and logging, and PowerShell automation for health checks, user lifecycle management, configuration backup and operational reporting.
 
-## Current Lab Environment: `Phase 2 Complete`
+## Current Lab Environment: `Phases 1 & 2 Complete`
 <p align="center">
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Phase%202%20Network%20Diagram.png" width="700"/>
 </p>
