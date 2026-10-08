@@ -46,14 +46,14 @@ The environment includes redundant Active Directory, DNS and DHCP services acros
 > #### PowerShell Automation
  
 ## Skills Demonstrated
-- Build and configure a multi-server Windows Server 2025 infrastructure environment using Hyper-V.
-- Deploy and manage virtual machines, virtual switches and segmented client/server networks.
-- Configure IPv4 addressing, multi-NIC routing, RRAS, NAT and DHCP relay.
-- Deploy and administer Active Directory Domain Services, including OU design, users, computers and security groups.
-- Configure AD-integrated DNS, DHCP scopes and cross-subnet DHCP delivery.
-- Create and apply Group Policy for workstation security, drive mappings, local administrator access and Windows LAPS.
-- Configure Windows File Services, SMB shares and AGDLP-based NTFS permissions using least-privilege principles.
-- Validate and troubleshoot infrastructure configuration using Windows administration tools, networking utilities and PowerShell.
+- Build and administer a multi-server Windows Server 2025 infrastructure environment using Hyper-V.
+- Configure virtual machines, virtual switches, segmented networks, IPv4 routing, RRAS, NAT and DHCP relay.
+- Deploy and manage Active Directory Domain Services, including OU design, users, computers, security groups and redundant Domain Controllers.
+- Configure resilient AD-integrated DNS and DHCP services, including replication, failover and cross-subnet client delivery.
+- Implement Group Policy, Windows LAPS, SMB file services and AGDLP-based NTFS permissions using least-privilege principles.
+- Design and validate backup and recovery for Active Directory, file services, Group Policy and DHCP configuration.
+- Implement centralised administration, monitoring and logging using Windows Admin Center, Server Manager and Windows Event Forwarding.
+- Automate infrastructure health checks, user lifecycle tasks, configuration backup, event reporting and troubleshooting using PowerShell.
 
 ## Project Roadmap
 
