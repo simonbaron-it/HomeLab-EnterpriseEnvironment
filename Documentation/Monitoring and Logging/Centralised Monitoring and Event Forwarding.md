@@ -14,7 +14,7 @@ The main objectives of this implementation were to:
 - Monitor account creation, deletion, modification, and lockout activity.
 - Validate monitoring during simulated infrastructure failures.
 
-> PowerShell automation used for infrastructure health checking and event reporting is documented separately in <i>PowerShell Automation.</i>
+> PowerShell automation used for infrastructure health checking and event reporting is documented separately in [PowerShell Infrastructure Automation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md).
 
 ## Monitoring Infrastructure
 The monitoring solution uses `MGMT01` as the central management and logging server.
