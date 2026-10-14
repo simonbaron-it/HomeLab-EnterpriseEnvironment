@@ -21,8 +21,8 @@ The objectives of this implementation are to:
 
 ### Script Inventory
 
-|Script|Function|Status|
-|---|---|---|
+|Script|Function|
+|---|---|
 |[`InfrastructureHealthCheck.ps1`](../../Scripts/Invoke-InfrastructureHealthCheck.ps1)|Server, service, DNS, DHCP, AD and storage health|
 |[`New-ADUserFromCSV.ps1`](../../Scripts/New-ADUserFromCSV.ps1)|CSV-driven user onboarding|
 |[`Disable-ADUser.ps1`](../../Scripts/Disable-ADUser.ps1)|Controlled user offboarding|
