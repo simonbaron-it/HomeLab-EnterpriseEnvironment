@@ -21,16 +21,16 @@ The objectives of this implementation are to:
 
 ### Script Inventory
 
-| Script | Function | Status |
+|Script|Function|Status|
 |---|---|---|
-| [`Invoke-InfrastructureHealthCheck.ps1`](../../Scripts/Invoke-InfrastructureHealthCheck.ps1) | Server, service, DNS, DHCP, AD and storage health | `[STATUS]` |
-| [`New-ADUserFromCSV.ps1`](../../Scripts/New-ADUserFromCSV.ps1) | CSV-driven user onboarding | `[STATUS]` |
-| [`Disable-ADUser.ps1`](../../Scripts/Disable-ADUser.ps1) | Controlled user offboarding | `[STATUS]` |
-| [`Invoke-InfrastructureBackup.ps1`](../../Scripts/Invoke-InfrastructureBackup.ps1) | Configuration export and verification | `[STATUS]` |
-| [`Get-CentralisedEventReport.ps1`](../../Scripts/Get-CentralisedEventReport.ps1) | Central WEF event analysis and reporting | `[STATUS]` |
+|[`InfrastructureHealthCheck.ps1`](../../Scripts/Invoke-InfrastructureHealthCheck.ps1)|Server, service, DNS, DHCP, AD and storage health|
+|[`New-ADUserFromCSV.ps1`](../../Scripts/New-ADUserFromCSV.ps1)|CSV-driven user onboarding|
+|[`Disable-ADUser.ps1`](../../Scripts/Disable-ADUser.ps1)|Controlled user offboarding|
+|[`Invoke-InfrastructureBackup.ps1`](../../Scripts/Invoke-InfrastructureBackup.ps1)|Configuration export and verification|
+|[`Get-CentralisedEventReport.ps1`](../../Scripts/Get-CentralisedEventReport.ps1)|Central WEF event analysis and reporting|
 
 ### Execution Environment
-Scripts are developed and tested using Windows PowerShell `5.1`. The management host requires the appropriate `ActiveDirectory`, `DhcpServer` and `GroupPolicy` modules, `WinRM` connectivity and sufficient administrative permissions.
+Scripts are developed and tested using Windows PowerShell `5.1`. The `MGMT01` host requires the appropriate `ActiveDirectory`, `DhcpServer` and `GroupPolicy` modules, `WinRM` connectivity and sufficient administrative permissions.
 
 ```text
 C:\LabAutomation\
@@ -40,39 +40,82 @@ C:\LabAutomation\
 └── Logs\
 ```
 
-### Scripting Standards
-
 ## Infrastructure Health Check
-**Script:** `Invoke-InfrastructureHealthCheck.ps1`
+**Script:** `InfrastructureHealthCheck.ps1`
+
 ### Purpose
-Runs a consolidated set of infrastructure checks against `DC01`, `DC02`, `FS01` and `MGMT01`.
+Developed a PowerShell script to automate routine infrastructure health checks across `DC01`, `DC02`, `FS01` and `MGMT01`.
+
+The script runs centrally from `MGMT01`, replacing multiple manual administrative checks with a single execution. It evaluates key infrastructure components, reports their health status and exports the results for troubleshooting and historical reference.
+
 ### Checks Performed
-- Server reachability and critical Windows services.
-- DNS resolution via both domain controllers.
-- AD replication status, domain controller health and FSMO role visibility.
-- `SYSVOL` and `NETLOGON` share availability.
-- DHCP failover state.
-- Access to `\\FS01\CompanyData` and disk free-space thresholds.
+- <b>Connectivity:</b> Tests WinRM management connectivity to each server using TCP port 5985.
+- <b>Windows Services:</b> Checks critical services including AD DS, DNS, DHCP, Netlogon, Kerberos, SMB and Windows Event Collector.
+- <b>DNS:</b> Validates internal hostname resolution and expected IP addresses against both domain controllers.
+- <b>Active Directory:</b> Checks replication health, SYSVOL and NETLOGON accessibility, FSMO role ownership and DC diagnostics where available.
+- <b>DHCP:</b> Checks the DC01-DC02-Failover relationship, including its operational state and load-balancing mode.
+- <b>File Services:</b> Verifies access to \\FS01\CompanyData.
+- <b>Storage:</b> Checks available disk space across the servers, using the following thresholds:
+    - <b>PASS:</b> 20% or more free.
+    - <b>WARN:</b> 10% to less than 20% free.
+    - <b>FAIL:</b> Less than 10% free.
 
 ### Execution
+The script is executed from `MGMT01` using Windows PowerShell 5.1, with the required Active Directory/DHCP management modules and administrative permissions.
+
 ```powershell
-.\Invoke-InfrastructureHealthCheck.ps1
+.\InfrastructureHealthCheck.ps1
 ```
 
-**Output:** `[DESCRIBE CONSOLE RESULTS, CSV PATH AND STATUS VALUES]`
+#### Output 
+Results are displayed in the PowerShell console as checks complete, allowing the administrator to monitor progress without waiting for the entire script to finish.
+
+Each result includes:
+- <b>Category:</b> Infrastructure component being checked.
+- <b>Target:</b> Server or service being assessed.
+- <b>Check:</b> Specific test performed.
+- <b>Status:</b> PASS, WARN or FAIL.
+- <b>Detail:</b> Additional diagnostic information or error messages.
+- At completion, the script displays a summary of the number of PASS, WARN and FAIL results.
+- A timestamped CSV report is also generated at:
+    - `C:\LabAutomation\Output\InfrastructureHealth-YYYYMMDD-HHMMSS.csv`
+
+### Error Handling and Resilience
+
+During initial testing, the script experienced significant delays when `DC01` was powered off because multiple commands attempted to contact the unavailable server.
+
+The script was subsequently improved to:
+- Perform an initial management-connectivity check with a short TCP connection timeout.
+- Avoid repeatedly attempting remote checks against servers whose WinRM endpoints are unreachable.
+- Use try/catch error handling to record failures without terminating the entire script.
+- Display results progressively to help identify slow or unresponsive checks.
+- Defer potentially lengthy domain-controller diagnostics during a known DC outage.
+- Continue checking the remaining infrastructure when an individual server becomes unavailable.
 
 ### Validation
-1. Execute with all infrastructure online to record the healthy baseline.
-2. Shut down `DC01` in a controlled test, keeping `DC02` available.
-3. Confirm affected checks fail cleanly while unaffected services remain healthy.
-4. Start `DC01`, verify AD replication and rerun the script.
+The script is tested under both normal and degraded infrastructure conditions.
 
-**Observed results:** `[INSERT RESULTS]`
+#### Normal-State Validation
+1. Ensure `DC01`, `DC02`, `FS01` and `MGMT01` are online.
+2. Execute the script from `MGMT01`.
+3. Review connectivity, services, DNS, AD replication, DHCP failover, file-sharing and storage results.
+4. Investigate any unexpected warnings or failures.
+5. Confirm that a timestamped CSV report is generated.
 
-### Normal-State Validation
-<i>Add: screenshot of healthy report</i>
-### Failure-State Validation
-<i>Add: screenshot of DC01 failure report</i>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20Healthy.png" width="700"/>
+
+#### Failure-State Validation
+1. Shut down DC01 through Hyper-V while keeping DC02 operational.
+2. Execute the script again from MGMT01.
+3. Confirm that the unavailable server is detected and dependent checks are handled without repeatedly waiting for connection timeouts.
+4. Verify that checks against the remaining available infrastructure continue.
+5. Restart DC01, confirm AD replication and DHCP failover recovery, and rerun the script.
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20DC01%20Failure.png" width="700"/>
+
+#### CSV File Validation
+
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20CSV.png" width="900"/>
 
 ## Active Directory User Onboarding
 **Script:** `New-ADUserFromCSV.ps1`
