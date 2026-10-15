@@ -229,33 +229,3 @@ Query the `ForwardedEvents` log on `MGMT01` and generate an operational summary 
 ### Event Filtering
 ### CSV Reporting
 ### HTML Reporting
-
-## Integrated Automation Test
-| Step | Test | Expected result | Actual result |
-|---|---|---|---|
-| 1 | Run infrastructure health check | Healthy baseline | `[PENDING]` |
-| 2 | Create disposable users via CSV | Correct OU and group placement | `[PENDING]` |
-| 3 | Run event report | Account-creation event visible if forwarded | `[PENDING]` |
-| 4 | Offboard a disposable account | Disabled, memberships reviewed, moved OU | `[PENDING]` |
-| 5 | Run event report | Account-disable event visible if forwarded | `[PENDING]` |
-| 6 | Run configuration backup | Exports and manifest verified | `[PENDING]` |
-| 7 | Simulate a `DC01` outage | Failures reported; `DC02` remains available | `[PENDING]` |
-| 8 | Recover `DC01` | Health checks and replication return to normal | `[PENDING]` |
-
-## Validation Summary
-- Infrastructure health validated during normal operation and a controlled DC outage.
-- CSV onboarding validated, including invalid/duplicate input handling.
-- Account offboarding validated using `-WhatIf` and a disposable user.
-- Infrastructure configuration backup and manifest verified.
-- Centralised event reporting verified against forwarded events.
-- Integrated end-to-end test completed.
-- Scripts and screenshots reviewed for secrets before committing.
-
-## Skills Demonstrated
-- Develop parameterised PowerShell scripts with reusable functions and structured output.
-- Automate Active Directory onboarding, offboarding and group management.
-- Validate AD replication, DNS, DHCP, server services and file shares.
-- Automate and verify GPO/DHCP configuration exports.
-- Analyse centralised Windows events and generate operational reports.
-- Apply input validation, exception handling, audit logging and `-WhatIf`.
-- Test automation under normal and degraded infrastructure conditions.
