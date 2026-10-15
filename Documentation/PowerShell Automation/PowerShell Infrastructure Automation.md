@@ -63,15 +63,21 @@ Includes input validation, duplicate-account detection, -WhatIf support and prot
 
 Will automate account disablement, group membership removal, placement within the Disabled Users OU and administrative audit logging.
 
+[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Offboarding.md)
+
 ### 04 — Infrastructure Configuration Backup
 **Script:** Invoke-InfrastructureBackup.ps1 — Planned
 
 Will automate GPO backups, DHCP exports and infrastructure configuration snapshots, complementing the existing Windows Server Backup implementation.
 
+[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Configuration%20Backup.md)
+
 ### 05 — Centralised Event Reporting
 **Script:** Get-CentralisedEventReport.ps1 — Planned
 
 Will query the centrally collected Windows events on MGMT01 and produce structured infrastructure and security activity reports.
+
+[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Centralised%20Event%20Reporting.md)
 
 ### Execution Environment
 The primary automation host is `MGMT01`.
@@ -111,121 +117,3 @@ C:\LabAutomation\
 - Structured reporting and CSV processing.
 - Input validation, exception handling and audit logging.
 - Testing automation against real infrastructure failure scenarios.
-
-
-
-## Active Directory User Offboarding
-**Script:** `Disable-ADUser.ps1`
-### Purpose
-Provide an auditable workflow to disable an account, revoke appropriate direct group memberships and move it to the existing `Disabled Users` OU.
-
-### Offboarding Workflow
-1. Identify the user and record their existing state and group memberships.
-2. Preview proposed modifications using `-WhatIf`.
-3. Disable the account and remove the intended direct group memberships.
-4. Optionally clear manager/contact attributes; update the description and reason.
-5. Move the account to `Disabled Users`, validate changes and log the result.
-
-### Execution
-```powershell
-.\Disable-ADUser.ps1 -Identity 'james.wilson' -Reason 'Lab offboarding test' -WhatIf
-
-# After reviewing the preview:
-.\Disable-ADUser.ps1 -Identity 'james.wilson' -Reason 'Lab offboarding test'
-```
-
-### Validation
-- Account `Enabled` value changed to `False`.
-- OU location and membership changes confirmed.
-- Missing-account and partial-failure scenarios handled appropriately.
-- Account-disabled event `4725` checked in centralised logs, where available.
-
-**Observed results:** `[INSERT RESULTS]`
-
-<i>Add: screenshot of WhatIf output and disabled account</i>
-
-### Account Disablement
-### Group Removal
-### Disabled Users OU
-### Audit Logging
-### Validation
-
-## Infrastructure Configuration Backup
-**Script:** `Invoke-InfrastructureBackup.ps1`
-### Purpose
-Automate configuration exports that complement, **but do not replace**, existing Windows Server Backup jobs for System State and file data.
-
-### Protected Configuration
-
-| Component | Export method |
-|---|---|
-| Group Policy | `Backup-GPO -All` |
-| DHCP configuration and leases | `Export-DhcpServer` |
-| Domain, forest and DC inventory | Active Directory PowerShell cmdlets |
-| OU/group, DNS and failover inventory | AD/DNS/DHCP PowerShell cmdlets |
-| Verification | Export checks and JSON manifest |
-
-### Backup Structure
-```text
-B:\InfrastructureBackups\
-└── [yyyyMMdd-HHmmss]\
-    ├── GPO\
-    ├── DHCP\
-    ├── Config\
-    └── BackupManifest.json
-```
-
-### Execution
-Run from an elevated session on `DC01`:
-
-```powershell
-.\Invoke-InfrastructureBackup.ps1
-```
-
-### Validation
-- Confirm the `B:` backup volume is available and has free space.
-- Compare GPO backup count against the expected count.
-- Confirm DHCP export and configuration snapshots exist and contain data.
-- Review the JSON manifest, including any partial failures.
-
-**Execution frequency:** `[MANUAL / SCHEDULED]`  
-**Observed results:** `[INSERT RESULTS]`
-
-<i>Add: screenshot of successful backup script and manifest</i>
-
-### GPO Backup
-### DHCP Export
-### Configuration Snapshot
-### Backup Verification
-### Manifest
-
-## Centralised Event Reporting
-**Script:** `Get-CentralisedEventReport.ps1`
-### Purpose
-Query the `ForwardedEvents` log on `MGMT01` and generate an operational summary of infrastructure and identity/security activity.
-
-### Event Sources
-- `Infrastructure-Critical-Errors`: Critical/Error events from Application and System logs.
-- `Identity-Security-Events`: selected security events, including `4625`, `4720`, `4725`, `4726` and `4740`.
-
-### Execution
-```powershell
-.\Get-CentralisedEventReport.ps1 -Hours 24
-```
-
-### Validation
-1. Generate a controlled Application error on `FS01`.
-2. Confirm the event appears in `MGMT01`'s `ForwardedEvents` log.
-3. Create/disable a disposable AD account to generate identity events.
-4. Confirm the report contains the expected source computer and event IDs.
-5. Check any CSV/HTML exports for completeness and readability.
-
-**Output location:** `[INSERT PATH]`  
-**Observed results:** `[INSERT RESULTS]`
-
-<i>Add: screenshot of report output / HTML report</i>
-
-### WEF Integration
-### Event Filtering
-### CSV Reporting
-### HTML Reporting
