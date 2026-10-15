@@ -44,7 +44,12 @@ The environment includes redundant Active Directory, DNS and DHCP services acros
 > - [Centralised Monitoring and Event Forwarding](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Monitoring%20and%20Logging/Centralised%20Monitoring%20and%20Event%20Forwarding.md)
 >
 > #### PowerShell Automation
->  - [PowerShell Infrastructure Automation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md)
+>  - [PowerShell Infrastructure Automation Overview](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md)
+>    - [Infrastructure Health Check](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Health%20Check.md)
+>    - [Active Directory User Onboarding](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Onboarding.md)
+>    - [Active Directory User Offboarding]
+>    - [Infrastructure Configuration Backup]
+>    - [Centralised Event Reporting] 
  
 ## Skills Demonstrated
 - Build and administer a multi-server Windows Server 2025 infrastructure environment using Hyper-V.
