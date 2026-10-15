@@ -1,15 +1,21 @@
 # PowerShell Infrastructure Automation
-> This section documents the development and validation of five PowerShell scripts used to automate routine administration, infrastructure health checking, identity lifecycle management, configuration backup, and operational reporting within the `baron.example.com` environment.
+> This section documents the development and implementation of PowerShell scripts used to automate routine IT administration, infrastructure health monitoring, Active Directory identity management, configuration backups and operational reporting within the `baron.example.com` home lab.
 
 ## Overview
+The objective was to build practical PowerShell automation skills while improving the efficiency, consistency and reliability of administrative operations across the Windows Server environment.
+
+Five scripts were developed as part of `Phase 2`, building upon the previously implemented Active Directory, DNS, DHCP, file services, backup/recovery and centralised monitoring infrastructure.
+
 The objectives of this implementation are to:
-- Automate routine infrastructure health checks across the lab.
+- Automate repetitive infrastructure administration tasks.
+- Provide consistent health monitoring across Windows servers and services.
 - Standardise Active Directory user onboarding and offboarding.
-- Automate exports of Group Policy, DHCP and infrastructure configuration.
-- Produce structured reports from centrally forwarded Windows events.
-- Improve operational consistency, error handling and auditability.
+- Automate infrastructure configuration backups and verification.
+- Generate operational reports from centrally collected Windows events.
+- Implement appropriate input validation, error handling, audit logging and safeguards against unintended changes.
 
 ## Automation Design
+Scripts are developed and tested using `Windows PowerShell 5.1` within the existing Hyper-V environment.
 
 |Server|Role in automation|
 |---|---|
@@ -23,14 +29,56 @@ The objectives of this implementation are to:
 
 |Script|Function|
 |---|---|
-|[`InfrastructureHealthCheck.ps1`](../../Scripts/Invoke-InfrastructureHealthCheck.ps1)|Server, service, DNS, DHCP, AD and storage health|
-|[`New-ADUserFromCSV.ps1`](../../Scripts/New-ADUserFromCSV.ps1)|CSV-driven user onboarding|
-|[`Disable-ADUser.ps1`](../../Scripts/Disable-ADUser.ps1)|Controlled user offboarding|
-|[`Invoke-InfrastructureBackup.ps1`](../../Scripts/Invoke-InfrastructureBackup.ps1)|Configuration export and verification|
-|[`Get-CentralisedEventReport.ps1`](../../Scripts/Get-CentralisedEventReport.ps1)|Central WEF event analysis and reporting|
+|[`InfrastructureHealthCheck.ps1`](../../Scripts/Invoke-InfrastructureHealthCheck.ps1)|Automated server, service, DNS, DHCP, AD and storage health checks.|
+|[`New-ADUserFromCSV.ps1`](../../Scripts/New-ADUserFromCSV.ps1)|CSV-driven Active Directory user provisioning.|
+|[`Disable-ADUser.ps1`](../../Scripts/Disable-ADUser.ps1)|Controlled account offboarding and access removal.|
+|[`Invoke-InfrastructureBackup.ps1`](../../Scripts/Invoke-InfrastructureBackup.ps1)|GPO, DHCP and infrastructure configuration exports.|
+|[`Get-CentralisedEventReport.ps1`](../../Scripts/Get-CentralisedEventReport.ps1)|Structured reports from centrally forwarded Windows events.|
+
+## Implementation Documentation
+> Each automation script has its own documentation covering its purpose, design, implementation, execution, error handling and validation.
+
+### 01 — Infrastructure Health Check
+**Script:** `InfrastructureHealthCheck.ps1`
+
+Automates infrastructure health checks across `DC01`, `DC02`, `FS01` and `MGMT01`.
+
+The script evaluates core services and availability, providing structured PASS/WARN/FAIL results and timestamped CSV reports.
+
+Testing includes a controlled `DC01` outage to demonstrate failure detection and continued monitoring of surviving infrastructure.
+
+[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Health%20Check.md)
+
+### 02 — Active Directory User Onboarding
+**Script:** `New-ADUserFromCSV.ps1`
+
+Automates standard employee account creation from CSV input, including username generation, OU placement, approved security group membership, secure temporary password handling and audit logging.
+
+Includes input validation, duplicate-account detection, -WhatIf support and protective handling of partially provisioned accounts.
+
+[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Onboarding.md)
+
+### 03 — Active Directory User Offboarding
+**Script:** Disable-ADUser.ps1 — Planned
+
+Will automate account disablement, group membership removal, placement within the Disabled Users OU and administrative audit logging.
+
+### 04 — Infrastructure Configuration Backup
+**Script:** Invoke-InfrastructureBackup.ps1 — Planned
+
+Will automate GPO backups, DHCP exports and infrastructure configuration snapshots, complementing the existing Windows Server Backup implementation.
+
+### 05 — Centralised Event Reporting
+**Script:** Get-CentralisedEventReport.ps1 — Planned
+
+Will query the centrally collected Windows events on MGMT01 and produce structured infrastructure and security activity reports.
 
 ### Execution Environment
-Scripts are developed and tested using Windows PowerShell `5.1`. The `MGMT01` host requires the appropriate `ActiveDirectory`, `DhcpServer` and `GroupPolicy` modules, `WinRM` connectivity and sufficient administrative permissions.
+The primary automation host is `MGMT01`.
+
+Scripts require the relevant Windows Server management modules, appropriate Active Directory permissions and connectivity to their target systems.
+
+The local working directory is organised as follows:
 
 ```text
 C:\LabAutomation\
@@ -40,260 +88,31 @@ C:\LabAutomation\
 └── Logs\
 ```
 
-## Infrastructure Health Check
-**Script:** `InfrastructureHealthCheck.ps1`
+> The GitHub repository stores the script source code, sample input files and implementation documentation. Generated logs, credentials and sensitive operational data are excluded.
 
-### Purpose
-Developed a PowerShell script to automate routine infrastructure health checks across `DC01`, `DC02`, `FS01` and `MGMT01`.
+## Validation Summary
 
-The script runs centrally from `MGMT01`, replacing multiple manual administrative checks with a single execution. It evaluates key infrastructure components, reports their health status and exports the results for troubleshooting and historical reference.
-
-### Checks Performed
-- <b>Connectivity:</b> Tests WinRM management connectivity to each server using TCP port 5985.
-- <b>Windows Services:</b> Checks critical services including AD DS, DNS, DHCP, Netlogon, Kerberos, SMB and Windows Event Collector.
-- <b>DNS:</b> Validates internal hostname resolution and expected IP addresses against both domain controllers.
-- <b>Active Directory:</b> Checks replication health, SYSVOL and NETLOGON accessibility, FSMO role ownership and DC diagnostics where available.
-- <b>DHCP:</b> Checks the DC01-DC02-Failover relationship, including its operational state and load-balancing mode.
-- <b>File Services:</b> Verifies access to \\FS01\CompanyData.
-- <b>Storage:</b> Checks available disk space across the servers, using the following thresholds:
-    - <b>PASS:</b> 20% or more free.
-    - <b>WARN:</b> 10% to less than 20% free.
-    - <b>FAIL:</b> Less than 10% free.
-
-### Execution
-The script is executed from `MGMT01` using Windows PowerShell 5.1, with the required Active Directory/DHCP management modules and administrative permissions.
-
-```powershell
-.\InfrastructureHealthCheck.ps1
-```
-
-#### Output 
-Results are displayed in the PowerShell console as checks complete, allowing the administrator to monitor progress without waiting for the entire script to finish.
-
-Each result includes:
-- <b>Category:</b> Infrastructure component being checked.
-- <b>Target:</b> Server or service being assessed.
-- <b>Check:</b> Specific test performed.
-- <b>Status:</b> PASS, WARN or FAIL.
-- <b>Detail:</b> Additional diagnostic information or error messages.
-- At completion, the script displays a summary of the number of PASS, WARN and FAIL results.
-- A timestamped CSV report is also generated at:
-    - `C:\LabAutomation\Output\InfrastructureHealth-YYYYMMDD-HHMMSS.csv`
-
-### Error Handling and Resilience
-
-During initial testing, the script experienced significant delays when `DC01` was powered off because multiple commands attempted to contact the unavailable server.
-
-The script was subsequently improved to:
-- Perform an initial management-connectivity check with a short TCP connection timeout.
-- Avoid repeatedly attempting remote checks against servers whose WinRM endpoints are unreachable.
-- Use try/catch error handling to record failures without terminating the entire script.
-- Display results progressively to help identify slow or unresponsive checks.
-- Defer potentially lengthy domain-controller diagnostics during a known DC outage.
-- Continue checking the remaining infrastructure when an individual server becomes unavailable.
-
-### Validation
-The script is tested under both normal and degraded infrastructure conditions.
-
-#### Normal-State Validation
-1. Ensure `DC01`, `DC02`, `FS01` and `MGMT01` are online.
-2. Execute the script from `MGMT01`.
-3. Review connectivity, services, DNS, AD replication, DHCP failover, file-sharing and storage results.
-4. Investigate any unexpected warnings or failures.
-5. Confirm that a timestamped CSV report is generated.
-
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20Healthy.png" width="700"/>
-
-#### Failure-State Validation
-1. Shut down DC01 through Hyper-V while keeping DC02 operational.
-2. Execute the script again from MGMT01.
-3. Confirm that the unavailable server is detected and dependent checks are handled without repeatedly waiting for connection timeouts.
-4. Verify that checks against the remaining available infrastructure continue.
-5. Restart DC01, confirm AD replication and DHCP failover recovery, and rerun the script.
-
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20DC01%20Failure.png" width="700"/>
-
-> CSV File Validation
-
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20CSV.png" width="900"/>
-
-## Active Directory User Onboarding
-**Script:** `New-ADUserFromCSV.ps1`
-
-### Purpose
-Developed a PowerShell script to automate the onboarding of standard employee accounts within the `baron.example.com` Active Directory environment.
-
-The script runs centrally from `MGMT01` and processes employee information from a CSV file, replacing repetitive manual account creation in `Active Directory Users and Computers`.
-
-The automation provides:
-- CSV input validation and duplicate-account detection.
-- Automatic username generation using a standard naming convention.
-- Department-specific Organisational Unit placement.
-- Role-based Active Directory security group assignment.
-- Secure temporary password handling and mandatory password change at first sign-in.
-- Safe account provisioning, error handling and verification.
-- Timestamped audit logging.
-
-### CSV Input
-**Example file:** [`NewUsers-Sample.csv`](../../Scripts/Samples/NewUsers-Sample.csv)
-
-```csv
-FirstName,LastName,Department,Role,JobTitle
-James,Wilson,Finance,User,Finance Analyst
-Emily,Clark,Finance,Manager,Finance Manager
-Daniel,Evans,HR,User,HR Advisor
-Sophie,Green,IT,User,IT Support Analyst
-Oliver,Harris,Sales,User,Sales Executive
-```
-
-The CSV contains no passwords or other authentication credentials. 
-
-Each record is processed individually, allowing valid users to be provisioned while invalid records are logged for investigation.
-
-### Username Convention
-Usernames are automatically generated using the following convention:
-
-|Employee|sAMAccountName|User Principle Name (UPN)|
-|---|---|---|
-|`James Wilson`|`jwilson`|`jwilson@baron.example.com`|
-|`Emily Clark`|`eclark`|`eclark@baron.example.com`|
-|`Daniel Evans`|`devans`|`devans@baron.example.com`|
-|`Sophie Green`|`sgreen`|`sgreen@baron.example.com`|
-|`Oliver Harris`|`oharris`|`oharris@baron.example.com`|
-
-The script validates generated usernames against the supported character pattern and length restrictions.
-
-Existing usernames and duplicates within the CSV are detected to prevent unintended account creation. Username collisions are flagged for manual review rather than automatically generating numbered alternatives.
-
-### OU Mapping
-The script uses a PowerShell hashtable to map employees to their designated Active Directory OU based on department.
-
-|Department|Target OU|
+|Script|Validation Performed|
 |---|---|
-|`Finance`|`OU=Finance Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
-|`HR`|`OU=HR Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
-|`IT`|`OU=IT Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
-|`Sales`|`OU=Sales Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
+|`Infrastructure Health Check`|Successful reporting during normal operation and a simulated DC01 outage, including CSV generation.|
+|`AD User Onboarding`|Successful single-user provisioning, account configuration verification and audit-log generation.|
+|`AD User Offboarding`|Pending.|
+|`Infrastructure Configuration Backup`|Pending.|
+|`Centralised Event Reporting`|Pending.|
 
-Before account creation, the script validates that the requested department is supported and its destination OU exists.
+> Detailed screenshots, observed results, troubleshooting and limitations are included in the corresponding implementation documents.
 
-### Group Membership
-Department and role values determine which Global Security Groups are assigned.
+## Skills Demonstrated
+- Windows PowerShell 5.1 scripting and automation.
+- Functions, variables, arrays, hashtables and conditional logic.
+- Remote administration using PowerShell Remoting and RSAT.
+- Active Directory identity and group management.
+- Infrastructure health monitoring and troubleshooting.
+- Structured reporting and CSV processing.
+- Input validation, exception handling and audit logging.
+- Testing automation against real infrastructure failure scenarios.
 
-|Department|Role|Assigned Groups|
-|---|---|---|
-|`Finance`|`User`|`Finance_Users`|
-|`Finance`|`Manager`|`Finance_Users`, `Finance_Managers`|
-|`HR`|`User`|`HR_Usrers`|
-|`HR`|`Manager`|`HR_Users`, `HR_Managers`|
-|`IT`|`User`|`IT_Users`|
-|`Sales`|`User`|`Sales_Users`|
 
-Group membership follows the existing AGDLP access-control structure, allowing departmental group assignments to provide access through the previously configured resource-permission groups.
-
-The script validates that required groups exist and are Global Security Groups before provisioning.
-
-Unsupported role combinations are rejected. Privileged groups such as IT_Admins are intentionally excluded from automated standard-user onboarding.
-
-### Onboarding Workflow
-1. Import the CSV and validate required columns and employee information.
-2. Confirm connectivity to the expected Active Directory domain.
-3. Validate the employee's department and role against the approved configuration.
-4. Generate a username and UPN using the established naming convention.
-5. Check for existing accounts, duplicate usernames and missing AD objects.
-6. Prompt securely for an initial password.
-7. Create the user account in a disabled state within the appropriate OU.
-8. Assign the approved departmental and role-based security groups.
-9. Enable the account after successful group assignment.
-10. Enforce a mandatory password change at next sign-in.
-11. Verify account status, required group memberships and password-change settings.
-12. Record the result in a structured audit log.
-
-Creating accounts disabled initially ensures that partially provisioned identities are not immediately available for authentication.
-
-### Password Handling
-Temporary passwords are supplied interactively through Read-Host -AsSecureString.
-
-The script is designed to:
-- Avoid storing passwords in CSV files or audit logs.
-- Prompt for a separate temporary password for each new account.
-- Require the password to comply with the domain password policy.
-- Enforce ChangePasswordAtLogon before the provisioning workflow is considered complete.
-- Verify the password-change requirement through the Active Directory pwdLastSet attribute.
-
-### Error Handling and Duplicate Prevention
-The script uses PowerShell try/catch error handling to process employee records independently and report failures without terminating the entire onboarding operation.
-
-Possible execution results include:
-
-|Status|Description|
-|---|---|
-|`Preview`|Proposed changes displayed without modifying Active Directory|
-|`Created`|Account created, configured, enabled and verified|
-|`Skipped`|Existing username or declined operation|
-|`Failed`|Validation or provisioning failed before account creation|
-|`Partial`|Account created, but a subsequent provisioning or verification step failed|
-
-If an error occurs after account creation, the script attempts to disable the newly created account and records the failure for administrative investigation.
-
-Previously existing accounts are not modified or recreated automatically.
-
-### Execution
-<b>Execution host:</b> `MGMT01`   
-<b>PowerShell version:</b>  `Windows PowerShell 5.1`   
-<b>Required module:</b>  `ActiveDirectory`   
-<b>Target domain:</b>  `baron.example.com`   
-<b>Default domain controller:</b>  `DC01`   
-
-> The script requires an account with appropriate permissions to create and configure standard users within the designated OUs.
-
-#### Preview changes without modifying AD:
-```powershell
-.\New-ADUserFromCSV.ps1 -CsvPath '.\Samples\NewUsers-Sample.csv' -WhatIf
-```
-#### Execute user onboarding:
-```powershell
-.\New-ADUserFromCSV.ps1 -CsvPath '.\Samples\NewUsers-Sample.csv'
-```
-
-### Audit Logging
-Each execution records a structured summary of account-processing results.
-
-Audit logs are exported as timestamped CSV files:
-```
-C:\LabAutomation\Logs\Onboarding-YYYYMMDD-HHMMSS.csv
-```
-
-Each log entry includes:
-
-|Field|Description|
-|---|---|
-|`Time`|Timestamp of the operation|
-|`Operator`|Account executing the script|
-|`Row`|Source CSV record number|
-|`Username`|Generated account username|
-|`Department`|Assigned department|
-|`Role`|Requested employee role|
-|`Groups`|Intended security group assignments|
-|`Status`|`CREATED`, `SKIPPED`, `FAILED` or `PARTIAL`|
-|`Detail`|Operation result or error information|
-
-Temporary passwords are not included in the audit logs.
-
-### Validation
-#### A five-user CSV test was executed against `DC01`.
-
-> The execution confirmed that the script's automated verification checks completed successfully, including account enablement, expected group membership and the mandatory password-change requirement.
-
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20Powershell%20Output.png" width="900"/>
-
-> An audit log was successfully generated
-
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20-%20CSV%20Log.png" width="900"/>
-
-> New accounts with correctly assigned OU's and Security Groups were inspected in `Active Directory Users and Computers`.
-
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20-%20ADUC%20Verification.png" width="900"/>
 
 ## Active Directory User Offboarding
 **Script:** `Disable-ADUser.ps1`
