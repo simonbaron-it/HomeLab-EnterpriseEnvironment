@@ -86,7 +86,7 @@ Each audit entry records the execution timestamp, operator, account identity, do
 
 The script uses the following statuses:
 
-|Status|Meaning|
+|Status|Description|
 |---|---|
 |`Preview`|Proposed changes displayed - no modifications performed.|
 |`Completed`|Offboarding actions completed and final state verified.|
