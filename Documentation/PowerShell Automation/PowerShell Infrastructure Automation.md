@@ -54,28 +54,28 @@ Testing includes a controlled `DC01` outage to demonstrate failure detection and
 
 Automates standard employee account creation from CSV input, including username generation, OU placement, approved security group membership, secure temporary password handling and audit logging.
 
-Includes input validation, duplicate-account detection, -WhatIf support and protective handling of partially provisioned accounts.
+Includes input validation, duplicate-account detection, `-WhatIf` support and protective handling of partially provisioned accounts.
 
 [View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Onboarding.md)
 
 ### 03 — Active Directory User Offboarding
-**Script:** Disable-ADUser.ps1 — Planned
+**Script:** `Disable-ADUser.ps1`
 
-Will automate account disablement, group membership removal, placement within the Disabled Users OU and administrative audit logging.
+Automates account disablement, group membership removal, placement within the `Disabled Users` OU and administrative audit logging.
 
 [View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Offboarding.md)
 
 ### 04 — Infrastructure Configuration Backup
-**Script:** Invoke-InfrastructureBackup.ps1 — Planned
+**Script:** `InfrastructureBackup.ps1`
 
-Will automate GPO backups, DHCP exports and infrastructure configuration snapshots, complementing the existing Windows Server Backup implementation.
+Automates GPO backups, DHCP exports and infrastructure configuration snapshots, complementing the existing Windows Server Backup implementation.
 
 [View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Configuration%20Backup.md)
 
 ### 05 — Centralised Event Reporting
-**Script:** Get-CentralisedEventReport.ps1 — Planned
+**Script:** `CentralisedEventReport.ps1`
 
-Will query the centrally collected Windows events on MGMT01 and produce structured infrastructure and security activity reports.
+Queries the centrally collected Windows events on `MGMT01` and produce structured infrastructure and security activity reports.
 
 [View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Centralised%20Event%20Reporting.md)
 
@@ -88,10 +88,10 @@ The local working directory is organised as follows:
 
 ```text
 C:\LabAutomation\
-├── Scripts\
 ├── Input\
+├── Logs\
 ├── Output\
-└── Logs\
+└── Scripts\
 ```
 
 > The GitHub repository stores the script source code, sample input files and implementation documentation. Generated logs, credentials and sensitive operational data are excluded.
@@ -100,8 +100,8 @@ C:\LabAutomation\
 
 |Script|Validation Performed|
 |---|---|
-|`Infrastructure Health Check`|Successful reporting during normal operation and a simulated DC01 outage, including CSV generation.|
-|`AD User Onboarding`|Successful single-user provisioning, account configuration verification and audit-log generation.|
+|`Infrastructure Health Check`|Successful reporting during normal operation and a simulated `DC01` outage, including CSV generation.|
+|`AD User Onboarding`|Successful multi-user provisioning, account configuration verification and audit-log generation.|
 |`AD User Offboarding`|Pending.|
 |`Infrastructure Configuration Backup`|Pending.|
 |`Centralised Event Reporting`|Pending.|
