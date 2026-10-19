@@ -11,8 +11,8 @@ The script runs centrally from `MGMT01`, replacing multiple manual administrativ
 - <b>Windows Services:</b> Checks critical services including AD DS, DNS, DHCP, Netlogon, Kerberos, SMB and Windows Event Collector.
 - <b>DNS:</b> Validates internal hostname resolution and expected IP addresses against both domain controllers.
 - <b>Active Directory:</b> Checks replication health, SYSVOL and NETLOGON accessibility, FSMO role ownership and DC diagnostics where available.
-- <b>DHCP:</b> Checks the DC01-DC02-Failover relationship, including its operational state and load-balancing mode.
-- <b>File Services:</b> Verifies access to \\FS01\CompanyData.
+- <b>DHCP:</b> Checks the `DC01`-`DC02` Failover relationship, including its operational state and load-balancing mode.
+- <b>File Services:</b> Verifies access to `\\FS01\CompanyData`.
 - <b>Storage:</b> Checks available disk space across the servers, using the following thresholds:
     - <b>PASS:</b> 20% or more free.
     - <b>WARN:</b> 10% to less than 20% free.
@@ -63,11 +63,11 @@ The script was subsequently improved to:
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20Healthy.png" width="700"/>
 
 ### Failure-State Validation
-1. Shut down DC01 through Hyper-V while keeping DC02 operational.
-2. Execute the script again from MGMT01.
+1. Shut down `DC01` through Hyper-V while keeping `DC02` operational.
+2. Execute the script again from `MGMT01`.
 3. Confirm that the unavailable server is detected and dependent checks are handled without repeatedly waiting for connection timeouts.
 4. Verify that checks against the remaining available infrastructure continue.
-5. Restart DC01, confirm AD replication and DHCP failover recovery, and rerun the script.
+5. Restart `DC01`, confirm AD replication and DHCP failover recovery, and rerun the script.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20DC01%20Failure.png" width="700"/>
 
