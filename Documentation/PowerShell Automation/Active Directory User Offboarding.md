@@ -6,9 +6,9 @@ Automate the secure and auditable offboarding of standard Active Directory user 
 
 The script disables the account, removes direct security-group memberships, clears contact information, updates the account description and moves the user into the existing `Disabled Users` OU.
 
-The workflow incorporates input validation, privileged-account safeguards, -WhatIf previews, pre-change configuration snapshots, post-change verification, error handling and audit logging.
+The workflow incorporates input validation, privileged-account safeguards, `-WhatIf` previews, pre-change configuration snapshots, post-change verification, error handling and audit logging.
 
-The account is retained in Active Directory rather than deleted.
+> The account is retained in Active Directory rather than deleted.
 
 ## Execution Environment
 - <b>Execution server:</b> `MGMT01`
@@ -36,7 +36,7 @@ The account is retained in Active Directory rather than deleted.
       - Preserve the account's primary group relationship.
 5. Account attribute updates
       - Update the Description field with the offboarding date and reason.
-      - Optionally clear manager and contact attributes when -ClearContactAttributes is specified.
+      - Optionally clear manager and contact attributes when `-ClearContactAttributes` is specified.
 6. OU relocation
       - Move the account into the `Disabled Users` OU using `Move-ADObject`.
 7. Post-change verification
