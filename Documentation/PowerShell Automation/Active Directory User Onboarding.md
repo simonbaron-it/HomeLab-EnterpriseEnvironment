@@ -51,12 +51,12 @@ The script uses a PowerShell hashtable to map employees to their designated Acti
 
 |Department|Target OU|
 |---|---|
-|`Finance`|`OU=Finance Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
-|`HR`|`OU=HR Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
-|`IT`|`OU=IT Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
-|`Sales`|`OU=Sales Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
+|`Finance`|`OU=Finance Staff`, `OU=Baron Users`, `DC=baron.example.com`|
+|`HR`|`OU=HR Staff`, `OU=Baron Users`, `DC=baron.example.com`|
+|`IT`|`OU=IT Staff`, `OU=Baron Users`, `DC=baron.example.com`|
+|`Sales`|`OU=Sales Staff`, `OU=Baron Users`, `DC=baron.example.com`|
 
-Before account creation, the script validates that the requested department is supported and its destination OU exists.
+> Before account creation, the script validates that the requested department is supported and its destination OU exists.
 
 ## Group Membership
 Department and role values determine which Global Security Groups are assigned.
@@ -65,7 +65,7 @@ Department and role values determine which Global Security Groups are assigned.
 |---|---|---|
 |`Finance`|`User`|`Finance_Users`|
 |`Finance`|`Manager`|`Finance_Users`, `Finance_Managers`|
-|`HR`|`User`|`HR_Usrers`|
+|`HR`|`User`|`HR_Users`|
 |`HR`|`Manager`|`HR_Users`, `HR_Managers`|
 |`IT`|`User`|`IT_Users`|
 |`Sales`|`User`|`Sales_Users`|
@@ -74,7 +74,7 @@ Group membership follows the existing AGDLP access-control structure, allowing d
 
 The script validates that required groups exist and are Global Security Groups before provisioning.
 
-Unsupported role combinations are rejected. Privileged groups such as IT_Admins are intentionally excluded from automated standard-user onboarding.
+Unsupported role combinations are rejected. Privileged groups such as `IT_Admins` are intentionally excluded from automated standard-user onboarding.
 
 ## Onboarding Workflow
 1. Import the CSV and validate required columns and employee information.
@@ -90,17 +90,17 @@ Unsupported role combinations are rejected. Privileged groups such as IT_Admins 
 11. Verify account status, required group memberships and password-change settings.
 12. Record the result in a structured audit log.
 
-Creating accounts disabled initially ensures that partially provisioned identities are not immediately available for authentication.
+> Creating accounts disabled initially ensures that partially provisioned identities are not immediately available for authentication.
 
 ## Password Handling
-Temporary passwords are supplied interactively through Read-Host -AsSecureString.
+Temporary passwords are supplied interactively through Read-Host `-AsSecureString`.
 
 The script is designed to:
 - Avoid storing passwords in CSV files or audit logs.
 - Prompt for a separate temporary password for each new account.
 - Require the password to comply with the domain password policy.
-- Enforce ChangePasswordAtLogon before the provisioning workflow is considered complete.
-- Verify the password-change requirement through the Active Directory pwdLastSet attribute.
+- Enforce `ChangePasswordAtLogon` before the provisioning workflow is considered complete.
+- Verify the password-change requirement through the Active Directory `pwdLastSet` attribute.
 
 ## Error Handling and Duplicate Prevention
 The script uses PowerShell try/catch error handling to process employee records independently and report failures without terminating the entire onboarding operation.
@@ -117,7 +117,7 @@ Possible execution results include:
 
 If an error occurs after account creation, the script attempts to disable the newly created account and records the failure for administrative investigation.
 
-Previously existing accounts are not modified or recreated automatically.
+> Previously existing accounts are not modified or recreated automatically.
 
 ## Execution
 <b>Execution host:</b> `MGMT01`   
@@ -159,7 +159,7 @@ Each log entry includes:
 |`Status`|`CREATED`, `SKIPPED`, `FAILED` or `PARTIAL`|
 |`Detail`|Operation result or error information|
 
-Temporary passwords are not included in the audit logs.
+> Temporary passwords are not included in the audit logs.
 
 ## Validation
 ### A five-user CSV test was executed against `DC01`.
@@ -168,7 +168,7 @@ Temporary passwords are not included in the audit logs.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20Powershell%20Output.png" width="900"/>
 
-> An audit log was successfully generated
+> An audit log was successfully generated.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20-%20CSV%20Log.png" width="900"/>
 
