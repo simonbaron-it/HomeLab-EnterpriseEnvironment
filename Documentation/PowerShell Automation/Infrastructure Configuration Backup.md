@@ -102,29 +102,113 @@ B:\InfrastructureBackups\
 - Store file hashes, backup metadata and an overall completion status.
 
 ## GPO Backup
+The script uses `Backup-GPO -All` to back up every Group Policy Object in the domain.
 
------
+Before execution, the script records the expected GPO count.
+
+Following the backup, the number of returned GPO backups is compared against the expected count, and the resulting backup files are checked.
+
+An unsuccessful operation or count mismatch is recorded as a failed backup stage.
+
+## DHCP Export
+The script exports DHCP server configuration and lease information from `DC01` using `Export-DhcpServer`.
+
+The export is saved as: `DHCP\DHCP-Config-and-Leases.xml`
+
+Validation confirms that the file exists, contains data and can be parsed as XML.
+
+This provides a configuration recovery resource alongside the existing DHCP failover relationship between `DC01` and `DC02`.
+
+## Configuration Snapshot
+The script collects infrastructure configuration information using the Active Directory, DNS and DHCP PowerShell modules.
+
+Each inventory is saved as a structured XML file using `Export-Clixml`.
+
+This provides reference information for infrastructure troubleshooting, configuration comparison and potential rebuilding activities.
+
+## Backup Verification
+The script validates exported files using multiple checks:
+- Expected and actual GPO backup counts.
+- Export file existence and non-zero file size.
+- DHCP export XML parsing.
+- Successful configuration inventory collection.
+- SHA-256 hashes of exported files.
+- File hashes are recorded in the backup manifest and can be recalculated to identify subsequent file modifications.
+
+## Backup Manifest
+At completion, the script generates: `BackupManifest.json`.
+
+The manifest contains:
+
+|Field|Description|
+|---|---|
+|`StartTimestamp`|Backup execution timestamp|
+|`CompletedAt`|Completion timestamp|
+|`SourceServer`|Server executing the script|
+|`Operator`|Windows account executing the script|
+|`Domain`|Target Active Directory domain|
+|`OutputPath`|Backup directory|
+|`ExpectedGPOs`|GPO count before backup|
+|`BackedUpGPOs`|Number of GPO backups returned|
+|`Results`|Individual backup operation results|
+|`Files`|Exported files, sizes and SHA-256 hashes|
+|`OverallStatus`|PASS or PARTIAL|
+
+> The overall status is marked PARTIAL if one or more export stages fail.
+
+## Security and Error Handling
+The script includes safeguards to reduce the risk of incomplete or unintended operations:
+- <b>Execution restriction:</b> Requires an elevated PowerShell session on `DC01`.
+- <b>Storage validation:</b>  Checks that the destination backup volume is accessible and has sufficient available capacity.
+- <b>`-WhatIf` support:</b>  Previews the operation without creating backup files or directories.
+- <b>Timestamped directories:</b>  Prevents normal backup runs from overwriting previous exports.
+- <b>Module validation:</b>  Confirms required management modules are available.
+- <b>Error handling:</b>  Uses try/catch to record failures and continue independent export stages.
+- <b>Output verification:</b>  Checks backup counts, exported files and XML structure.
+- <b>Partial-failure reporting:</b>  Prevents individual stage failures from being reported as an entirely successful run.
+
+> Generated configuration data remains on restricted lab storage and is excluded from the public GitHub repository.
 
 ## Execution
-Run from an elevated session on `DC01`:
+<b>Execution host:</b> `DC01`
 
-```powershell
-.\Invoke-InfrastructureBackup.ps1
+### Preview execution without creating files
+
+``` powershell
+.\InfrastructureBackup.ps1 -WhatIf
+```
+
+### Execute configuration backup
+
+``` powershell
+.\InfrastructureBackup.ps1
+```
+
+### Specify a minimum free-space requirement
+
+``` powershell
+.\InfrastructureBackup.ps1 -MinFreeGB 5
 ```
 
 ## Validation
-- Confirm the `B:` backup volume is available and has free space.
-- Compare GPO backup count against the expected count.
-- Confirm DHCP export and configuration snapshots exist and contain data.
-- Review the JSON manifest, including any partial failures.
+### `WhatIf` Validation
 
-**Execution frequency:** `[MANUAL / SCHEDULED]`  
-**Observed results:** `[INSERT RESULTS]`
+The script is executed using `-WhatIf` to confirm the intended backup destination and pre-flight checks without creating files or modifying existing backup sets.
 
-<i>Add: screenshot of successful backup script and manifest</i>
+<i>INSERT SCREENSHOT — WHATIF OUTPUT</i>
 
-## GPO Backup
-## DHCP Export
-## Configuration Snapshot
-## Backup Verification
-## Manifest
+### Successful Configuration Backup
+
+The script is executed from `DC01`, and the GPO, DHCP and configuration inventory output directories are inspected.
+
+The resulting PowerShell output is reviewed to confirm the individual export stages completed as expected.
+
+<i>INSERT SCREENSHOT — POWERSHELL EXECUTION</i>
+
+<i>INSERT SCREENSHOT — BACKUP DIRECTORY</i>
+
+### Manifest and Integrity Validation
+
+The generated BackupManifest.json is inspected to verify individual backup-stage results, exported file information and the overall status.
+
+<i>INSERT SCREENSHOT</i>
