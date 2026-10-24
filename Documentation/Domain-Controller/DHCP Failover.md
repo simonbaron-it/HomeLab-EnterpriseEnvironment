@@ -63,6 +63,8 @@ The DHCP scope configuration was replicated to `DC02` as part of the failover re
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Scope%20Replication%20Validation.png" width="800"/>
 
+> DHCP failover automatically synchronises lease information between `DC01` and `DC02`. However, subsequent changes to DHCP scope configuration, such as DNS options, address exclusions or lease duration, are not automatically replicated to the failover partner. Following any scope configuration changes, replication must be initiated manually to maintain consistent configuration across both DHCP servers.
+
 ### Lease Synchronisation
 Active leases were reviewed on both DHCP servers to verify that lease information was synchronised between failover partners.
 
