@@ -51,10 +51,10 @@ The script uses a PowerShell hashtable to map employees to their designated Acti
 
 |Department|Target OU|
 |---|---|
-|`Finance`|`OU=Finance Staff`, `OU=Baron Users`, `DC=baron.example.com`|
-|`HR`|`OU=HR Staff`, `OU=Baron Users`, `DC=baron.example.com`|
-|`IT`|`OU=IT Staff`, `OU=Baron Users`, `DC=baron.example.com`|
-|`Sales`|`OU=Sales Staff`, `OU=Baron Users`, `DC=baron.example.com`|
+|`Finance`|`OU=Finance Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
+|`HR`|`OU=HR Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
+|`IT`|`OU=IT Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
+|`Sales`|`OU=Sales Staff`, `OU=Baron Users`, `DC=baron`, `DC=example`, `DC=com`|
 
 > Before account creation, the script validates that the requested department is supported and its destination OU exists.
 
