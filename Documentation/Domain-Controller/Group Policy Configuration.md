@@ -151,7 +151,7 @@ The `Windows-LAPS` GPO centrally creates, manages and rotates a dedicated local 
 ### Active Directory Preparation
 Using PowerShell, the Active Directory schema was extended from `DC01` and the required self-permissions were delegated to the Workstations OU.
 
-```Powershell
+```powershell
 Update-LapsADSchema
 
 Set-LapsADComputerSelfPermission `

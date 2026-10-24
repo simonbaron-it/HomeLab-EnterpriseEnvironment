@@ -25,12 +25,12 @@ The domain provides:
 - Security group-based access control.
 - A foundation for Group Policy deployment.
 
-# Active Directory Users and Computers
+## Active Directory Users and Computers
 Users, organisational units and security groups were configured using `Active Directory Users and Computers` to simulate how identity, computers, departments and access could be managed within a small organisation.
 
 >- DNS and DHCP are documented in [DNS and DHCP configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md).
 >- Group Policy is documented in [Group Policy Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md).
-## Organisational Unit Design
+### Organisational Unit Design
 >Organisational Units were created to logically separate users, workstations, servers and administrative objects.
 
 |OU|Purpose|
@@ -45,17 +45,17 @@ Users, organisational units and security groups were configured using `Active Di
 |`Baron Servers`|Stores domain-joined member servers and provides a target for server-specific GPOs|
 |`Baron Users`|Parent OU for standard domain user accounts|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Disabled Users`|Stores disabled domain user accounts|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Finance Users`|Stores Finance department domain user accounts|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `HR Users`|Stores HR department domain user accounts|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `IT Users`|Stores IT department domain user accounts|
-|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Sales Users`|Stores Sales department domain user accounts|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Finance Staff`|Stores Finance department domain user accounts|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `HR Staff`|Stores HR department domain user accounts|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `IT Staff`|Stores IT department domain user accounts|
+|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Sales Staff`|Stores Sales department domain user accounts|
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory.png" width="900"/>
 
-## Security Groups
+### Security Groups
 > Security groups were implemented using the AGDLP model to separate user and role membership from resource permissions.
 
-### Global Security Groups
+#### Global Security Groups
 |Group|Scope|Type|Purpose|
 |---|---|---|---|
 |`Finance_Managers`|`Global`|`Security`|Represents Finance department managers for role-based access|
@@ -68,7 +68,7 @@ Users, organisational units and security groups were configured using `Active Di
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Global%20Groups.png" width="900"/>
 
-### Domain Local Security Groups
+#### Domain Local Security Groups
 |Group|Scope|Type|Purpose|
 |---|---|---|---|
 |`Finance_Folder_Management`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\Finance\Management`|
@@ -85,7 +85,7 @@ Users, organisational units and security groups were configured using `Active Di
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Domain%20Local%20Groups.png" width="900"/>
 
-## Group-Based Access Control
+### Group-Based Access Control
 The AGDLP model is implemented where applicable. User accounts are assigned to role-based Global security groups, which are nested within Domain Local resource groups. Permissions are then assigned to the Domain Local groups rather than directly to individual users.
 
 `Account`  
