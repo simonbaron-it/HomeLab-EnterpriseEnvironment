@@ -3,12 +3,13 @@
 
 [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
 param(
-    [string]$BackupRoot = 'B:\InfrastructureBackups',
     [ValidateRange(0,100)]
     [int]$MinFreeGB = 2
 )
 
 $ErrorActionPreference = 'Stop'
+
+$BackupRoot = 'B:\InfrastructureBackups'
 $DomainName = 'baron.example.com'
 $DomainController = 'DC01'
 $DhcpServer = 'DC01'
