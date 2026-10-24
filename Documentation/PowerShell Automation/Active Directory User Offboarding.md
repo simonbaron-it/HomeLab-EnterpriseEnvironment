@@ -4,7 +4,7 @@
 ## Purpose
 Automate the secure and auditable offboarding of standard Active Directory user accounts within the `baron.example.com` domain.
 
-The script disables the account, removes direct security-group memberships, clears contact information, updates the account description and moves the user into the existing `Disabled Users` OU.
+The script disables the account, removes direct security-group memberships, optionally clears contact information, updates the account description and moves the user into the existing `Disabled Users` OU.
 
 The workflow incorporates input validation, privileged-account safeguards, `-WhatIf` previews, pre-change configuration snapshots, post-change verification, error handling and audit logging.
 
