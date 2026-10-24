@@ -39,7 +39,7 @@ The existing source-initiated subscriptions forward selected events to `MGMT01`:
 |`Infrastructure-Critical-Errors`|`Application`, `System`|Critical and Error events|
 |`Identity-Security-Events`|`Security`|Selected account, authentication and security-group events|
 
-## Identity and Security Event ID's
+## Identity and Security Event IDs
 
 |Event ID|Event Description|
 |---|---|
