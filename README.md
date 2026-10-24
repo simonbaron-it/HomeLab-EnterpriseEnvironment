@@ -10,7 +10,14 @@ The environment includes redundant Active Directory, DNS and DHCP services acros
 
 > Phase 2 expands the lab beyond core infrastructure deployment into resilience and operations, with Active Directory and DNS redundancy, DHCP failover, tested backup and recovery procedures, centralised monitoring and logging, and PowerShell automation for health checks, user lifecycle management, configuration backup and operational reporting.
 
-## Current Lab Environment: `Phases 1 & 2 Complete`
+## Key Achievements
+- Designed and deployed a segmented Windows Server 2025 enterprise environment using Hyper-V, Active Directory and RRAS.
+- Implemented redundant domain controllers, DNS and DHCP failover, validating service continuity through controlled outage testing.
+- Secured enterprise resources using Group Policy, Windows LAPS and role-based NTFS permissions.
+- Implemented and tested backup and recovery procedures for Active Directory objects, Group Policy and file services.
+- Developed five PowerShell scripts for infrastructure monitoring, backup exports, event reporting and user lifecycle automation.
+
+## Current Lab Environment: `Complete - Phases 1 & 2`
 <p align="center">
 <img src="Images/Phase%202%20Network%20Diagram.png" width="700"/>
 </p>
