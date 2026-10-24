@@ -95,7 +95,7 @@ The script identifies Critical/Error events from the System and Application logs
 
 Each run creates a timestamped detailed CSV, summary CSV and browser-readable HTML report. The implementation handles empty reporting windows, query limits, inaccessible logs and incomplete event fields. Its documentation includes controlled `FS01` Application-error and disposable AD account-lifecycle test procedures, with console, report-directory and HTML output evidence.
 
-. The reports describe events that have been audited, forwarded, retained and selected by the query; they do not guarantee that every event from every source was collected or provide real-time alerting.
+The reports describe events that have been audited, forwarded, retained and selected by the query; they do not guarantee that every event from every source was collected or provide real-time alerting.
 
 [View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Centralised%20Event%20Reporting.md)
 
