@@ -93,7 +93,7 @@ The script queries `ForwardedEvents` using `Get-WinEvent`, with configurable par
 |---|---|---|
 |`-Hours`|`24`|Reporting window in hours (1–720)|
 |`-MaxEvents`|`5000`|Maximum raw forwarded records to retrieve (1–100000)|
-|`-HtmlLimit`|`200`, `System`|Maximum matching events displayed in HTML (1–2000)|
+|`-HtmlLimit`|`200`,|Maximum matching events displayed in HTML (1–2000)|
 |`-OutputFolder`|`C:\LabAutomation\Output\EventReports`|Location of generated report files|
 
 The script categorises matching events as follows:
