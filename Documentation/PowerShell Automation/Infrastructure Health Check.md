@@ -10,7 +10,7 @@ The script runs centrally from `MGMT01`, replacing multiple manual administrativ
 - <b>Connectivity:</b> Tests WinRM management connectivity to each server using TCP port 5985.
 - <b>Windows Services:</b> Checks critical services including AD DS, DNS, DHCP, Netlogon, Kerberos, SMB and Windows Event Collector.
 - <b>DNS:</b> Validates internal hostname resolution and expected IP addresses against both domain controllers.
-- <b>Active Directory:</b> Checks replication health, SYSVOL and NETLOGON accessibility, FSMO role ownership and DC diagnostics where available.
+- <b>Active Directory:</b> Checks replication health, SYSVOL and NETLOGON accessibility and FSMO role ownership.
 - <b>DHCP:</b> Checks the `DC01`-`DC02` Failover relationship, including its operational state and load-balancing mode.
 - <b>File Services:</b> Verifies access to `\\FS01\CompanyData`.
 - <b>Storage:</b> Checks available disk space across the servers, using the following thresholds:
