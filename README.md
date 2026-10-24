@@ -23,6 +23,7 @@ The environment includes redundant Active Directory, DNS and DHCP services acros
 </p>
 
 ## Lab Documentation
+- ### [Final Architecture Overview](Documentation/Final%20Architecture%20Overview.md)
 ### Phase 1 - Core Infrastructure
 > #### Hyper-V & Virtual Infrastructure
 > - [Hyper-V Host, Virtual Switch and Virtual Machine Configuration](Documentation/Hyper-V%20%26%20Virtual%20Infrastructure/Hyper-V%20host%2C%20virtual%20switch%20and%20VM%20configuration.md)
