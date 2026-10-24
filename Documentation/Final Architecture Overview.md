@@ -10,7 +10,7 @@ This document provides a current-state view of the completed Windows Server ente
 ## Final Architecture Diagram
 
 <p align="center">
-<img src="Images/Phase%202%20Network%20Diagram.png" width="700"/>
+<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Phase%202%20Network%20Diagram.png" width="700"/>
 </p>
 
 ## Virtual Machine Inventory
