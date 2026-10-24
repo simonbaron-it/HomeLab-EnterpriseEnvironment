@@ -191,5 +191,5 @@ System State backups were confirmed as available for both Domain Controllers usi
 - Protect Windows File Services and shared organisational data.
 - Back up Group Policy and DHCP configuration.
 - Use PowerShell and Windows Server backup tooling to protect infrastructure configuration.
-- Validate backup completion and integrity.
+- Verify backup completion and perform representative recovery testing.
 - Perform controlled file and configuration recovery testing.
