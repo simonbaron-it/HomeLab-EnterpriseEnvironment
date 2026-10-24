@@ -172,6 +172,6 @@ Each log entry includes:
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20-%20CSV%20Log.png" width="900"/>
 
-> New accounts with correctly assigned OU's and Security Groups were inspected in `Active Directory Users and Computers`.
+> New accounts with correctly assigned OUs and Security Groups were inspected in `Active Directory Users and Computers`.
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20-%20ADUC%20Verification.png" width="900"/>
