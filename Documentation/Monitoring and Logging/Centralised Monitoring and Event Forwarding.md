@@ -176,6 +176,15 @@ The subscription collects selected Security Event IDs:
 
 <img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Event%20Viewer%20Subscriptions.png" width="900"/>
 
+
+#### Security Log Forwarding Permission
+The `Identity-Security-Events` subscription requires the Windows Event Forwarding service to have read access to the Security event log on each source computer.
+
+Windows Event Forwarding operates under the `NT AUTHORITY\NETWORK SERVICE` account. To allow Security log forwarding, this account requires appropriate permissions through the `Event Log Readers` group.
+
+- **Domain Controllers (`DC01`, `DC02`):** Permissions are managed through the domain's `Builtin\Event Log Readers` group.
+- **Member Computers (`FS01`, `CLIENT01`):** Permissions are managed through the local `Event Log Readers` group on each computer.
+
 ## Security Auditing
 
 ### Audit Policy
