@@ -34,7 +34,7 @@ Each record is processed individually, allowing valid users to be provisioned wh
 ## Username Convention
 Usernames are automatically generated using the following convention:
 
-|Employee|sAMAccountName|User Principle Name (UPN)|
+|Employee|sAMAccountName|User Principal Name (UPN)|
 |---|---|---|
 |`James Wilson`|`jwilson`|`jwilson@baron.example.com`|
 |`Emily Clark`|`eclark`|`eclark@baron.example.com`|
