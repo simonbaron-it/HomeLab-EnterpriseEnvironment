@@ -15,7 +15,7 @@ The Group Policy design provides:
 
 ### Group Policy Management
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Group%20Policy.png" width="900"/>
+<img src="../../Images/Group%20Policy.png" width="900"/>
 
 ## Group Policy Design
 
@@ -29,7 +29,7 @@ The Group Policy design provides:
 
 GPOs are linked at the narrowest appropriate scope. The domain account policy is linked at the domain root, while workstation and user policies are targeted through the relevant Organisational Units.
 
-> Active Directory OU design is documented in [Active Directory Domain Services](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Active%20Directory%20Domain%20Services.md).
+> Active Directory OU design is documented in [Active Directory Domain Services](../../Documentation/Domain-Controller/Active%20Directory%20Domain%20Services.md).
 
 ## Domain Account Policy GPO
 
@@ -59,7 +59,7 @@ The `Domain-Account-Policy` GPO defines domain-wide password and account lockout
 ### Validation
 > PowerShell was used on `DC01` to verify the effective domain password and account lockout policy.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain-Account-Policy%20Validation.png" width="900"/>
+<img src="../../Images/Domain-Account-Policy%20Validation.png" width="900"/>
 
 ## Workstation Security Baseline GPO
 
@@ -87,14 +87,14 @@ The `Workstation-Security-Baseline` GPO applies centralised security settings to
 ### Validation
 > PowerShell was used on `CLIENT01` to verify the effective firewall profile policy.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Security-Baseline%20Validation.png" width="900"/>
+<img src="../../Images/Workstation-Security-Baseline%20Validation.png" width="900"/>
 
 ## User Drive Mapping GPO
 
 ### Purpose
 The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for domain users. Access to departmental folders within the share is controlled separately through NTFS permissions and Active Directory security groups.
 
-> SMB share configuration, NTFS permissions and AGDLP-based resource access are documented in [File Services and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md).
+> SMB share configuration, NTFS permissions and AGDLP-based resource access are documented in [File Services and NTFS Access Control](../../Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md).
 
 ### Scope  
 | Setting | Value |
@@ -114,7 +114,7 @@ The `User-Drive-Mappings` GPO centrally maps the `CompanyData` file share for do
 ### Validation
 > A domain user signed in to `CLIENT01` to verify that the `CompanyData` share was automatically mapped as drive `E:`.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/User-Drive-Mapping%20Validation.png" width="900"/>
+<img src="../../Images/User-Drive-Mapping%20Validation.png" width="900"/>
 
 ## Workstation Local Administrator GPO
 
@@ -140,7 +140,7 @@ The `Workstation-Local-Admins` GPO ensures the `BARON\IT_Admins` security group 
 ### Validation
 > PowerShell was used on `CLIENT01` to verify that the Active Directory security group `BARON\IT_Admins` was added to the local `Administrators` group.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Workstation-Local-Admins%20Validation.png" width="900"/>
+<img src="../../Images/Workstation-Local-Admins%20Validation.png" width="900"/>
 
 ## Windows LAPS GPO
 > The `Workstation-Local-Admins` GPO grants administrative access to the domain `BARON\IT_Admins` group, while the `Windows-LAPS` GPO manages a separate local administrator account and its credentials. The two policies therefore provide different administrative access mechanisms.
@@ -184,12 +184,12 @@ Set-LapsADComputerSelfPermission `
 ### Validation
 > PowerShell was used on `DC01` to verify that Windows LAPS was managing `CLIENT01` and storing the managed account metadata in Active Directory.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Windows-LAPS%20Validation.png" width="900"/>
+<img src="../../Images/Windows-LAPS%20Validation.png" width="900"/>
 
 ## Applied GPO Validation
 > `gpresult` was used on `CLIENT01` to verify that the expected computer-based Group Policy Objects were successfully applied.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/GPResult%20Validation.png" width="900"/>
+<img src="../../Images/GPResult%20Validation.png" width="900"/>
 
 ## Validation Summary
 Validation confirmed:

@@ -28,8 +28,8 @@ The domain provides:
 ## Active Directory Users and Computers
 Users, organisational units and security groups were configured using `Active Directory Users and Computers` to simulate how identity, computers, departments and access could be managed within a small organisation.
 
->- DNS and DHCP are documented in [DNS and DHCP configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md).
->- Group Policy is documented in [Group Policy Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md).
+>- DNS and DHCP are documented in [DNS and DHCP configuration](../../Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md).
+>- Group Policy is documented in [Group Policy Configuration](../../Documentation/Domain-Controller/Group%20Policy%20Configuration.md).
 ### Organisational Unit Design
 >Organisational Units were created to logically separate users, workstations, servers and administrative objects.
 
@@ -50,7 +50,7 @@ Users, organisational units and security groups were configured using `Active Di
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `IT Staff`|Stores IT department domain user accounts|
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Sales Staff`|Stores Sales department domain user accounts|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory.png" width="900"/>
+<img src="../../Images/Active%20Directory.png" width="900"/>
 
 ### Security Groups
 > Security groups were implemented using the AGDLP model to separate user and role membership from resource permissions.
@@ -66,7 +66,7 @@ Users, organisational units and security groups were configured using `Active Di
 |`IT_Users`|`Global`|`Security`|Represents IT department users for role-based access|
 |`Sales_Users`|`Global`|`Security`|Represents Sales department users for role-based access|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Global%20Groups.png" width="900"/>
+<img src="../../Images/Active%20Directory%20-%20Global%20Groups.png" width="900"/>
 
 #### Domain Local Security Groups
 |Group|Scope|Type|Purpose|
@@ -83,7 +83,7 @@ Users, organisational units and security groups were configured using `Active Di
 |`Sales_Folder_RO`|`Domain Local`|`Security`|Used to grant Read-only access to: `\\FS01\CompanyData\Sales`|
 |`Sales_Folder_RW`|`Domain Local`|`Security`|Used to grant Modify access to: `\\FS01\CompanyData\Sales`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Active%20Directory%20-%20Domain%20Local%20Groups.png" width="900"/>
+<img src="../../Images/Active%20Directory%20-%20Domain%20Local%20Groups.png" width="900"/>
 
 ### Group-Based Access Control
 The AGDLP model is implemented where applicable. User accounts are assigned to role-based Global security groups, which are nested within Domain Local resource groups. Permissions are then assigned to the Domain Local groups rather than directly to individual users.
@@ -99,23 +99,23 @@ Example:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳`Finance_Folder_RW`  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳Modify access to `\\FS01\CompanyData\Finance`
 
->File-share permissions and NTFS access control are documented separately in [File Services and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md).
+>File-share permissions and NTFS access control are documented separately in [File Services and NTFS Access Control](../../Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md).
 
 ## Configuration Validation
 
 > PowerShell was used on `DC01` to verify the Active Directory domain and implemented Organisational Units.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain%20Validation.png" width="900"/>
+<img src="../../Images/Domain%20Validation.png" width="900"/>
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/OU%20Validation.png" width="900"/>
+<img src="../../Images/OU%20Validation.png" width="900"/>
 
 > PowerShell was used on `CLIENT01` to verify successful domain-join.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Domain-join%20Validation.png" width="900"/>
+<img src="../../Images/Domain-join%20Validation.png" width="900"/>
 
 > PowerShell was used to validate the above example's AGDLP model implementation.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/AGDLP%20Validation.png" width="900"/>
+<img src="../../Images/AGDLP%20Validation.png" width="900"/>
 
 ### Validation Confirmed
 - `DC01` hosts the `baron.example.com` Active Directory domain.

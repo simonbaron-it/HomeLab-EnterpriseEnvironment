@@ -37,7 +37,7 @@ DNS host records allow systems within the domain to resolve hostnames to IPv4 ad
 |`FS01`|`FS01.baron.example.com`|`10.10.10.20`|
 |`CLIENT01`|`CLIENT01.baron.example.com`|`10.10.20.100` `(DHCP)`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DNS%20Manager.png" width="800"/>
+<img src="../../Images/DNS%20Manager.png" width="800"/>
 
 ### DNS Forwarders
 External DNS queries that cannot be resolved by the internal DNS server are forwarded to an upstream DNS resolver.
@@ -47,7 +47,7 @@ External DNS queries that cannot be resolved by the internal DNS server are forw
 |DNS Forwarder 1|`1.1.1.1`|
 |DNS Forwarder 2|`8.8.8.8`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DNS%20Forwarders.png" width="350"/>
+<img src="../../Images/DNS%20Forwarders.png" width="350"/>
 
 ## DHCP Configuration
 The DHCP server role was installed and authorised in Active Directory on `DC01`. DHCP provides dynamic IPv4 configuration to devices on the `CLIENTS` network.
@@ -68,30 +68,30 @@ The DHCP server role was installed and authorised in Active Directory on `DC01`.
 |006 DNS Server|`10.10.10.10`|
 |015 DNS Domain Name|`baron.example.com`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Scope.png" width="800"/>
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Scope%20Options.png" width="800"/>
+<img src="../../Images/DHCP%20Scope.png" width="800"/>
+<img src="../../Images/DHCP%20Scope%20Options.png" width="800"/>
 
 ### DHCP Relay
 
-`CLIENT01` resides on the `10.10.20.0/24` network while `DC01` resides on the `10.10.10.0/24` server network. The DHCP Relay Agent configured on `RTR01` forwards DHCP requests from the `CLIENTS` network to `DC01`. DHCP Relay configuration is documented in [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).  
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Relay%20diagram.png" width="500"/>
+`CLIENT01` resides on the `10.10.20.0/24` network while `DC01` resides on the `10.10.10.0/24` server network. The DHCP Relay Agent configured on `RTR01` forwards DHCP requests from the `CLIENTS` network to `DC01`. DHCP Relay configuration is documented in [RRAS Routing and NAT Configuration](../../Documentation/Networking%20%26%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md).  
+<img src="../../Images/DHCP%20Relay%20diagram.png" width="500"/>
 
 ## Configuration Validation
 
 ### DNS Resolution
 > DNS resolution was tested from a domain-joined system to verify internal forward and reverse lookups, along with external name resolution through `DC01`. 
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DNS%20Validation.png" width="800"/>
+<img src="../../Images/DNS%20Validation.png" width="800"/>
 
 ### DHCP Lease
 > PowerShell was used on `DC01` to verify that `CLIENT01` obtained an active lease from the `10.10.20.0/24` client scope. 
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/DHCP%20Lease%20Validation.png" width="800"/>
+<img src="../../Images/DHCP%20Lease%20Validation.png" width="800"/>
 
 ### CLIENT01 DHCP Configuration
 > `ipconfig /all` was used to confirm that `CLIENT01` received its IPv4 configuration dynamically from `DC01`.  
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20CLIENT01.png" width="800"/>
+<img src="../../Images/IPConfig%20-%20CLIENT01.png" width="800"/>
 
 ### Validation Confirmed
 - Internal forward DNS records resolve through `DC01`.

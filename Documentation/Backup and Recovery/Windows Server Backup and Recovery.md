@@ -9,7 +9,7 @@ The implementation covers:
 - Verification that backup jobs complete successfully.
 - Recovery testing for representative infrastructure and file-service scenarios.
 
-> PowerShell-based configuration backup automation is documented separately in [PowerShell Infrastructure Automation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md).
+> PowerShell-based configuration backup automation is documented separately in [PowerShell Infrastructure Automation](../../Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md).
 
 ## Backup Design
 
@@ -44,7 +44,7 @@ wbadmin start backup -backupTarget:B: -allCritical -systemState -vssFull
 
 ### Validation
 > DC01 completed backup
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DC01%20Backup.png" width="900"/>
+<img src="../../Images/DC01%20Backup.png" width="900"/>
 
 ## File Server Backup
 Windows Server Backup was configured on FS01 to protect the shared organisational data stored on `E:\CompanyData` together with the server's system state and critical operating system volumes.
@@ -63,7 +63,7 @@ wbadmin start backup -backupTarget:B: -include:E: -allCritical -systemState -vss
 
 ### Validation
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/FS01%20Backup.png" width="500"/>
+<img src="../../Images/FS01%20Backup.png" width="500"/>
 
 ## Infrastructure Configuration Backup
 Infrastructure configuration is exported separately so key settings can be restored without rebuilding them manually.
@@ -85,7 +85,7 @@ Backup-GPO `
 
 ### Validation
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/GPO%20Backup.png" width="900"/>
+<img src="../../Images/GPO%20Backup.png" width="900"/>
 
 ### DHCP
 The DHCP server configuration and lease data were exported separately to provide a faster recovery method than restoring an entire Domain Controller.
@@ -105,7 +105,7 @@ Export-DhcpServer `
 
 ### Validation
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DHCP%20Backup.png" width="900"/>
+<img src="../../Images/DHCP%20Backup.png" width="900"/>
 
 ## Backup Frequency and Retention
 
@@ -122,16 +122,16 @@ Representative recovery tests were performed to verify that protected data and c
 `Backup Recovery Test File.txt` was created within `E:\CompanyData\Finance`, backed up, deleted and then restored from backup.
 
 #### Recovery
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20FS01%20Recovery%20Complete.png" width="900"/>
+<img src="../../Images/Test%20FS01%20Recovery%20Complete.png" width="900"/>
 
 #### Restored File
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20FS01%20After%20Recovery.png" width="900"/>
+<img src="../../Images/Test%20FS01%20After%20Recovery.png" width="900"/>
 
 ### Recovery Test 2 — Group Policy Recovery
 An unlinked test Group Policy Object was configured with a known registry-based policy value and backed up using `Backup-GPO`. The value was then deliberately modified before the GPO was restored from backup.
 
 #### Modified GPO
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20GPO%20Modified%20Value.png" width="900"/>
+<img src="../../Images/Test%20GPO%20Modified%20Value.png" width="900"/>
 
 #### Restored GPO
 Following the restore, the policy value returned from `ModifiedValue` to its original value of `OriginalValue`.
@@ -142,41 +142,41 @@ Restore-GPO `
      -Path "B:\GPOBackups"
 ```
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20GPO%20Original%20Value.png" width="900"/>
+<img src="../../Images/Test%20GPO%20Original%20Value.png" width="900"/>
 
 ### Recovery Test 3 — Active Directory Object Recovery
 A `Recovery Test User` Active Directory user was created in the `IT Staff` OU and added to the `IT_Users` security group before being deliberately deleted. The account was then restored using Active Directory Recycle Bin to validate object-level recovery without requiring a System State restore.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Recovery.png" width="900"/>
+<img src="../../Images/AD%20User%20Recovery.png" width="900"/>
 
 #### Deleted Object
 `Recovery Test User` was deleted from Active Directory and confirmed as no longer present in its original OU.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Deletion.png" width="900"/>
+<img src="../../Images/AD%20User%20Deletion.png" width="900"/>
 
 #### Object Recovery
 The deleted user was identified and restored using Active Directory Administrative Centre.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Restore.png" width="900"/>
+<img src="../../Images/AD%20User%20Restore.png" width="900"/>
 
 #### Recovery Validation
 Following recovery, the user account was verified in its original OU and its relevant Active Directory attributes and group membership were reviewed.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/AD%20User%20Recovery%20Validation.png" width="900"/>
+<img src="../../Images/AD%20User%20Recovery%20Validation.png" width="900"/>
 
 ### Recovery Test 4 — DHCP Recovery Readiness
 The DHCP configuration export was inspected to confirm that the backup contained the configured scope, scope options and lease data required for a future recovery operation.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20DHCP%20Recovery%20Readiness.png" width="900"/>
+<img src="../../Images/Test%20DHCP%20Recovery%20Readiness.png" width="900"/>
 
 ### Active Directory Recovery Readiness
 System State backups were confirmed as available for both Domain Controllers using `WBAdmin Get Versions` in PowerShell.
 
 > DC01
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20AD%20Recovery%20Test%20DC01.png" width="900"/>
+<img src="../../Images/Test%20AD%20Recovery%20Test%20DC01.png" width="900"/>
 
 > DC02
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Test%20AD%20Recovery%20Test%20DC02.png" width="900"/>
+<img src="../../Images/Test%20AD%20Recovery%20Test%20DC02.png" width="900"/>
 
 ## Validation Summary
 - Critical infrastructure data and configuration are included in the backup design.

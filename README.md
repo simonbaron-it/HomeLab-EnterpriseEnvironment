@@ -12,44 +12,44 @@ The environment includes redundant Active Directory, DNS and DHCP services acros
 
 ## Current Lab Environment: `Phases 1 & 2 Complete`
 <p align="center">
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Phase%202%20Network%20Diagram.png" width="700"/>
+<img src="Images/Phase%202%20Network%20Diagram.png" width="700"/>
 </p>
 
 ## Lab Documentation
 ### Phase 1 - Core Infrastructure
 > #### Hyper-V & Virtual Infrastructure
-> - [Hyper-V Host, Virtual Switch and Virtual Machine Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Hyper-V%20%26%20Virtual%20Infrastructure/Hyper-V%20host%2C%20virtual%20switch%20and%20VM%20configuration.md)
+> - [Hyper-V Host, Virtual Switch and Virtual Machine Configuration](Documentation/Hyper-V%20%26%20Virtual%20Infrastructure/Hyper-V%20host%2C%20virtual%20switch%20and%20VM%20configuration.md)
 >
 > #### Networking & RRAS
-> - [Network Architecture and IP Addressing](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md)
-> - [RRAS Routing and NAT Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Networking%20%26%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md)
+> - [Network Architecture and IP Addressing](Documentation/Networking%20%26%20RRAS/Network%20architecture%20and%20IP%20addressing.md)
+> - [RRAS Routing and NAT Configuration](Documentation/Networking%20%26%20RRAS/RRAS%20Routing%20and%20NAT%20Configuration.md)
 >
 > #### Domain Controller
-> - [Active Directory Domain Services](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Active%20Directory%20Domain%20Services.md)
-> - [DNS and DHCP Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md)
-> - [Group Policy Configuration](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Group%20Policy%20Configuration.md)
+> - [Active Directory Domain Services](Documentation/Domain-Controller/Active%20Directory%20Domain%20Services.md)
+> - [DNS and DHCP Configuration](Documentation/Domain-Controller/DNS%20and%20DHCP%20configuration.md)
+> - [Group Policy Configuration](Documentation/Domain-Controller/Group%20Policy%20Configuration.md)
 >
 > #### File Services
-> - [File Server and NTFS Access Control](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
+> - [File Server and NTFS Access Control](Documentation/File%20Services/File%20server%20and%20NTFS%20Access%20Control.md)
 >
 ### Phase 2 - Resilience & Operations
 > #### Resilience and High Availability
-> - [Active Directory and DNS Resilience](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Domain-Controller/AD%20and%20DNS%20Resilience.md)
-> - [DHCP Failover](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Domain-Controller/DHCP%20Failover.md)
+> - [Active Directory and DNS Resilience](Documentation/Domain-Controller/AD%20and%20DNS%20Resilience.md)
+> - [DHCP Failover](Documentation/Domain-Controller/DHCP%20Failover.md)
 >
 > #### Backup & Recovery
-> - [Windows Server Backup and Recovery](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Backup%20and%20Recovery/Windows%20Server%20Backup%20and%20Recovery.md)
+> - [Windows Server Backup and Recovery](Documentation/Backup%20and%20Recovery/Windows%20Server%20Backup%20and%20Recovery.md)
 >
 > #### Monitoring & Logging
-> - [Centralised Monitoring and Event Forwarding](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Monitoring%20and%20Logging/Centralised%20Monitoring%20and%20Event%20Forwarding.md)
+> - [Centralised Monitoring and Event Forwarding](Documentation/Monitoring%20and%20Logging/Centralised%20Monitoring%20and%20Event%20Forwarding.md)
 >
 > #### PowerShell Automation
->  - [PowerShell Infrastructure Automation Overview](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md)
->    - [Infrastructure Health Check](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Health%20Check.md)
->    - [Active Directory User Onboarding](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Onboarding.md)
->    - [Active Directory User Offboarding](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Offboarding.md)
->    - [Infrastructure Configuration Backup](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Configuration%20Backup.md)
->    - [Centralised Event Reporting](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Centralised%20Event%20Reporting.md) 
+>  - [PowerShell Infrastructure Automation Overview](Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md)
+>    - [Infrastructure Health Check](Documentation/PowerShell%20Automation/Infrastructure%20Health%20Check.md)
+>    - [Active Directory User Onboarding](Documentation/PowerShell%20Automation/Active%20Directory%20User%20Onboarding.md)
+>    - [Active Directory User Offboarding](Documentation/PowerShell%20Automation/Active%20Directory%20User%20Offboarding.md)
+>    - [Infrastructure Configuration Backup](Documentation/PowerShell%20Automation/Infrastructure%20Configuration%20Backup.md)
+>    - [Centralised Event Reporting](Documentation/PowerShell%20Automation/Centralised%20Event%20Reporting.md) 
  
 ## Skills Demonstrated
 - Build and administer a multi-server Windows Server 2025 infrastructure environment using Hyper-V.

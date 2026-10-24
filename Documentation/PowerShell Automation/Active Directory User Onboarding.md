@@ -166,12 +166,12 @@ Each log entry includes:
 
 > The execution confirmed that the script's automated verification checks completed successfully, including account enablement, expected group membership and the mandatory password-change requirement.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20Powershell%20Output.png" width="900"/>
+<img src="../../Images/New-ADUserFromCSV%20Powershell%20Output.png" width="900"/>
 
 > An audit log was successfully generated.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20-%20CSV%20Log.png" width="900"/>
+<img src="../../Images/New-ADUserFromCSV%20-%20CSV%20Log.png" width="900"/>
 
 > New accounts with correctly assigned OUs and Security Groups were inspected in `Active Directory Users and Computers`.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/New-ADUserFromCSV%20-%20ADUC%20Verification.png" width="900"/>
+<img src="../../Images/New-ADUserFromCSV%20-%20ADUC%20Verification.png" width="900"/>

@@ -8,7 +8,7 @@
 >
 > File access is controlled using Active Directory security groups and the AGDLP model. Users are assigned to role-based Global groups, which are nested within Domain Local resource groups. NTFS permissions are then assigned to the Domain Local groups rather than directly to individual user accounts.
 >
-> Active Directory security groups used in AGDLP design are documented in [Active Directory Domain Services](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Documentation/Domain-Controller/Active%20Directory%20Domain%20Services.md).
+> Active Directory security groups used in AGDLP design are documented in [Active Directory Domain Services](../../Documentation/Domain-Controller/Active%20Directory%20Domain%20Services.md).
 
 ### Server Configuration
 
@@ -33,7 +33,7 @@ A dedicated virtual disk was provisioned for shared organisational data, separat
 
 > Disk Management showing the dedicated `20GB` data volume used for organisational file storage.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/FS01%20Disk%20Management.png" width="900"/>
+<img src="../../Images/FS01%20Disk%20Management.png" width="900"/>
 
 ## File Share Structure
 A central `CompanyData` folder was created on the dedicated data volume and organised into departmental folders. This structure provides centralised storage while allowing access to individual folders to be controlled independently through NTFS permissions.
@@ -54,7 +54,7 @@ E:\CompanyData
 └── Public
 ```
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/FS01%20File%20Structure.png" width="400"/>
+<img src="../../Images/FS01%20File%20Structure.png" width="400"/>
 
 ## SMB Share Configuration
 The `CompanyData` folder was published as an SMB share to allow domain users to access organisational data across the network.
@@ -73,7 +73,7 @@ SMB share permissions control access to the `CompanyData` share itself, while gr
 |`NT AUTHORITY\Authenticated Users`|`Change`|
 |`BUILTIN\Administrators`|`Full`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/SMB%20Permissions.png" width="900"/>
+<img src="../../Images/SMB%20Permissions.png" width="900"/>
 
 ## NTFS Permission Design
 NTFS permissions are assigned to Domain Local resource groups rather than directly to individual users.
@@ -137,18 +137,18 @@ Example:
 > The Finance user `Sarah Jones` signed in to `CLIENT01` to validate authorised and unauthorised access to the `CompanyData` share.
 
 #### Modify access to `\\FS01\CompanyData\Finance`
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20Finance%20modify%20access.png" width="800"/>
+<img src="../../Images/NTFS%20Finance%20modify%20access.png" width="800"/>
 
 
 #### Read & Execute access to `\\FS01\CompanyData\Public`
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20Public%20read%20access.png" width="800"/>
+<img src="../../Images/NTFS%20Public%20read%20access.png" width="800"/>
 
 
 #### Denied access to `\\FS01\CompanyData\Finance\Management`
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20Management.png" width="600"/>
+<img src="../../Images/NTFS%20deny%20access%20Management.png" width="600"/>
 
 #### Denied access to `\\FS01\CompanyData\HR`
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/NTFS%20deny%20access%20HR.png" width="600"/>
+<img src="../../Images/NTFS%20deny%20access%20HR.png" width="600"/>
 
 ### Validation Summary
 Validation confirmed:

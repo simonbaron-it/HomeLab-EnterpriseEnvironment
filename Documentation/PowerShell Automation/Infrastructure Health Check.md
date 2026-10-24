@@ -60,7 +60,7 @@ The script was subsequently improved to:
 4. Investigate any unexpected warnings or failures.
 5. Confirm that a timestamped CSV report is generated.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20Healthy.png" width="700"/>
+<img src="../../Images/InfrastructureHealthCheck%20Output%20-%20Healthy.png" width="700"/>
 
 ### Failure-State Validation
 1. Shut down `DC01` through Hyper-V while keeping `DC02` operational.
@@ -69,8 +69,8 @@ The script was subsequently improved to:
 4. Verify that checks against the remaining available infrastructure continue.
 5. Restart `DC01`, confirm AD replication and DHCP failover recovery, and rerun the script.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20DC01%20Failure.png" width="700"/>
+<img src="../../Images/InfrastructureHealthCheck%20Output%20-%20DC01%20Failure.png" width="700"/>
 
 ### CSV File Validation
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureHealthCheck%20Output%20-%20CSV.png" width="900"/>
+<img src="../../Images/InfrastructureHealthCheck%20Output%20-%20CSV.png" width="900"/>

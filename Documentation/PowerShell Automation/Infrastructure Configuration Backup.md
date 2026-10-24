@@ -195,14 +195,14 @@ The script includes safeguards to reduce the risk of incomplete or unintended op
 
 The script is executed using `-WhatIf` to confirm the intended backup destination and pre-flight checks without creating files or modifying existing backup sets.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureBackup%20WhatIf%20Output.png" width="900"/>
+<img src="../../Images/InfrastructureBackup%20WhatIf%20Output.png" width="900"/>
 
 ### Successful Configuration Backup
 
 The script is executed from `DC01`, and the configuration, DHCP and GPO inventory output directories are inspected.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureBackup%20Directory%20Output.png" width="900"/>
+<img src="../../Images/InfrastructureBackup%20Directory%20Output.png" width="900"/>
 
 The resulting PowerShell output is reviewed to confirm the individual export stages completed as expected.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/InfrastructureBackup%20PowerShell%20Output.png" width="900"/>
+<img src="../../Images/InfrastructureBackup%20PowerShell%20Output.png" width="900"/>

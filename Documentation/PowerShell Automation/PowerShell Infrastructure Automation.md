@@ -45,7 +45,7 @@ Developed a PowerShell script to automate health checks across `DC01`, `DC02`, `
 
 The script checks management connectivity, critical Windows services, DNS resolution, Active Directory replication and domain-controller health, DHCP failover, file-share availability and disk capacity. Results are displayed progressively and exported as timestamped CSV reports using PASS, WARN and FAIL statuses.
 
-[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Health%20Check.md)
+[View Implementation & Validation](../../Documentation/PowerShell%20Automation/Infrastructure%20Health%20Check.md)
 
 ### 02 — Active Directory User Onboarding
 **Script:** `New-ADUserFromCSV.ps1`
@@ -56,7 +56,7 @@ The script validates employee records, generates usernames, prevents duplicates,
 
 The implementation includes `-WhatIf` previews, password-change enforcement, independent handling of failed records, safeguards for partially provisioned accounts and timestamped CSV audit logs. Validation documented multi-user provisioning, account attributes, group membership, OU placement and generated audit records.
 
-[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Onboarding.md)
+[View Implementation & Validation](../../Documentation/PowerShell%20Automation/Active%20Directory%20User%20Onboarding.md)
 
 ### 03 — Active Directory User Offboarding
 **Script:** `Disable-ADUser.ps1`
@@ -67,7 +67,7 @@ The script validates the requested identity, rejects protected or privileged acc
 
 Safeguards include `-WhatIf`, confirmation, post-change verification, repeat-execution checks, partial-failure handling and timestamped CSV auditing. Validation documentation includes offboarding a disposable account, inspecting its state in Active Directory Users and Computers, and reviewing the resulting snapshot and logs.
 
-[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Active%20Directory%20User%20Offboarding.md)
+[View Implementation & Validation](../../Documentation/PowerShell%20Automation/Active%20Directory%20User%20Offboarding.md)
 
 ### 04 — Infrastructure Configuration Backup
 **Script:** `InfrastructureBackup.ps1`
@@ -84,7 +84,7 @@ The workflow validates its execution environment, modules, available storage, ex
 
 > These exports complement, but do not replace, the existing Windows Server Backup jobs for System State, critical volumes and file data. The dedicated backup VHDX is not an off-host disaster-recovery copy.
 
-[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Infrastructure%20Configuration%20Backup.md)
+[View Implementation & Validation](../../Documentation/PowerShell%20Automation/Infrastructure%20Configuration%20Backup.md)
 
 ### 05 — Centralised Event Reporting
 **Script:** `CentralisedEventReport.ps1`
@@ -97,7 +97,7 @@ Each run creates a timestamped detailed CSV, summary CSV and browser-readable HT
 
 The reports describe events that have been audited, forwarded, retained and selected by the query; they do not guarantee that every event from every source was collected or provide real-time alerting.
 
-[View Implementation & Validation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/Centralised%20Event%20Reporting.md)
+[View Implementation & Validation](../../Documentation/PowerShell%20Automation/Centralised%20Event%20Reporting.md)
 
 ### Execution Environment
 The primary automation host is `MGMT01`. `Infrastructure Configuration Backup` is executed locally on `DC01` to access its backup volume.

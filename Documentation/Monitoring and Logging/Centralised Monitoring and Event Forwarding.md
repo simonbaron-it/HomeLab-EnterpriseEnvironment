@@ -14,7 +14,7 @@ The main objectives of this implementation were to:
 - Monitor account creation, deletion, modification, and lockout activity.
 - Validate monitoring during simulated infrastructure failures.
 
-> PowerShell automation used for infrastructure health checking and event reporting is documented separately in [PowerShell Infrastructure Automation](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md).
+> PowerShell automation used for infrastructure health checking and event reporting is documented separately in [PowerShell Infrastructure Automation](../../Documentation/PowerShell%20Automation/PowerShell%20Infrastructure%20Automation.md).
 
 ## Monitoring Infrastructure
 The monitoring solution uses `MGMT01` as the central management and logging server.
@@ -57,17 +57,17 @@ Windows Admin Center was installed on MGMT01 to provide browser-based central ad
 |Access URL|`https://MGMT01.baron.example.com:6516`|
 |Servers Added|`MGMT01`, `DC01`, `DC02`, `FS01`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Windows%20Admin%20Centre.png" width="900"/>
+<img src="../../Images/Windows%20Admin%20Centre.png" width="900"/>
 
 ### Infrastructure Monitoring
 Windows Admin Center was used to observe important infrastructure performance counters.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Windows%20Admin%20Centre%20-%20DC01.png" width="900"/>
+<img src="../../Images/Windows%20Admin%20Centre%20-%20DC01.png" width="900"/>
 
 ## Server Manager
 Server Manager on `MGMT01` was configured with the primary infrastructure servers: `DC01`, `DC02` & `FS01`
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Server%20Manager%20-%20All%20Servers.png" width="900"/>
+<img src="../../Images/Server%20Manager%20-%20All%20Servers.png" width="900"/>
 
 ### Health Monitoring
 
@@ -78,7 +78,7 @@ Server Manager was used to monitor:
 - Installed roles
 - Server availability
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Server%20Manager%20-%20Dashboard.png" width="900"/>
+<img src="../../Images/Server%20Manager%20-%20Dashboard.png" width="900"/>
 
 ## Windows Event Forwarding
 ### Event Collector Configuration
@@ -118,7 +118,7 @@ Add-ADGroupMember `
     -Members $Computers
 ```
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/WEF_Forwarders%20Group.png" width="600"/>
+<img src="../../Images/WEF_Forwarders%20Group.png" width="600"/>
 
 ### Event Forwarding Group Policy
 A new `Infrastructure-Event-Forwarding` Group Policy Object was created.
@@ -133,7 +133,7 @@ Policy Configuration:
 
 The GPO was linked to the `baron.example.com` domain root and scoped to members of `WEF_Forwarders`.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Infrastructure%20Event%20Forwarding%20GPO.png" width="900"/>
+<img src="../../Images/Infrastructure%20Event%20Forwarding%20GPO.png" width="900"/>
 
 ## Event Subscriptions
 
@@ -174,7 +174,7 @@ The subscription collects selected Security Event IDs:
 |`4738`|`User account changed`|
 |`4740`|`User account locked out`|
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Event%20Viewer%20Subscriptions.png" width="900"/>
+<img src="../../Images/Event%20Viewer%20Subscriptions.png" width="900"/>
 
 
 #### Security Log Forwarding Permission
@@ -212,24 +212,24 @@ The following categories were enabled:
 > &nbsp;&nbsp;↳ `Audit Logon`   
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↳ `Failure`
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Audit%20Policy%20GPO.png" width="900"/>
+<img src="../../Images/Audit%20Policy%20GPO.png" width="900"/>
 
 ## Account Management Events
 Account lifecycle activity monitoring was tested using a disposable `Monitoring Test User` AD account. Forwarded account modification events were queried using PowerShell.
 
 > ### Account Created
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/PowerShell%20Monitoring%20-%20User%20Creation%20.png" width="900"/>
+<img src="../../Images/PowerShell%20Monitoring%20-%20User%20Creation%20.png" width="900"/>
 
 > ### Account Disabled
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/PowerShell%20Monitoring%20-%20User%20Disabled%20.png" width="900"/>
+<img src="../../Images/PowerShell%20Monitoring%20-%20User%20Disabled%20.png" width="900"/>
 
 > ### Account Deleted
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/PowerShell%20Monitoring%20-%20User%20Deletion%20.png" width="900"/>
+<img src="../../Images/PowerShell%20Monitoring%20-%20User%20Deletion%20.png" width="900"/>
 
 ## Account Lockout Events
 A disposable standard user account was used to generate a controlled account lockout. Incorrect passwords were deliberately entered from CLIENT01 until the domain lockout policy was triggered.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/PowerShell%20Monitoring%20-%20User%20Locked%20.png" width="900"/>
+<img src="../../Images/PowerShell%20Monitoring%20-%20User%20Locked%20.png" width="900"/>
 
 ## Event Forwarding Test
 A controlled Application error was generated on FS01:
@@ -240,7 +240,7 @@ eventcreate /T ERROR /ID 100 /L APPLICATION /SO BaronLab-Monitoring /D "Phase 2 
 
 Forwarded error events were then queried on `MGMT01` using PowerShell.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20FS01.png" width="900"/>
+<img src="../../Images/Monitoring%20-%20FS01.png" width="900"/>
 
 ## Infrastructure Failure Test
 A controlled domain-controller outage was performed to confirm that infrastructure failures could be identified centrally.
@@ -256,15 +256,15 @@ A controlled domain-controller outage was performed to confirm that infrastructu
 
 > #### Server Manager showing outage
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20DC01%20outage.png" width="900"/>
+<img src="../../Images/Monitoring%20-%20DC01%20outage.png" width="900"/>
 
 > #### WEF Subscription state showing DC01 with an older `LastHeartbeatTime` than connected servers
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20DC01%20outage%202.png" width="900"/>
+<img src="../../Images/Monitoring%20-%20DC01%20outage%202.png" width="900"/>
 
 > #### AD replication after DC01 recovery
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Monitoring%20-%20DC01%20outage%203.png" width="900"/>
+<img src="../../Images/Monitoring%20-%20DC01%20outage%203.png" width="900"/>
 
 ## Validation Summary
 - `MGMT01` provides a dedicated central management and monitoring layer for the lab.

@@ -9,7 +9,7 @@ The implementation covers:
 - Redundant DNS configuration for domain-joined systems.
 - Validation of authentication and DNS resolution when one Domain Controller is unavailable.
 
-> DHCP resilience is documented separately in [DHCP Failover](https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Documentation/Domain-Controller/DHCP%20Failover.md).
+> DHCP resilience is documented separately in [DHCP Failover](../../Documentation/Domain-Controller/DHCP%20Failover.md).
 
 ## DC02 Deployment
 ### Virtual Machine Configuration
@@ -50,17 +50,17 @@ Active Directory replication ensures directory changes made on one Domain Contro
 ### Replication Validation
 PowerShell and Active Directory replication tools were used to verify replication health between `DC01` and `DC02`.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/repadmin_replsummary.png" width="800"/>
+<img src="../../Images/repadmin_replsummary.png" width="800"/>
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Global%20catalog.png" width="800"/>
+<img src="../../Images/Global%20catalog.png" width="800"/>
 
 ### Functional Replication Test
 A `Replication Test User` was created inside the `IT Staff` Active Directory OU on `DC01` and then verified on `DC02` to confirm successful replication.
 > User created on DC01
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Replication%20test%20DC01.png" width="800"/>
+<img src="../../Images/Replication%20test%20DC01.png" width="800"/>
 
 > User shown replicated on DC02
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Replication%20test%20DC02.png" width="800"/>
+<img src="../../Images/Replication%20test%20DC02.png" width="800"/>
 
 ## DNS Resilience
 Both Domain Controllers host DNS and the `baron.example.com` zone is Active Directory-integrated. Because the DNS zone is stored in Active Directory, DNS records replicate between `DC01` and `DC02` through Active Directory replication.
@@ -76,7 +76,7 @@ Both Domain Controllers host DNS and the `baron.example.com` zone is Active Dire
 ### DNS Replication Validation
 DNS records were verified on both Domain Controllers to confirm that AD-integrated DNS data replicated successfully.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/DNS%20Replication%20Validation.png" width="800"/>
+<img src="../../Images/DNS%20Replication%20Validation.png" width="800"/>
 
 ### DNS Client Configuration
 Domain-joined systems were configured to use both Domain Controllers for DNS resolution.
@@ -105,22 +105,22 @@ A controlled failure test was performed with `DC01` unavailable to verify that `
 #### Domain Authentication
 A domain user account that had not previously signed in to `CLIENT01` was used to verify that authentication remained available while `DC01` was offline. PowerShell confirmed that `DC02` handled the domain logon.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Domain%20Authentication%20Test.png" width="800"/>
+<img src="../../Images/Domain%20Authentication%20Test.png" width="800"/>
 
 #### Internal DNS Resolution
 With `DC01` unavailable, the DNS client cache on `CLIENT01` was cleared and the internal `FS01` hostname was resolved successfully.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Internal%20DNS%20Resolution%20Test.png" width="800"/>
+<img src="../../Images/Internal%20DNS%20Resolution%20Test.png" width="800"/>
 
 #### External DNS Resolution
 External DNS resolution was tested while `DC01` was unavailable to confirm that `DC02` continued providing recursive/upstream name resolution.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/External%20DNS%20Resolution%20Test.png" width="800"/>
+<img src="../../Images/External%20DNS%20Resolution%20Test.png" width="800"/>
 
 #### Domain Resource Access
 With `DC01` powered off, `CLIENT01` successfully obtained fresh Kerberos authentication and CIFS service tickets from `DC02`, maintaining access to the `FS01` file server.
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Domain%20Resource%20Access%20Test.png" width="800"/>
+<img src="../../Images/Domain%20Resource%20Access%20Test.png" width="800"/>
 
 ## Validation Summary
 - `DC02` operates as an additional Domain Controller and Global Catalog for `baron.example.com`.

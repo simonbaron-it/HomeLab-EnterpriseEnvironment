@@ -99,15 +99,15 @@ The script uses the following statuses:
 ## Validation
 The script was run to offboard AD user `James Wilson` (one of the users created using the `New-ADUserFromCSV.ps1` script):
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Disable%20Users%20Script%20-%20PowerShell.png" width="900"/>
+<img src="../../Images/Disable%20Users%20Script%20-%20PowerShell.png" width="900"/>
 
 `Active Directory Users and Computers` on `DC01` was inspected to verify the changes:
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Disable%20Users%20Script%20-%20ADUC.png" width="900"/>
+<img src="../../Images/Disable%20Users%20Script%20-%20ADUC.png" width="900"/>
 
 `C:\LabAutomation\Logs\Offboarding` on `MGMT01` was inspected to verify expected outputs:
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/Disable%20Users%20Script%20-%20Logs.png" width="900"/>
+<img src="../../Images/Disable%20Users%20Script%20-%20Logs.png" width="900"/>
 
 
 

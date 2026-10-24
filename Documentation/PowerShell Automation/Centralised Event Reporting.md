@@ -199,13 +199,13 @@ The script includes safeguards and clear reporting limitations:
 
 ### PowerShell Output
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/CentralisedEventReport%20PowerShell%20Output.png" width="900"/>
+<img src="../../Images/CentralisedEventReport%20PowerShell%20Output.png" width="900"/>
 
 ### Directory output
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/CentralisedEventReport%20Directory%20Output.png" width="900"/>
+<img src="../../Images/CentralisedEventReport%20Directory%20Output.png" width="900"/>
 
 ### HTML Output
 
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/Phase-2/Images/CentralisedEventReport%20HTML%20Output.png" width="900"/>
+<img src="../../Images/CentralisedEventReport%20HTML%20Output.png" width="900"/>
 

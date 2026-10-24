@@ -12,7 +12,7 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 
 ## Network Diagram
 <p align="center">
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/Network%20Diagram.png" width="500"/>
+<img src="../../Images/Network%20Diagram.png" width="500"/>
 </p>
 
 ## IP Addressing Plan
@@ -37,16 +37,16 @@ The lab is divided into three virtual network segments. RTR01 connects all three
 ## Configuration Validation
 `ipconfig` was used to verify that each system's IPv4 address, subnet, default gateway and DNS configuration matched the documented addressing plan.
 ### RTR01
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20RTR01.png" width="700"/>
+<img src="../../Images/IPConfig%20-%20RTR01.png" width="700"/>
 
 ### DC01
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20DC01.png" width="700"/>
+<img src="../../Images/IPConfig%20-%20DC01.png" width="700"/>
 
 ### FS01
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20FS01.png" width="700"/>
+<img src="../../Images/IPConfig%20-%20FS01.png" width="700"/>
 
 ### CLIENT01
-<img src="https://github.com/simonbaron-it/HomeLab-EnterpriseEnvironment/blob/main/Images/IPConfig%20-%20CLIENT01.png" width="700"/>
+<img src="../../Images/IPConfig%20-%20CLIENT01.png" width="700"/>
 
 ### Validation Confirmed
 - `RTR01` is configured with interfaces on all three network segments.
