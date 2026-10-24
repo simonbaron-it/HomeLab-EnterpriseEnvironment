@@ -210,4 +210,6 @@ $StepResults | Format-Table Step,Status,Detail -AutoSize
 Write-Host "Manifest: $ManifestPath"
 if ($Failures -gt 0) {
     Write-Warning "$Failures step(s) failed. Review BackupManifest.json before treating this run as complete."
+
+    throw "Infrastructure backup is PARTIAL: $Failures step(s) failed. Manifest: $ManifestPath"
 }
